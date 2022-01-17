@@ -27,7 +27,8 @@
     "promise",
     "prettier",
     "react-redux",
-    "redux-saga"
+    "redux-saga",
+    "import"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
