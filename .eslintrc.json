@@ -13,9 +13,10 @@
     "plugin:react-hooks/recommended",
     "plugin:unicorn/recommended",
     "plugin:sonarjs/recommended",
-    "plugin:promise/recommended"
+    "plugin:promise/recommended",
+    "plugin:prettier/recommended"
   ],
-  "plugins": ["@typescript-eslint", "react", "react-hooks", "unicorn", "sonarjs", "promise"],
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "unicorn", "sonarjs", "promise", "prettier"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
