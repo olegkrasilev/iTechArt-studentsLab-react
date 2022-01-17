@@ -10,9 +10,12 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:unicorn/recommended",
+    "plugin:sonarjs/recommended",
+    "plugin:promise/recommended"
   ],
-  "plugins": ["@typescript-eslint", "react", "react-hooks"],
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "unicorn", "sonarjs", "promise"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -23,5 +26,7 @@
     "sourceType": "module"
   },
 
-  "rules": {}
+  "rules": {
+    "unicorn/filename-case": "off"
+  }
 }
