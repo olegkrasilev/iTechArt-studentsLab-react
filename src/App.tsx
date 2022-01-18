@@ -1,4 +1,6 @@
 import React from 'react';
-import './App.css';
 
-export const App: React.FC = () => <h1>Hello world</h1>;
+import './App.css';
+import { Auth } from 'src/pages/auth';
+
+export const App: React.FC = () => <Auth />;
