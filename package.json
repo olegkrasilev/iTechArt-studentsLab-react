@@ -16,6 +16,7 @@
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "@types/redux-saga": "^0.10.5",
+    "@types/styled-components": "^5.1.20",
     "eslint-config-airbnb-typescript": "^16.1.0",
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-promise": "^6.0.0",
