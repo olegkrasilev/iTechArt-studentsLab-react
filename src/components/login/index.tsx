@@ -28,11 +28,11 @@ export const Login = () => {
           <div className="wrapper__inner">
             <h1 className="title">
               {isUserLoggedIn ? (
+                <span className="title__registration">Registration</span>
+              ) : (
                 <span className="title__welcome">
                   Welcome back <span>Login to your account</span>
                 </span>
-              ) : (
-                <span className="title__registration">Registration</span>
               )}
             </h1>
             <TextField className="input" type="email" label="email" variant="outlined" required />
@@ -44,15 +44,17 @@ export const Login = () => {
               <TextField className="input" type="text" label="Last Name" variant="outlined" required />
             )}
             <Button className="loginBtn button" variant="contained" color="success" size="large">
-              {isUserLoggedIn ? 'Login now' : 'Register'}
+              {isUserLoggedIn ? 'Register' : 'Login'}
             </Button>
-            {isUserLoggedIn && (
+            {isUserLoggedIn ? (
+              ''
+            ) : (
               <Button onClick={openIsUserForgotPasswordModal} className="button" variant="text">
                 Forgot password?
               </Button>
             )}
             <Button onClick={toggleUserForgotPassword} className="button" variant="text">
-              {isUserLoggedIn ? 'Sign up' : 'Already have an account?'}
+              {isUserLoggedIn ? 'Already have an account?' : 'Sign up'}
             </Button>
           </div>
         </form>
