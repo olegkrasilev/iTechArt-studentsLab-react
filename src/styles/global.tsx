@@ -1,3 +1,6 @@
+import { createGlobalStyle } from 'styled-components';
+
+export const GlobalStyles = createGlobalStyle`
 /* https://dev.to/hankchizljaw/a-modern-css-reset-6p3 */
 
 /* Box sizing rules */
@@ -149,3 +152,4 @@ html {
   }
   /* 1rem = 12px, 12/16 = 75% */
 }
+`;
