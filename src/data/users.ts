@@ -60,4 +60,10 @@ export const mockData = [
     lastName: 'best Last Name',
     id: 10,
   },
+  {
+    email: 'bestEmail',
+    firstName: 'best First Name',
+    lastName: 'best Last Name',
+    id: 11,
+  },
 ];
