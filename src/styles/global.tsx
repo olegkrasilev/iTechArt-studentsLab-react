@@ -152,4 +152,14 @@ html {
   }
   /* 1rem = 12px, 12/16 = 75% */
 }
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+main {
+  flex: 1 1 auto;
+}
 `;
