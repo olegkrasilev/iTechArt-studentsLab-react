@@ -21,6 +21,10 @@ export const AllPosts = () => {
       marginTop: 20,
       marginBottom: 20,
     },
+    title: {
+      textAlign: 'center',
+      fontSize: 40,
+    },
   });
 
   const classes = useStyles();
@@ -76,12 +80,16 @@ export const AllPosts = () => {
 
   return (
     <Container>
-      <ul>
-        <Grid container spacing={2}>
-          {renderPosts}
-        </Grid>
-      </ul>
-      <Pagination className={classes.centerPagination} onClick={paginationClick} count={pageNumbers.length} />
+      {posts.length === 0 ? (
+        <h1 className={classes.title}>No posts were found</h1>
+      ) : (
+        <ul>
+          <Grid container spacing={2}>
+            {renderPosts}
+          </Grid>
+          <Pagination className={classes.centerPagination} onClick={paginationClick} count={pageNumbers.length} />
+        </ul>
+      )}
     </Container>
   );
 };
