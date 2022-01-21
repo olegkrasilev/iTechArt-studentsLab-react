@@ -4,7 +4,6 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions, Grid } from '@mui/material';
 
-import { mockData } from 'src/data/post';
 import { Posts } from 'src/types';
 import { RenderPagination } from 'src/components/pagination';
 
