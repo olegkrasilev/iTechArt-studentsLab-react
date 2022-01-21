@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
 
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions, Container, Grid } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 import { makeStyles } from '@mui/styles';
-
-import { Posts } from 'src/types';
 
 type Properties = {
   incomingData: any;
@@ -38,7 +33,7 @@ export const RenderPagination: React.FC<Properties> = ({ incomingData, renderDat
   // Logic for displaying posts
   const indexOfLastData = currentPage * dataPerPage;
   const indexOfFirstPost = indexOfLastData - dataPerPage;
-  const currentData = data.slice(indexOfFirstPost, indexOfLastData);
+  const currentData = renderData.slice(indexOfFirstPost, indexOfLastData);
 
   const paginationClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const paginationButton = (event.target as HTMLButtonElement).textContent;
@@ -62,7 +57,7 @@ export const RenderPagination: React.FC<Properties> = ({ incomingData, renderDat
       ) : (
         <ul>
           <Grid container spacing={2}>
-            {renderData}
+            {currentData}
           </Grid>
           <Pagination className={classes.centerPagination} onClick={paginationClick} count={pageNumbers.length} />
         </ul>

@@ -2,19 +2,18 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions, Grid } from '@mui/material';
+import { CardActionArea, Grid } from '@mui/material';
 
-import { mockData } from 'src/data/post';
-import { Posts } from 'src/types';
+import { Users } from 'src/types';
 import { RenderPagination } from 'src/components/pagination';
 
 type Properties = {
-  currentData: Posts[];
+  currentData: Users[];
 };
 
-export const AllPosts: React.FC<Properties> = ({ currentData }) => {
+export const AllUsers: React.FC<Properties> = ({ currentData }) => {
   const renderPosts = currentData.map(item => {
-    const { id, post, postCreationTime, title, user } = item;
+    const { email, firstName, lastName, id } = item;
 
     return (
       <Grid item key={id} xs={12}>
@@ -22,21 +21,13 @@ export const AllPosts: React.FC<Properties> = ({ currentData }) => {
           <CardActionArea>
             <CardContent>
               <Typography gutterBottom variant="h6" component="div">
-                {title} by {user}
+                {firstName} {lastName}
               </Typography>
               <Typography gutterBottom variant="body1" component="div">
-                Created at <time>{postCreationTime}</time>
-              </Typography>
-              <Typography variant="subtitle1" color="text.secondary">
-                {post}
+                email: {email}
               </Typography>
             </CardContent>
           </CardActionArea>
-          <CardActions>
-            <Button size="small" color="primary">
-              Comment
-            </Button>
-          </CardActions>
         </Card>
       </Grid>
     );

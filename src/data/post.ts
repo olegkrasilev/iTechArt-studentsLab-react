@@ -71,7 +71,7 @@ export const mockData = [
     id: 10,
   },
   {
-    user: 'Best user1',
+    user: 'Best user11',
     title: 'Best title',
     post: 'Best post',
     postCreationTime: '24:00:00',

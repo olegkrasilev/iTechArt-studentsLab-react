@@ -5,3 +5,10 @@ export type Posts = {
   postCreationTime: string;
   id: number;
 };
+
+export type Users = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  id: number;
+};
