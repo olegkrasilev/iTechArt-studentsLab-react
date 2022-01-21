@@ -4,7 +4,7 @@ import Container from '@mui/material/Container';
 import { StyledFooter } from 'src/components/footer/style';
 
 export const Footer = () => (
-  <StyledFooter>
+  <StyledFooter as="footer">
     <Container>
       <nav className="menu">
         <ul className="menu__list reset-list">
