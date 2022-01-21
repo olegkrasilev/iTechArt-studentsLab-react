@@ -8,6 +8,7 @@ import { mockData as UserData } from 'src/data/users';
 import { AllUsers } from 'src/pages/allUsers/allUsers';
 import { NotFound } from 'src/pages/notFound';
 import { Layout } from 'src/pages/layout';
+import { UserPage } from 'src/pages/user';
 
 export const Navigation = () => (
   <Routes>
@@ -15,6 +16,7 @@ export const Navigation = () => (
     <Route path="/authorized" element={<Layout />}>
       <Route path="allUsers" element={<AllUsers currentData={UserData} />} />
       <Route path="allPosts" element={<AllPosts currentData={PostData} />} />
+      <Route path="user" element={<UserPage />} />
       <Route path="*" element={<NotFound />} />
     </Route>
   </Routes>
