@@ -1,11 +1,10 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions, Container, Grid } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
+import { makeStyles } from '@mui/styles';
 
 import { mockData } from 'src/data/post';
 import { Posts } from 'src/types';
@@ -15,16 +14,27 @@ export const AllPosts = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPost] = useState(5);
 
+  const useStyles = makeStyles({
+    centerPagination: {
+      display: 'flex',
+      justifyContent: 'center',
+      marginTop: 20,
+      marginBottom: 20,
+    },
+  });
+
+  const classes = useStyles();
+
   // Logic for displaying posts
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPost = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginationClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const hey = (event.target as HTMLButtonElement).textContent;
+    const paginationButton = (event.target as HTMLButtonElement).textContent;
 
-    if (hey) {
-      setCurrentPage(+hey);
+    if (paginationButton) {
+      setCurrentPage(+paginationButton);
     }
   };
 
@@ -32,7 +42,7 @@ export const AllPosts = () => {
     const { id, post, postCreationTime, title, user } = item;
 
     return (
-      <Grid item key={id} xs>
+      <Grid item key={id} xs={12}>
         <Card>
           <CardActionArea>
             <CardContent>
@@ -71,17 +81,7 @@ export const AllPosts = () => {
           {renderPosts}
         </Grid>
       </ul>
-      <Pagination
-        className="pagination"
-        onClick={paginationClick}
-        count={pageNumbers.length}
-        sx={{
-          marginTop: 2,
-          marginBottom: 2,
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      />
+      <Pagination className={classes.centerPagination} onClick={paginationClick} count={pageNumbers.length} />
     </Container>
   );
 };
