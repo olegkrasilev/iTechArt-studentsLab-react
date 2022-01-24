@@ -102,7 +102,9 @@
         "html": true
       }
     ],
-    "no-plusplus": "off"
+    "no-plusplus": "off",
+    "default-param-last": "off",
+    "@typescript-eslint/default-param-last": ["off"]
   },
   "settings": {
     "import/resolver": {

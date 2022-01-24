@@ -14,7 +14,7 @@ const initialState: AppInitialState = {
   },
 };
 
-export const appReducer = (action: UserAction, state = initialState): AppInitialState => {
+export const appReducer = (state = initialState, action: UserAction): AppInitialState => {
   switch (action.type) {
     case UserActions.fetchUser:
       return {
