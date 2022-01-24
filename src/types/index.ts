@@ -12,3 +12,18 @@ export type Users = {
   lastName: string;
   id: number;
 };
+
+export type Response = {
+  status: string;
+  accessToken: string;
+  refreshToken: string;
+  firstName: string;
+  lastName: string;
+  data: {
+    id: string;
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+  };
+};

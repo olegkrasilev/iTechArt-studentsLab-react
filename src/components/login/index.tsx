@@ -1,19 +1,21 @@
-/* eslint-disable unicorn/consistent-function-scoping */
+/* eslint-disable sonarjs/cognitive-complexity */
 import React, { useState } from 'react';
 import { Button, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-import { loginEndpoint } from 'src/API/endpoints';
+import { loginEndpoint, signUpEndpoint } from 'src/API/endpoints';
 import { ForgotPasswordModal } from 'src/components/login/forgoPasswordModal';
 import { Wrapper } from 'src/components/login/style';
+import { login } from 'src/API/login';
+import { singUp } from 'src/API/signup';
 
 export const Login = () => {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [isUserRegistered, setIsUserRegistered] = useState(false);
   const [isForgotUserPasswordModalOpen, setForgotUserPasswordModalOpen] = React.useState(false);
 
   const toggleUserForgotPassword = () => {
-    setIsUserLoggedIn(!isUserLoggedIn);
+    setIsUserRegistered(!isUserRegistered);
   };
 
   const openIsUserForgotPasswordModal = () => {
@@ -24,45 +26,39 @@ export const Login = () => {
     setForgotUserPasswordModalOpen(false);
   };
 
-  const userSchemaValidation = yup.object({
+  const loginSchemaValidation = yup.object({
     email: yup.string().email('Enter a valid email').required('Email is required'),
     password: yup.string().min(6, 'Password should be of minimum 6 characters length').required('Password is required'),
   });
 
-  type LoginResponse = {
-    status: string;
-    accessToken: string;
-    refreshToken: string;
-  };
-
-  const login = async (url: string, data: { email: string; password: string }) => {
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      const serverResponse: LoginResponse = await response.json();
-      const { accessToken, refreshToken } = serverResponse;
-
-      return serverResponse;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const formik = useFormik({
+  const loginFormik = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
-    validationSchema: userSchemaValidation,
+    validationSchema: loginSchemaValidation,
     onSubmit: data => {
-      console.log(data);
       login(loginEndpoint, data);
+    },
+  });
+
+  const signUpSchemaValidation = yup.object({
+    email: yup.string().email('Enter a valid email').required('Email is required'),
+    password: yup.string().min(6, 'Password should be of minimum 6 characters length').required('Password is required'),
+    firstName: yup.string().required('First name is required'),
+    lastName: yup.string().required('Last name is required'),
+  });
+
+  const signUpFormik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+    },
+    validationSchema: signUpSchemaValidation,
+    onSubmit: data => {
+      singUp(signUpEndpoint, data);
     },
   });
 
@@ -70,10 +66,15 @@ export const Login = () => {
     <>
       <Wrapper>
         <div className="form__left" />
-        <form onSubmit={formik.handleSubmit} className="form__right" noValidate autoComplete="off">
+        <form
+          onSubmit={isUserRegistered ? signUpFormik.handleSubmit : loginFormik.handleSubmit}
+          className="form__right"
+          noValidate
+          autoComplete="off"
+        >
           <div className="wrapper__inner">
             <h1 className="title">
-              {isUserLoggedIn ? (
+              {isUserRegistered ? (
                 <span className="title__registration">Registration</span>
               ) : (
                 <span className="title__welcome">
@@ -87,10 +88,18 @@ export const Login = () => {
               name="email"
               label="email"
               type="email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
+              value={isUserRegistered ? signUpFormik.values.email : loginFormik.values.email}
+              onChange={isUserRegistered ? signUpFormik.handleChange : loginFormik.handleChange}
+              error={
+                isUserRegistered
+                  ? signUpFormik.touched.email && Boolean(signUpFormik.errors.email)
+                  : loginFormik.touched.email && Boolean(loginFormik.errors.email)
+              }
+              helperText={
+                isUserRegistered
+                  ? signUpFormik.touched.email && signUpFormik.errors.email
+                  : loginFormik.touched.email && loginFormik.errors.email
+              }
               variant="outlined"
               required
             />
@@ -100,23 +109,55 @@ export const Login = () => {
               name="password"
               type="password"
               label="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
+              value={isUserRegistered ? signUpFormik.values.password : loginFormik.values.password}
+              onChange={isUserRegistered ? signUpFormik.handleChange : loginFormik.handleChange}
+              error={
+                isUserRegistered
+                  ? signUpFormik.touched.password && Boolean(signUpFormik.errors.password)
+                  : loginFormik.touched.password && Boolean(loginFormik.errors.password)
+              }
+              helperText={
+                isUserRegistered
+                  ? signUpFormik.touched.password && signUpFormik.errors.password
+                  : loginFormik.touched.password && loginFormik.errors.password
+              }
               variant="outlined"
               required
             />
-            {isUserLoggedIn && (
-              <TextField className="input" type="text" label="First Name" variant="outlined" required />
+            {isUserRegistered && (
+              <TextField
+                className="input"
+                id="firstName"
+                name="firstName"
+                label="First Name"
+                type="text"
+                value={signUpFormik.values.firstName}
+                onChange={signUpFormik.handleChange}
+                error={signUpFormik.touched.firstName && Boolean(signUpFormik.errors.firstName)}
+                helperText={signUpFormik.touched.firstName && signUpFormik.errors.firstName}
+                variant="outlined"
+                required
+              />
             )}
-            {isUserLoggedIn && (
-              <TextField className="input" type="text" label="Last Name" variant="outlined" required />
+            {isUserRegistered && (
+              <TextField
+                className="input"
+                id="lastName"
+                name="lastName"
+                type="text"
+                label="Last Name"
+                value={signUpFormik.values.lastName}
+                onChange={signUpFormik.handleChange}
+                error={signUpFormik.touched.lastName && Boolean(signUpFormik.errors.lastName)}
+                helperText={signUpFormik.touched.lastName && signUpFormik.errors.lastName}
+                variant="outlined"
+                required
+              />
             )}
             <Button className="loginBtn button" type="submit" variant="contained" color="success" size="large">
-              {isUserLoggedIn ? 'Register' : 'Login'}
+              {isUserRegistered ? 'Register' : 'Login'}
             </Button>
-            {isUserLoggedIn ? (
+            {isUserRegistered ? (
               ''
             ) : (
               <Button onClick={openIsUserForgotPasswordModal} className="button" variant="text">
@@ -124,7 +165,7 @@ export const Login = () => {
               </Button>
             )}
             <Button onClick={toggleUserForgotPassword} className="button" variant="text">
-              {isUserLoggedIn ? 'Already have an account?' : 'Sign up'}
+              {isUserRegistered ? 'Already have an account?' : 'Sign up'}
             </Button>
           </div>
         </form>
