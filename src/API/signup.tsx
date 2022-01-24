@@ -1,4 +1,13 @@
+import * as yup from 'yup';
+
 import { Response } from '@src/types';
+
+export const signUpSchemaValidation = yup.object({
+  email: yup.string().email('Enter a valid email').required('Email is required'),
+  password: yup.string().min(6, 'Password should be of minimum 6 characters length').required('Password is required'),
+  firstName: yup.string().required('First name is required'),
+  lastName: yup.string().required('Last name is required'),
+});
 
 export const singUp = async (
   url: string,

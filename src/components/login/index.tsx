@@ -2,13 +2,12 @@
 import React, { useState } from 'react';
 import { Button, TextField } from '@mui/material';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
 
 import { loginEndpoint, signUpEndpoint } from 'src/API/endpoints';
 import { ForgotPasswordModal } from 'src/components/login/forgoPasswordModal';
 import { Wrapper } from 'src/components/login/style';
-import { login } from 'src/API/login';
-import { singUp } from 'src/API/signup';
+import { login, loginSchemaValidation } from 'src/API/login';
+import { singUp, signUpSchemaValidation } from 'src/API/signup';
 
 export const Login = () => {
   const [isUserRegistered, setIsUserRegistered] = useState(false);
@@ -26,11 +25,6 @@ export const Login = () => {
     setForgotUserPasswordModalOpen(false);
   };
 
-  const loginSchemaValidation = yup.object({
-    email: yup.string().email('Enter a valid email').required('Email is required'),
-    password: yup.string().min(6, 'Password should be of minimum 6 characters length').required('Password is required'),
-  });
-
   const loginFormik = useFormik({
     initialValues: {
       email: '',
@@ -40,13 +34,6 @@ export const Login = () => {
     onSubmit: data => {
       login(loginEndpoint, data);
     },
-  });
-
-  const signUpSchemaValidation = yup.object({
-    email: yup.string().email('Enter a valid email').required('Email is required'),
-    password: yup.string().min(6, 'Password should be of minimum 6 characters length').required('Password is required'),
-    firstName: yup.string().required('First name is required'),
-    lastName: yup.string().required('Last name is required'),
   });
 
   const signUpFormik = useFormik({
