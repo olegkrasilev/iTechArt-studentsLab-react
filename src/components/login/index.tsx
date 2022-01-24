@@ -9,7 +9,7 @@ import { Wrapper } from 'src/components/login/style';
 import { login, loginSchemaValidation } from 'src/API/login';
 import { singUp, signUpSchemaValidation } from 'src/API/signup';
 
-export const Login = () => {
+export const Login: React.FC = () => {
   const [isUserRegistered, setIsUserRegistered] = useState(false);
   const [isForgotUserPasswordModalOpen, setForgotUserPasswordModalOpen] = React.useState(false);
 

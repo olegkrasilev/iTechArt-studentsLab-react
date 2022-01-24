@@ -3,7 +3,7 @@ import Container from '@mui/material/Container';
 
 import { StyledHeader } from 'src/components/header/style';
 
-export const Header = () => (
+export const Header: React.FC = () => (
   <StyledHeader>
     <Container>
       <nav className="menu">

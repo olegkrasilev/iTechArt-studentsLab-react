@@ -3,7 +3,7 @@ import Container from '@mui/material/Container';
 
 import { StyledFooter } from 'src/components/footer/style';
 
-export const Footer = () => (
+export const Footer: React.FC = () => (
   <StyledFooter as="footer">
     <Container>
       <nav className="menu">
