@@ -23,9 +23,6 @@ export const singUp = async (
     });
 
     const serverResponse: Response = await response.json();
-
-    console.log(serverResponse);
-
     const { accessToken, refreshToken } = serverResponse;
     const { id, firstName, lastName, email } = serverResponse.data;
 
