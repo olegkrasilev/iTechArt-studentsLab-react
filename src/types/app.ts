@@ -8,5 +8,7 @@ export interface AppInitialState {
     email: null | string;
     firstName: null | string;
     lastName: null | string;
+    accessToken: null | string;
+    refreshToken: null | string;
   };
 }

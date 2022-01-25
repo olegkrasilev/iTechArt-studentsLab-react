@@ -7,6 +7,8 @@ const initialState: AppInitialState = {
     email: null,
     firstName: null,
     lastName: null,
+    accessToken: null,
+    refreshToken: null,
   },
   app: {
     error: null,
@@ -24,6 +26,8 @@ export const appReducer = (state = initialState, action: UserAction): AppInitial
           email: null,
           firstName: null,
           lastName: null,
+          accessToken: null,
+          refreshToken: null,
         },
       };
     case UserActions.fetchUserSuccess:
@@ -39,6 +43,8 @@ export const appReducer = (state = initialState, action: UserAction): AppInitial
           email: null,
           firstName: null,
           lastName: null,
+          accessToken: null,
+          refreshToken: null,
         },
       };
     default:
