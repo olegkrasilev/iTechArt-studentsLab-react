@@ -1,17 +1,22 @@
+/* eslint-disable unicorn/consistent-function-scoping */
 /* eslint-disable sonarjs/cognitive-complexity */
 import React, { useState } from 'react';
 import { Button, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 
-import { loginEndpoint, signUpEndpoint } from 'src/API/endpoints';
+import { useDispatch } from 'react-redux';
+
+import { signUpEndpoint } from 'src/API/endpoints';
 import { ForgotPasswordModal } from 'src/components/login/forgoPasswordModal';
 import { Wrapper } from 'src/components/login/style';
-import { login, loginSchemaValidation } from 'src/API/login';
+import { loginSchemaValidation } from 'src/API/login';
 import { singUp, signUpSchemaValidation } from 'src/API/signup';
+import { loginAction } from 'src/redux/action/user';
 
 export const Login: React.FC = () => {
   const [isUserRegistered, setIsUserRegistered] = useState(false);
   const [isForgotUserPasswordModalOpen, setForgotUserPasswordModalOpen] = React.useState(false);
+  const dispatch = useDispatch();
 
   const toggleUserForgotPassword = () => {
     setIsUserRegistered(!isUserRegistered);
@@ -30,9 +35,10 @@ export const Login: React.FC = () => {
       email: '',
       password: '',
     },
+
     validationSchema: loginSchemaValidation,
     onSubmit: data => {
-      login(loginEndpoint, data);
+      dispatch(loginAction(data));
     },
   });
 

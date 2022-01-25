@@ -1,6 +1,7 @@
 import { UserAction, UserActions } from 'src/types/user';
 import { AppInitialState } from 'src/types/app';
 
+// TODO change app Reducer to user Reducer
 const initialState: AppInitialState = {
   user: {
     userID: null,
