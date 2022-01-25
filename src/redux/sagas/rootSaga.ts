@@ -1,12 +1,8 @@
-import { actionChannel, put, take, takeEvery } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
 
 import { login } from '../../API/login';
 import { loginEndpoint } from '../../API/endpoints';
 import { UserActions } from '../../types/user';
-
-export function* workerSaga() {
-  // fetch here must be function
-}
 
 export function* watchFetchUser(payload: { payload: { email: string; password: string }; type: string }) {
   const { email, password } = payload.payload;
@@ -30,6 +26,5 @@ export function* watchFetchUser(payload: { payload: { email: string; password: s
 }
 
 export function* rootSaga() {
-  // import action type
-  yield takeEvery('FETCH_USER', watchFetchUser);
+  yield takeEvery(UserActions.fetchUser, watchFetchUser);
 }

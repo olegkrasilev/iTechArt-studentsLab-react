@@ -21,6 +21,7 @@ export const appReducer = (state = initialState, action: UserAction): AppInitial
   switch (action.type) {
     case UserActions.fetchUser:
       return {
+        ...state,
         app: { loading: true, error: null },
         user: {
           userID: null,
@@ -33,11 +34,13 @@ export const appReducer = (state = initialState, action: UserAction): AppInitial
       };
     case UserActions.fetchUserSuccess:
       return {
+        ...state,
         app: { loading: false, error: null },
         user: action.payload,
       };
     case UserActions.fetchUserError:
       return {
+        ...state,
         app: { loading: false, error: action.payload },
         user: {
           userID: null,

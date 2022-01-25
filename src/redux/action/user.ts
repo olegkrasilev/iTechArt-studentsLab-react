@@ -1,6 +1,6 @@
-export const loginAction = (payload: any) => {
-  return {
-    type: 'FETCH_USER',
-    payload,
-  };
-};
+import { UserActions } from 'src/types/user';
+
+export const loginAction = (payload: { email: string; password: string }) => ({
+  type: UserActions.fetchUser,
+  payload,
+});
