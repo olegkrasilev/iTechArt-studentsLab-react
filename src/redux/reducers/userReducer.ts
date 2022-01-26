@@ -1,8 +1,6 @@
 import { UserAction, UserActions } from 'src/types/user';
-import { AppInitialState } from 'src/types/app';
 
-// TODO change app Reducer to user Reducer
-const initialState: AppInitialState = {
+const initialState = {
   user: {
     userID: null,
     email: null,
@@ -10,19 +8,16 @@ const initialState: AppInitialState = {
     lastName: null,
     accessToken: null,
     refreshToken: null,
-  },
-  app: {
     error: null,
     loading: false,
   },
 };
 
-export const appReducer = (state = initialState, action: UserAction): AppInitialState => {
+export const userReducer = (state = initialState, action: UserAction) => {
   switch (action.type) {
     case UserActions.fetchUser:
       return {
         ...state,
-        app: { loading: true, error: null },
         user: {
           userID: null,
           email: null,
@@ -30,18 +25,18 @@ export const appReducer = (state = initialState, action: UserAction): AppInitial
           lastName: null,
           accessToken: null,
           refreshToken: null,
+          loading: true,
+          error: null,
         },
       };
     case UserActions.fetchUserSuccess:
       return {
         ...state,
-        app: { loading: false, error: null },
         user: action.payload,
       };
     case UserActions.fetchUserError:
       return {
         ...state,
-        app: { loading: false, error: action.payload },
         user: {
           userID: null,
           email: null,
@@ -49,6 +44,8 @@ export const appReducer = (state = initialState, action: UserAction): AppInitial
           lastName: null,
           accessToken: null,
           refreshToken: null,
+          error: action.payload,
+          loading: false,
         },
       };
     default:

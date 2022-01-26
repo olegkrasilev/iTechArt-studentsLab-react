@@ -3,26 +3,38 @@ import { put, takeEvery } from 'redux-saga/effects';
 import { login } from 'src/API/login';
 import { loginEndpoint } from 'src/API/endpoints';
 import { UserActions } from 'src/types/user';
+import { Response } from '@src/types';
+
+export interface ResponseGenerator {
+  config?: any;
+  data?: any;
+  headers?: any;
+  request?: any;
+  status?: number;
+  statusText?: string;
+  ok?: boolean;
+}
 
 export function* watchFetchUser(payload: { payload: { email: string; password: string }; type: string }) {
   const { email, password } = payload.payload;
   try {
-    const data: { id: string; firstName: string; lastName: string; accessToken: string; refreshToken: string } =
-      yield login(loginEndpoint, { email, password });
+    const response: ResponseGenerator = yield login(loginEndpoint, { email, password });
 
-    const { id, firstName, lastName, accessToken, refreshToken } = data;
-    const dataToStore = {
-      userID: id,
-      email,
-      firstName,
-      lastName,
-      accessToken,
-      refreshToken,
-    };
+    if (!response.ok) {
+      throw new Error('Something went wrong... Please try again');
+    }
 
-    yield put({ type: UserActions.fetchUserSuccess, payload: dataToStore });
+    const userData = response as Promise<globalThis.Response>;
+
+    userData.then(result => console.log(result)).catch();
+
+    yield put({ type: UserActions.fetchUserSuccess, payload });
   } catch (error) {
-    yield put({ type: UserActions.fetchUserSuccess, payload: error });
+    if (error instanceof Error) {
+      const errorMessage = error.message;
+
+      yield put({ type: UserActions.fetchUserError, payload: errorMessage });
+    }
   }
 }
 
