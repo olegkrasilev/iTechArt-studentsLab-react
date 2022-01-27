@@ -4,6 +4,9 @@ export const GlobalStyles = createGlobalStyle`
 /* https://dev.to/hankchizljaw/a-modern-css-reset-6p3 */
 
 /* Box sizing rules */
+body {
+  font-family: 'Roboto', sans-serif;
+}
 
 *,
 *::before,
