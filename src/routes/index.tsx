@@ -1,5 +1,6 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { AllPosts } from 'src/pages/allPosts/allPosts';
 import { Login } from 'src/components/login/index';
@@ -9,10 +10,17 @@ import { AllUsers } from 'src/pages/allUsers/allUsers';
 import { NotFound } from 'src/pages/notFound';
 import { Layout } from 'src/pages/layout';
 import { UserPage } from 'src/pages/user';
-import { getAccessJwtToken } from 'src/utils/jwt';
+import { selectIsUserAuthorized } from 'src/redux/selector/isUserAuthorized';
 
 export const Navigation = () => {
-  const isAuthorized = getAccessJwtToken();
+  const isAuthorized = useSelector(selectIsUserAuthorized);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthorized) {
+      navigate('/authorized/allUsers');
+    }
+  }, [isAuthorized, navigate]);
 
   return (
     <Routes>
@@ -25,6 +33,7 @@ export const Navigation = () => {
           <Route path="*" element={<NotFound />} />
         </Route>
       )}
+
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

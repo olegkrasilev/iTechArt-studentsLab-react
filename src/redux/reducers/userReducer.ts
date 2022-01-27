@@ -8,6 +8,7 @@ const initialState = {
     lastName: null,
     error: null,
     loading: false,
+    isAuthorized: false,
   },
 };
 
@@ -31,6 +32,7 @@ export const userReducer = (state = initialState, action: UserAction) => {
           ...action.payload,
           loading: false,
           error: null,
+          isAuthorized: true,
         },
       };
     case UserActions.fetchUserError:
@@ -43,6 +45,7 @@ export const userReducer = (state = initialState, action: UserAction) => {
           lastName: null,
           error: action.payload,
           loading: false,
+          isAuthorized: false,
         },
       };
     default:

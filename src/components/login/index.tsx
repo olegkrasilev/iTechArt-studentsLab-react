@@ -3,10 +3,7 @@
 import React, { useState } from 'react';
 import { Button, TextField } from '@mui/material';
 import { useFormik } from 'formik';
-
 import { useDispatch } from 'react-redux';
-
-import { useNavigate } from 'react-router-dom';
 
 import { signUpEndpoint } from 'src/API/endpoints';
 import { ForgotPasswordModal } from 'src/components/login/forgoPasswordModal';
@@ -14,14 +11,11 @@ import { Wrapper } from 'src/components/login/style';
 import { loginSchemaValidation } from 'src/API/login';
 import { singUp, signUpSchemaValidation } from 'src/API/signup';
 import { loginAction } from 'src/redux/action/user';
-import { getAccessJwtToken } from 'src/utils/jwt';
 
 export const Login: React.FC = () => {
   const [isUserRegistered, setIsUserRegistered] = useState(false);
   const [isForgotUserPasswordModalOpen, setForgotUserPasswordModalOpen] = React.useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const isAuthorized = getAccessJwtToken();
 
   const toggleUserForgotPassword = () => {
     setIsUserRegistered(!isUserRegistered);
@@ -44,10 +38,6 @@ export const Login: React.FC = () => {
     validationSchema: loginSchemaValidation,
     onSubmit: data => {
       dispatch(loginAction(data));
-
-      if (isAuthorized) {
-        navigate('/authorized/allUsers');
-      }
     },
   });
 

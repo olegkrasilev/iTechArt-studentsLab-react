@@ -38,3 +38,17 @@ export type Response = {
     email: string;
   };
 };
+
+export type Store = {
+  app: {
+    user: {
+      id: null;
+      email: null;
+      firstName: null;
+      lastName: null;
+      error: null;
+      loading: boolean;
+      isAuthorized: boolean;
+    };
+  };
+};
