@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 import { Button, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
+import * as yup from 'yup';
 
-import { signUpEndpoint } from 'src/API/endpoints';
+import { signUpEndpoint } from 'src/constants/endpoints';
 import { ForgotPasswordModal } from 'src/components/login/forgoPasswordModal';
 import { Wrapper } from 'src/components/login/style';
-import { loginSchemaValidation } from 'src/API/login';
 import { singUp, signUpSchemaValidation } from 'src/API/signup';
 import { loginAction } from 'src/redux/action/user';
 
@@ -28,6 +28,11 @@ export const Login: React.FC = () => {
   const closeIsUserForgotPasswordModal = () => {
     setForgotUserPasswordModalOpen(false);
   };
+
+  const loginSchemaValidation = yup.object({
+    email: yup.string().email('Enter a valid email').required('Email is required'),
+    password: yup.string().min(6, 'Password should be of minimum 6 characters length').required('Password is required'),
+  });
 
   const loginFormik = useFormik({
     initialValues: {
