@@ -9,17 +9,22 @@ import { AllUsers } from 'src/pages/allUsers/allUsers';
 import { NotFound } from 'src/pages/notFound';
 import { Layout } from 'src/pages/layout';
 import { UserPage } from 'src/pages/user';
+import { getAccessJwtToken } from 'src/utils/jwt';
 
 export const Navigation = () => {
+  const isAuthorized = getAccessJwtToken();
+
   return (
     <Routes>
       <Route path="/" element={<Login />} />
-      <Route path="/authorized" element={<Layout />}>
-        <Route path="allUsers" element={<AllUsers currentData={UserData} />} />
-        <Route path="allPosts" element={<AllPosts currentData={PostData} />} />
-        <Route path="user" element={<UserPage />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
+      {isAuthorized && (
+        <Route path="/authorized" element={<Layout />}>
+          <Route path="allUsers" element={<AllUsers currentData={UserData} />} />
+          <Route path="allPosts" element={<AllPosts currentData={PostData} />} />
+          <Route path="user" element={<UserPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      )}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
