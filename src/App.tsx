@@ -3,6 +3,4 @@ import './styles/fonts.css';
 
 import { Navigation } from 'src/routes';
 
-export const App: React.FC = () => {
-  return <Navigation />;
-};
+export const App: React.FC = () => <Navigation />;

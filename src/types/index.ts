@@ -13,16 +13,6 @@ export type Users = {
   id: number;
 };
 
-export type LoginResponse = {
-  status: string;
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  accessToken: string;
-  refreshToken: string;
-};
-
 export type Response = {
   status: string;
   id: number;
@@ -37,6 +27,16 @@ export type Response = {
     lastName: string;
     email: string;
   };
+};
+
+export type LoginResponse = {
+  status: string;
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  accessToken: string;
+  refreshToken: string;
 };
 
 export type Store = {
