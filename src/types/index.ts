@@ -13,17 +13,28 @@ export type Users = {
   id: number;
 };
 
-export type Response = {
+export type LoginResponse = {
   status: string;
-  accessToken: string;
-  refreshToken: string;
+  id: number;
   firstName: string;
   lastName: string;
+  email: string;
+  accessToken: string;
+  refreshToken: string;
+};
+
+export type Response = {
+  status: string;
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  accessToken: string;
+  refreshToken: string;
   data: {
     id: string;
-    email: string;
-    password: string;
     firstName: string;
     lastName: string;
+    email: string;
   };
 };

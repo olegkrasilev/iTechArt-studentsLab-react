@@ -2,12 +2,10 @@ import { UserAction, UserActions } from 'src/types/user';
 
 const initialState = {
   user: {
-    userID: null,
+    id: null,
     email: null,
     firstName: null,
     lastName: null,
-    accessToken: null,
-    refreshToken: null,
     error: null,
     loading: false,
   },
@@ -19,31 +17,30 @@ export const userReducer = (state = initialState, action: UserAction) => {
       return {
         ...state,
         user: {
-          userID: null,
+          id: null,
           email: null,
           firstName: null,
           lastName: null,
-          accessToken: null,
-          refreshToken: null,
           loading: true,
           error: null,
         },
       };
     case UserActions.fetchUserSuccess:
       return {
-        ...state,
-        user: action.payload,
+        user: {
+          ...action.payload,
+          loading: false,
+          error: null,
+        },
       };
     case UserActions.fetchUserError:
       return {
         ...state,
         user: {
-          userID: null,
+          id: null,
           email: null,
           firstName: null,
           lastName: null,
-          accessToken: null,
-          refreshToken: null,
           error: action.payload,
           loading: false,
         },
