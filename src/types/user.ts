@@ -1,3 +1,18 @@
+/*
+User payload type
+*/
+export interface UserPayload {
+  userID: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  accessToken: string;
+  refreshToken: string;
+}
+/*
+Login types
+*/
+
 export enum LoginActions {
   loginUser = '@@LOGIN_USER',
   loginUserSuccess = '@@LOGIN_USER_SUCCESS',
@@ -10,14 +25,7 @@ export interface LoginUserAction {
 
 export interface LoginUserSuccessAction {
   type: LoginActions.loginUserSuccess;
-  payload: {
-    userID: string;
-    email: string;
-    firstName: string;
-    lastName: string;
-    accessToken: string;
-    refreshToken: string;
-  };
+  payload: UserPayload;
 }
 
 export interface LoginUserErrorAction {
@@ -26,3 +34,29 @@ export interface LoginUserErrorAction {
 }
 
 export type LoginUserActions = LoginUserAction | LoginUserErrorAction | LoginUserSuccessAction;
+
+/*
+signup types
+*/
+
+export enum SignupActions {
+  signupUser = '@@SIGNUP_USER',
+  signupUserSuccess = '@@SIGNUP_USER_SUCCESS',
+  signupUserError = '@@SIGNUP_USER_ERROR',
+}
+
+export interface SignupUserAction {
+  type: SignupActions.signupUser;
+}
+
+export interface SignupUserSuccessAction {
+  type: SignupActions.signupUserSuccess;
+  payload: UserPayload;
+}
+
+export interface SignupUserErrorAction {
+  type: SignupActions.signupUserError;
+  payload: string;
+}
+
+export type SignupUserActions = SignupUserAction | SignupUserSuccessAction | SignupUserErrorAction;

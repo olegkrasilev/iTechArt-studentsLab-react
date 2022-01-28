@@ -1,4 +1,4 @@
-import { LoginUserActions, LoginActions } from 'src/types/user';
+import { LoginUserActions, LoginActions, SignupActions, SignupUserActions } from 'src/types/user';
 
 const initialState = {
   user: {
@@ -12,9 +12,12 @@ const initialState = {
   },
 };
 
-export const userReducer = (state = initialState, action: LoginUserActions) => {
+const initialUserState = initialState.user;
+
+export const userReducer = (state = initialState, action: LoginUserActions | SignupUserActions) => {
   switch (action.type) {
     case LoginActions.loginUser:
+    case SignupActions.signupUser:
       return {
         ...state,
         user: {
@@ -27,6 +30,7 @@ export const userReducer = (state = initialState, action: LoginUserActions) => {
         },
       };
     case LoginActions.loginUserSuccess:
+    case SignupActions.signupUserSuccess:
       return {
         user: {
           ...action.payload,
@@ -36,6 +40,7 @@ export const userReducer = (state = initialState, action: LoginUserActions) => {
         },
       };
     case LoginActions.loginUserError:
+    case SignupActions.signupUserError:
       return {
         ...state,
         user: {
