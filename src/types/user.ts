@@ -1,15 +1,15 @@
-export enum UserActions {
-  fetchUser = '@@FETCH_USER',
-  fetchUserSuccess = '@@FETCH_USER_SUCCESS',
-  fetchUserError = '@@FETCH_USER_ERROR',
+export enum LoginActions {
+  loginUser = '@@LOGIN_USER',
+  loginUserSuccess = '@@LOGIN_USER_SUCCESS',
+  loginUserError = '@@LOGIN_USER_ERROR',
 }
 
-export interface FetchUserAction {
-  type: UserActions.fetchUser;
+export interface LoginUserAction {
+  type: LoginActions.loginUser;
 }
 
-export interface FetchUserSuccessAction {
-  type: UserActions.fetchUserSuccess;
+export interface LoginUserSuccessAction {
+  type: LoginActions.loginUserSuccess;
   payload: {
     userID: string;
     email: string;
@@ -20,9 +20,9 @@ export interface FetchUserSuccessAction {
   };
 }
 
-export interface FetchUserErrorAction {
-  type: UserActions.fetchUserError;
+export interface LoginUserErrorAction {
+  type: LoginActions.loginUserError;
   payload: string;
 }
 
-export type UserAction = FetchUserAction | FetchUserErrorAction | FetchUserSuccessAction;
+export type LoginUserActions = LoginUserAction | LoginUserErrorAction | LoginUserSuccessAction;
