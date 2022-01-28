@@ -18,7 +18,9 @@ export const Navigation = () => {
 
   useEffect(() => {
     if (isAuthorized) {
-      navigate('/authorized/allUsers');
+      navigate('/authorized/allPosts');
+    } else {
+      navigate('/');
     }
   }, [isAuthorized, navigate]);
 

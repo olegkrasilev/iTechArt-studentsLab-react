@@ -24,6 +24,7 @@ export function* loginUser(payload: { payload: { email: string; password: string
         },
       },
     );
+
     const { id, firstName, lastName, accessToken, refreshToken } = response.data;
     const dataToStore = { id, email, firstName, lastName };
 

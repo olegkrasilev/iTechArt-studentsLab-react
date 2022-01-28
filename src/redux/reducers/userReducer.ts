@@ -12,8 +12,6 @@ const initialState = {
   },
 };
 
-const initialUserState = initialState.user;
-
 export const userReducer = (state = initialState, action: LoginUserActions | SignupUserActions) => {
   switch (action.type) {
     case LoginActions.loginUser:

@@ -1,6 +1,8 @@
 import React from 'react';
 import Container from '@mui/material/Container';
 
+import { Link } from 'react-router-dom';
+
 import { StyledHeader } from 'src/components/header/style';
 
 export const Header: React.FC = () => (
@@ -24,9 +26,9 @@ export const Header: React.FC = () => (
             </a>
           </li>
           <li className="menu__list-item">
-            <a className="menu__list-link" href="/">
+            <button className="menu__list-link reset-btn" type="button">
               Logout
-            </a>
+            </button>
           </li>
         </ul>
       </nav>

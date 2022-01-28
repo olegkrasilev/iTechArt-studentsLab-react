@@ -1,7 +1,18 @@
-export const getAccessJwtToken = () => sessionStorage.getItem('jwtAccessToken');
+import Cookies from 'js-cookie';
 
-export const setAccessJwtToken = (jwtAccessToken: string) => sessionStorage.setItem('jwtAccessToken', jwtAccessToken);
+export const getAccessJwtToken = () => Cookies.get('jwtAccessToken');
 
-export const getRefreshToken = () => sessionStorage.getItem('jwtRefreshToken');
+export const setAccessJwtToken = async (jwtAccessToken: string) => {
+  // TODO add env file
+  Cookies.set('jwtAccessToken', jwtAccessToken, {
+    expires: 7,
+  });
+};
 
-export const setRefreshToken = (token: string) => sessionStorage.setItem('jwtRefreshToken', token);
+export const getRefreshToken = () => Cookies.get('jwtRefreshToken');
+
+export const setRefreshToken = (jwtRefreshToken: string) => {
+  Cookies.set('jwtRefreshToken', jwtRefreshToken, {
+    expires: 7,
+  });
+};
