@@ -1,9 +1,12 @@
-import { takeEvery } from 'redux-saga/effects';
+import { all, fork } from 'redux-saga/effects';
 
-import { watchLoginUser } from './user';
-
-import { LoginActions } from 'src/types/user';
+import { usersSaga } from './user';
 
 export function* rootSaga() {
-  yield takeEvery(LoginActions.loginUser, watchLoginUser);
+  try {
+    yield all([fork(usersSaga)]);
+  } catch (error) {
+    // TODO create store app error field
+    console.error(error);
+  }
 }

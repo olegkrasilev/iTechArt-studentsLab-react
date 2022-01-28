@@ -1,27 +1,25 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, takeEvery, all } from 'redux-saga/effects';
+import axios from 'axios';
 
 import { LoginActions } from 'src/types/user';
 import { loginEndpoint } from 'src/constants/endpoints';
 import { LoginResponse } from '@src/types';
 import { setAccessJwtToken, setRefreshToken } from 'src/utils/jwt';
 
-const loginUser = async (url: string, data: { email: string; password: string }) => {
-  const response = await fetch(url, {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-
-  return response.json();
-};
-
-export function* watchLoginUser(payload: { payload: { email: string; password: string }; type: string }) {
+export function* loginUser(payload: { payload: { email: string; password: string }; type: string }) {
   const { email, password } = payload.payload;
   try {
-    const data: ReturnType<typeof loginUser> = yield call(loginUser, loginEndpoint, { email, password });
-    const { id, firstName, lastName, accessToken, refreshToken } = data as unknown as LoginResponse;
+    const response: LoginResponse = yield call(
+      axios.post,
+      loginEndpoint,
+      { email, password },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+    const { id, firstName, lastName, accessToken, refreshToken } = response.data;
     const dataToStore = { id, email, firstName, lastName };
 
     if (!(accessToken && refreshToken)) {
@@ -37,5 +35,18 @@ export function* watchLoginUser(payload: { payload: { email: string; password: s
 
       yield put({ type: LoginActions.loginUserError, payload: errorMessage });
     }
+  }
+}
+
+export function* watchLoginUser() {
+  yield takeEvery(LoginActions.loginUser, loginUser);
+}
+
+export function* usersSaga() {
+  try {
+    yield all([watchLoginUser()]);
+  } catch (error) {
+    // TODO create store app error field
+    console.error(error);
   }
 }

@@ -30,13 +30,15 @@ export type Response = {
 };
 
 export type LoginResponse = {
-  status: string;
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  accessToken: string;
-  refreshToken: string;
+  data: {
+    status: string;
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    accessToken: string;
+    refreshToken: string;
+  };
 };
 
 export type Store = {
