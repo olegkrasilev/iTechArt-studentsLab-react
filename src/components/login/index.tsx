@@ -180,7 +180,7 @@ export const Login: React.FC = () => {
       {userError && (
         <Snackbar open={userError} autoHideDuration={6000}>
           <Alert severity="warning" sx={{ fontSize: 16 }}>
-            This user does not exist.
+            This is an error. Please try again.
           </Alert>
         </Snackbar>
       )}
