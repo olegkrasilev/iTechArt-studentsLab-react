@@ -10,7 +10,7 @@ import { AllUsers } from 'src/pages/allUsers/allUsers';
 import { NotFound } from 'src/pages/notFound';
 import { Layout } from 'src/pages/layout';
 import { UserPage } from 'src/pages/user';
-import { selectIsUserAuthorized } from 'src/redux/selector/isUserAuthorized';
+import { selectIsUserAuthorized } from 'src/redux/selector';
 
 export const Navigation = () => {
   const isAuthorized = useSelector(selectIsUserAuthorized);

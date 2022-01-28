@@ -1,19 +1,20 @@
-/* eslint-disable unicorn/consistent-function-scoping */
 /* eslint-disable sonarjs/cognitive-complexity */
 import React, { useState } from 'react';
-import { Button, TextField } from '@mui/material';
+import { Alert, Button, Snackbar, TextField } from '@mui/material';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 
 import { ForgotPasswordModal } from 'src/components/login/forgoPasswordModal';
 import { Wrapper } from 'src/components/login/style';
 import { loginAction, signupAction } from 'src/redux/action/user';
+import { selectUserError } from 'src/redux/selector';
 
 export const Login: React.FC = () => {
   const [isUserRegistered, setIsUserRegistered] = useState(false);
   const [isForgotUserPasswordModalOpen, setForgotUserPasswordModalOpen] = React.useState(false);
   const dispatch = useDispatch();
+  const userError = useSelector(selectUserError);
 
   const toggleUserForgotPassword = () => {
     setIsUserRegistered(!isUserRegistered);
@@ -176,6 +177,13 @@ export const Login: React.FC = () => {
         closeIsUserForgotPasswordModal={closeIsUserForgotPasswordModal}
         isForgotUserPasswordPasswordModalOpen={isForgotUserPasswordModalOpen}
       />
+      {userError && (
+        <Snackbar open={userError} autoHideDuration={6000}>
+          <Alert severity="warning" sx={{ fontSize: 16 }}>
+            This user does not exist.
+          </Alert>
+        </Snackbar>
+      )}
     </>
   );
 };
