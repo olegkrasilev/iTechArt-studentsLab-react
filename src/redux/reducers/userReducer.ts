@@ -1,4 +1,11 @@
-import { LoginUserActions, LoginActions, SignupActions, SignupUserActions } from 'src/types/user';
+import {
+  LoginUserActions,
+  LoginActions,
+  SignupActions,
+  SignupUserActions,
+  LogoutUserActions,
+  LogoutActions,
+} from 'src/types/user';
 
 const initialState = {
   user: {
@@ -12,19 +19,15 @@ const initialState = {
   },
 };
 
-export const userReducer = (state = initialState, action: LoginUserActions | SignupUserActions) => {
+export const userReducer = (state = initialState, action: LoginUserActions | SignupUserActions | LogoutUserActions) => {
   switch (action.type) {
     case LoginActions.loginUser:
     case SignupActions.signupUser:
+    case LogoutActions.logoutUser:
       return {
-        ...state,
         user: {
-          id: null,
-          email: null,
-          firstName: null,
-          lastName: null,
+          ...state.user,
           loading: true,
-          error: null,
         },
       };
     case LoginActions.loginUserSuccess:
@@ -40,17 +43,34 @@ export const userReducer = (state = initialState, action: LoginUserActions | Sig
     case LoginActions.loginUserError:
     case SignupActions.signupUserError:
       return {
-        ...state,
         user: {
+          ...state.user,
+          error: action.payload,
+        },
+      };
+
+    case LogoutActions.logoutUserSuccess:
+      return {
+        user: {
+          ...state.user,
           id: null,
           email: null,
           firstName: null,
           lastName: null,
-          error: action.payload,
+          error: null,
           loading: false,
           isAuthorized: false,
         },
       };
+    case LogoutActions.logoutUserError: {
+      return {
+        user: {
+          ...state.user,
+          error: action.payload,
+          loading: false,
+        },
+      };
+    }
     default:
       return state;
   }

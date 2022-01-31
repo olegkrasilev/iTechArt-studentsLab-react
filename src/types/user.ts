@@ -60,3 +60,29 @@ export interface SignupUserErrorAction {
 }
 
 export type SignupUserActions = SignupUserAction | SignupUserSuccessAction | SignupUserErrorAction;
+
+/*
+logout types
+*/
+
+export enum LogoutActions {
+  logoutUser = '@@LOGOUT_USER',
+  logoutUserSuccess = '@@LOGOUT_USER_SUCCESS',
+  logoutUserError = '@@LOGOUT_USER_ERROR',
+}
+
+export interface LogoutUserAction {
+  type: LogoutActions.logoutUser;
+}
+
+export interface LogoutUserSuccessAction {
+  type: LogoutActions.logoutUserSuccess;
+  payload: UserPayload;
+}
+
+export interface LogoutUserErrorAction {
+  type: LogoutActions.logoutUserError;
+  payload: string;
+}
+
+export type LogoutUserActions = LogoutUserAction | LogoutUserSuccessAction | LogoutUserErrorAction;

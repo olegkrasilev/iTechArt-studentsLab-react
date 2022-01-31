@@ -1,10 +1,9 @@
 import { call, put, takeEvery, all } from 'redux-saga/effects';
 import axios from 'axios';
 
-import { SignupResponse, LoginResponse } from '../../../types/index';
-
-import { LoginActions, SignupActions } from 'src/types/user';
-import { loginEndpoint, signUpEndpoint } from 'src/constants/endpoints';
+import { SignupResponse, LoginResponse } from 'src/types/index';
+import { LogoutActions, LoginActions, SignupActions } from 'src/types/user';
+import { loginEndpoint, signUpEndpoint, logoutEndpoint } from 'src/constants/endpoints';
 import { setAccessJwtToken, setRefreshToken } from 'src/utils/jwt';
 
 /*
@@ -76,6 +75,22 @@ export function* signupUser(payload: {
   }
 }
 
+export function* logoutUser() {
+  try {
+    const response: { status: number } = yield call(axios.post, logoutEndpoint, {}, { withCredentials: true });
+
+    if (response.status === 204) {
+      yield put({ type: LogoutActions.logoutUserSuccess });
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      const errorMessage = error.message;
+
+      yield put({ type: LogoutActions.logoutUserError, payload: errorMessage });
+    }
+  }
+}
+
 /*
 Watchers
 */
@@ -88,9 +103,13 @@ export function* watchSignupUser() {
   yield takeEvery(SignupActions.signupUser, signupUser);
 }
 
+export function* watchLogoutUser() {
+  yield takeEvery(LogoutActions.logoutUser, logoutUser);
+}
+
 export function* usersSaga() {
   try {
-    yield all([watchLoginUser(), watchSignupUser()]);
+    yield all([watchLoginUser(), watchSignupUser(), watchLogoutUser()]);
   } catch (error) {
     // TODO create store app error field
     console.error(error);
