@@ -1,4 +1,4 @@
-import { PostsActions, LoadPostsActions } from '../../types/posts';
+import { PostsActions, LoadPostsActions } from 'src/types/posts';
 
 interface Post {
   postID: null | number;
@@ -23,7 +23,7 @@ export const postsReducer = (state = initialState, action: LoadPostsActions) => 
       return {
         error: false,
         loading: true,
-        ...state.posts,
+        posts: state.posts,
       };
     case PostsActions.loadPostsSuccess:
       return {
@@ -35,7 +35,7 @@ export const postsReducer = (state = initialState, action: LoadPostsActions) => 
       return {
         error: action.payload,
         loading: false,
-        ...state.posts,
+        posts: state.posts,
       };
     default:
       return state;

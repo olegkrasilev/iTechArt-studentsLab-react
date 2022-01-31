@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions, Grid } from '@mui/material';
+import { useDispatch } from 'react-redux';
 
+import { loadPosts } from 'src/redux/action/posts';
 import { Posts } from 'src/types';
 import { RenderPagination } from 'src/components/pagination';
 
@@ -12,6 +14,12 @@ type Properties = {
 };
 
 export const AllPosts: React.FC<Properties> = ({ currentData }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadPosts());
+  }, [dispatch]);
+
   const renderPosts = currentData.map(item => {
     const { id, post, postCreationTime, title, user } = item;
 

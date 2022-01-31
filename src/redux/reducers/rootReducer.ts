@@ -5,6 +5,6 @@ import { postsReducer } from './postsReducer';
 import { userReducer } from 'src/redux/reducers/userReducer';
 
 export const rootReducer = combineReducers({
-  user: userReducer,
+  app: userReducer,
   posts: postsReducer,
 });
