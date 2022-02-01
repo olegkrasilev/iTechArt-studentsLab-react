@@ -1,3 +1,5 @@
+import { Post } from 'src/types/posts';
+
 export type Posts = {
   user: string;
   title: string;
@@ -30,13 +32,18 @@ export type SignupResponse = LoginResponse;
 export type Store = {
   app: {
     user: {
-      id: null;
-      email: null;
-      firstName: null;
-      lastName: null;
+      id: null | number;
+      email: null | string;
+      firstName: null | string;
+      lastName: null | string;
       error: null;
       loading: boolean;
       isAuthorized: boolean;
     };
+  };
+  posts: {
+    error: null;
+    loading: boolean;
+    posts: Post[];
   };
 };

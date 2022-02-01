@@ -4,6 +4,7 @@ export interface Post {
   postCreationTime: null | Date;
   firstName: null | string;
   lastName: null | string;
+  postID: null | number;
 }
 
 export enum PostsActions {

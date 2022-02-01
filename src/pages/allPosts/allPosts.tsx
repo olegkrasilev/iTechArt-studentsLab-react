@@ -3,33 +3,33 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions, Grid } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { loadPosts } from 'src/redux/action/posts';
-import { Posts } from 'src/types';
 import { RenderPagination } from 'src/components/pagination';
+import { selectAllUsersPosts } from 'src/redux/selector';
 
-type Properties = {
-  currentData: Posts[];
-};
-
-export const AllPosts: React.FC<Properties> = ({ currentData }) => {
+export const AllPosts: React.FC = () => {
   const dispatch = useDispatch();
+  const allUsersPosts = useSelector(selectAllUsersPosts);
 
   useEffect(() => {
     dispatch(loadPosts());
   }, [dispatch]);
 
-  const renderPosts = currentData.map(item => {
-    const { id, post, postCreationTime, title, user } = item;
+  useEffect(() => {}, [allUsersPosts]);
+
+  const renderAllUsersPosts = allUsersPosts.map(item => {
+    const { firstName, lastName, post, postCreationTime, title, postID } = item;
 
     return (
-      <Grid item key={id} xs={12}>
+      <Grid item key={postID} xs={12}>
         <Card>
           <CardActionArea>
             <CardContent>
               <Typography gutterBottom variant="h6" component="div">
-                {title} by {user}
+                {title} by {firstName}
+                {lastName}
               </Typography>
               <Typography gutterBottom variant="body1" component="div">
                 Created at <time>{postCreationTime}</time>
@@ -49,5 +49,5 @@ export const AllPosts: React.FC<Properties> = ({ currentData }) => {
     );
   });
 
-  return <RenderPagination incomingData={currentData} renderData={renderPosts} />;
+  return <RenderPagination incomingData={allUsersPosts} renderData={renderAllUsersPosts} />;
 };

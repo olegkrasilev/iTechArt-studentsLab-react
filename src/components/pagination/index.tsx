@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Container, Grid } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
@@ -14,6 +14,8 @@ export const RenderPagination: React.FC<Properties> = ({ incomingData, renderDat
   const [data, setData] = useState(incomingData);
   const [currentPage, setCurrentPage] = useState(1);
   const [dataPerPage, setDataPerPage] = useState(5);
+
+  useEffect(() => {}, [incomingData, renderData]);
 
   const useStyles = makeStyles({
     centerPagination: {
