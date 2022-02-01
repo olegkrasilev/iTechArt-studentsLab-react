@@ -58,7 +58,7 @@ export const RenderPagination: React.FC<Properties> = ({ incomingData, renderDat
 
   return (
     <Container>
-      {data.length === 0 ? (
+      {incomingData.length === 0 ? (
         <h1 className={classes.title}>No data were found</h1>
       ) : (
         <ul>

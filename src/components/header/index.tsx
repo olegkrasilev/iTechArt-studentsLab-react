@@ -29,6 +29,11 @@ export const Header: React.FC = () => {
               </Link>
             </li>
             <li className="menu__list-item">
+              <Link className="menu__list-link" to="/authorized/allPosts">
+                Posts
+              </Link>
+            </li>
+            <li className="menu__list-item">
               <a className="menu__list-link" href="/">
                 Account
               </a>
