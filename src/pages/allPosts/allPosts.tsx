@@ -17,8 +17,6 @@ export const AllPosts: React.FC = () => {
     dispatch(loadPosts());
   }, [dispatch]);
 
-  useEffect(() => {}, [allUsersPosts]);
-
   const renderAllUsersPosts = allUsersPosts.map(item => {
     const { firstName, lastName, post, postCreationTime, title, postID } = item;
 

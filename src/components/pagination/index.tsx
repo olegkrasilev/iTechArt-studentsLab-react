@@ -11,11 +11,15 @@ type Properties = {
 };
 
 export const RenderPagination: React.FC<Properties> = ({ incomingData, renderData }) => {
-  const [data, setData] = useState(incomingData);
+  const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [dataPerPage, setDataPerPage] = useState(5);
 
-  useEffect(() => {}, [incomingData, renderData]);
+  useEffect(() => {
+    if (incomingData.length > 0) {
+      setData(incomingData);
+    }
+  }, [incomingData]);
 
   const useStyles = makeStyles({
     centerPagination: {
@@ -55,13 +59,19 @@ export const RenderPagination: React.FC<Properties> = ({ incomingData, renderDat
   return (
     <Container>
       {data.length === 0 ? (
-        <h1 className={classes.title}>No posts were found</h1>
+        <h1 className={classes.title}>No data were found</h1>
       ) : (
         <ul>
           <Grid container spacing={2}>
             {currentData}
           </Grid>
-          <Pagination className={classes.centerPagination} onClick={paginationClick} count={pageNumbers.length} />
+          <Pagination
+            hidePrevButton
+            hideNextButton
+            className={classes.centerPagination}
+            onClick={paginationClick}
+            count={pageNumbers.length}
+          />
         </ul>
       )}
     </Container>
