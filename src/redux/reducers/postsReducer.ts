@@ -1,13 +1,4 @@
-import { PostsActions, LoadPostsActions } from 'src/types/posts';
-
-interface Post {
-  postID: null | number;
-  title: null | string;
-  post: null | string;
-  postCreationTime: null | Date;
-  firstName: null | string;
-  lastName: null | string;
-}
+import { PostsActions, LoadPostsActions, Post } from 'src/types/posts';
 
 interface PostsInitialState {
   loading: boolean;

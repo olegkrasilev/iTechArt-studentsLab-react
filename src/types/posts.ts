@@ -1,11 +1,9 @@
-import { UserPayload } from './user';
-
-interface PostsPayload {
-  id: number;
-  title: string;
-  post: string;
-  postCreationTime: Date;
-  user: UserPayload[];
+export interface Post {
+  title: null | string;
+  post: null | string;
+  postCreationTime: null | Date;
+  firstName: null | string;
+  lastName: null | string;
 }
 
 export enum PostsActions {
@@ -20,7 +18,7 @@ export interface LoadPostsAction {
 
 export interface LoadPostsSuccessAction {
   type: PostsActions.loadPostsSuccess;
-  payload: PostsPayload;
+  payload: Post[];
 }
 
 export interface LoadPostsErrorAction {

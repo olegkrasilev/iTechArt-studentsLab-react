@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { allPostsEndpoint } from 'src/constants/endpoints';
 
-import { PostsActions } from 'src/types/posts';
+import { Post, PostsActions } from 'src/types/posts';
 
 /*
 Workers
@@ -11,9 +11,15 @@ Workers
 
 export function* loadAllPosts() {
   try {
-    const response: { data: string } = yield call(axios.get, allPostsEndpoint, { withCredentials: true });
+    const response: {
+      data: {
+        posts: Post[];
+      };
+    } = yield call(axios.get, allPostsEndpoint, { withCredentials: true });
 
-    console.log(response.data);
+    const posts = response.data.posts;
+
+    yield put({ type: PostsActions.loadPostsSuccess, payload: posts });
   } catch (error) {
     if (error instanceof Error) {
       const errorMessage = error.message;

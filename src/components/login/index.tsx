@@ -1,5 +1,5 @@
 /* eslint-disable sonarjs/cognitive-complexity */
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Alert, Button, Snackbar, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,9 +24,9 @@ export const Login: React.FC = () => {
     setForgotUserPasswordModalOpen(true);
   };
 
-  const closeIsUserForgotPasswordModal = () => {
+  const closeIsUserForgotPasswordModal = useCallback(() => {
     setForgotUserPasswordModalOpen(false);
-  };
+  }, []);
 
   const loginSchemaValidation = yup.object({
     email: yup.string().email('Enter a valid email').required('Email is required'),
