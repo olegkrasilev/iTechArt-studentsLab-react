@@ -2,6 +2,8 @@ import React from 'react';
 import Container from '@mui/material/Container';
 import { useDispatch } from 'react-redux';
 
+import { Link } from 'react-router-dom';
+
 import { StyledHeader } from 'src/components/header/style';
 import { logoutAction } from 'src/redux/action/user';
 
@@ -22,9 +24,9 @@ export const Header: React.FC = () => {
               </a>
             </li>
             <li className="menu__list-item">
-              <a className="menu__list-link" href="/">
+              <Link className="menu__list-link" to="/authorized/allUsers">
                 Users
-              </a>
+              </Link>
             </li>
             <li className="menu__list-item">
               <a className="menu__list-link" href="/">
