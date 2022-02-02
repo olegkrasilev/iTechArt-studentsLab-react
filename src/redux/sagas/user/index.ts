@@ -107,7 +107,7 @@ export function* watchLogoutUser() {
   yield takeEvery(LogoutActions.logoutUser, logoutUser);
 }
 
-export function* usersSaga() {
+export function* userSaga() {
   try {
     yield all([watchLoginUser(), watchSignupUser(), watchLogoutUser()]);
   } catch (error) {

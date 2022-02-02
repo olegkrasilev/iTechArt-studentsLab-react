@@ -5,9 +5,7 @@ import Typography from '@mui/material/Typography';
 import { Backdrop, Button, CardActionArea, CardActions, CircularProgress, Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { format } from 'date-fns';
-
-import { loadPosts } from 'src/redux/action/posts';
+import { loadPostsAction } from 'src/redux/action/posts';
 import { RenderPagination } from 'src/components/pagination';
 import { selectAllUsersPosts, selectIsUsersPostsLoading } from 'src/redux/selector';
 
@@ -17,7 +15,7 @@ export const AllPosts: React.FC = () => {
   const isPostsLoading = useSelector(selectIsUsersPostsLoading);
 
   useEffect(() => {
-    dispatch(loadPosts());
+    dispatch(loadPostsAction());
   }, [dispatch]);
 
   const renderAllUsersPosts = allUsersPosts.map(item => {

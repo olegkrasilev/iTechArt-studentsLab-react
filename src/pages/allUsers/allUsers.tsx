@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, Grid } from '@mui/material';
+import { useDispatch } from 'react-redux';
 
+import { loadUsersAction } from 'src/redux/action/users';
 import { Users } from 'src/types';
 import { RenderPagination } from 'src/components/pagination';
 
@@ -12,6 +14,11 @@ type Properties = {
 };
 
 export const AllUsers: React.FC<Properties> = ({ currentData }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadUsersAction());
+  }, []);
   const renderPosts = currentData.map(item => {
     const { email, firstName, lastName, id } = item;
 

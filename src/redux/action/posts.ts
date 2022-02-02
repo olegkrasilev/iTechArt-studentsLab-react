@@ -1,5 +1,5 @@
 import { PostsActions } from 'src/types/posts';
 
-export const loadPosts = () => ({
+export const loadPostsAction = () => ({
   type: PostsActions.loadPosts,
 });

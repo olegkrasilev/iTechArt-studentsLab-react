@@ -8,4 +8,6 @@ export const signUpEndpoint = `${userEndpoint}/signup`;
 
 export const logoutEndpoint = `${userEndpoint}/logout`;
 
+export const allUsersEndpoint = `${userEndpoint}/getAllUsers`;
+
 export const allPostsEndpoint = `${postsEndpoint}/getAllPosts`;
