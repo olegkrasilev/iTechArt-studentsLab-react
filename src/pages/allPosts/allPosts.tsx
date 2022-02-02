@@ -5,6 +5,8 @@ import Typography from '@mui/material/Typography';
 import { Backdrop, Button, CardActionArea, CardActions, CircularProgress, Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { format } from 'date-fns';
+
 import { loadPosts } from 'src/redux/action/posts';
 import { RenderPagination } from 'src/components/pagination';
 import { selectAllUsersPosts, selectIsUsersPostsLoading } from 'src/redux/selector';
@@ -21,6 +23,8 @@ export const AllPosts: React.FC = () => {
   const renderAllUsersPosts = allUsersPosts.map(item => {
     const { firstName, lastName, post, postCreationTime, title, postID } = item;
 
+    const formatedPostCreationTime = new Date(postCreationTime as Date).toDateString();
+
     return (
       <Grid item key={postID} xs={12}>
         <Card>
@@ -31,7 +35,7 @@ export const AllPosts: React.FC = () => {
                 {lastName}
               </Typography>
               <Typography gutterBottom variant="body1" component="div">
-                Created at <time>{postCreationTime}</time>
+                Created at <time>{formatedPostCreationTime}</time>
               </Typography>
               <Typography variant="subtitle1" color="text.secondary">
                 {post}
