@@ -1,3 +1,5 @@
+import { Post } from 'src/types/posts';
+
 /*
 User payload type
 */
@@ -86,3 +88,29 @@ export interface LogoutUserErrorAction {
 }
 
 export type LogoutUserActions = LogoutUserAction | LogoutUserSuccessAction | LogoutUserErrorAction;
+
+/*
+load User Posts types
+*/
+
+export enum LoadUserPostsAction {
+  loadUserPost = '@@LOAD_USER_POSTS',
+  loadUserPostSuccess = '@@LOAD_USER_POST_SUCCESS',
+  loadUserPostError = '@@LOGOUT_USER_ERROR',
+}
+
+export interface LoadUserPosts {
+  type: LoadUserPostsAction.loadUserPost;
+}
+
+export interface LoadUserPostSuccess {
+  type: LoadUserPostsAction.loadUserPostSuccess;
+  payload: Post[];
+}
+
+export interface LoadUserPostsError {
+  type: LoadUserPostsAction.loadUserPostError;
+  payload: string;
+}
+
+export type LoadUserPostsActions = LoadUserPosts | LoadUserPostSuccess | LoadUserPostsError;

@@ -1,7 +1,6 @@
 import React from 'react';
 import Container from '@mui/material/Container';
 import { useDispatch } from 'react-redux';
-
 import { Link } from 'react-router-dom';
 
 import { StyledHeader } from 'src/components/header/style';
@@ -19,9 +18,9 @@ export const Header: React.FC = () => {
         <nav className="menu">
           <ul className="menu__list reset-list">
             <li className="menu__list-item">
-              <a className="menu__list-link" href="/">
-                Home
-              </a>
+              <Link className="menu__list-link" to="/authorized/myPosts">
+                My posts
+              </Link>
             </li>
             <li className="menu__list-item">
               <Link className="menu__list-link" to="/authorized/allUsers">

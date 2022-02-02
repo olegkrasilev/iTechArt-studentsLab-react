@@ -6,7 +6,7 @@ import { selectIsUserAuthorized } from 'src/redux/selector';
 import { Login } from 'src/components/login/index';
 import { NotFound } from 'src/pages/notFound';
 import { Layout } from 'src/pages/layout';
-import { UserPage } from 'src/pages/user';
+import MyPosts from 'src/pages/myPosts';
 
 const AllUsers = lazy(() => import('src/pages/allUsers/allUsers'));
 const AllPosts = lazy(() => import('src/pages/allPosts/allPosts'));
@@ -39,7 +39,7 @@ export const Navigation = () => {
           <Route path="/authorized" element={<Layout />}>
             <Route path="allUsers" element={<AllUsers />} />
             <Route path="allPosts" element={<AllPosts />} />
-            <Route path="user" element={<UserPage />} />
+            <Route path="myPosts" element={<MyPosts />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         )}
