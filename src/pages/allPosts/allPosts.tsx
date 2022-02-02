@@ -9,7 +9,7 @@ import { loadPostsAction } from 'src/redux/action/posts';
 import { RenderPagination } from 'src/components/pagination';
 import { selectAllUsersPosts, selectIsUsersPostsLoading } from 'src/redux/selector';
 
-export const AllPosts: React.FC = () => {
+const AllPosts: React.FC = () => {
   const dispatch = useDispatch();
   const allUsersPosts = useSelector(selectAllUsersPosts);
   const isPostsLoading = useSelector(selectIsUsersPostsLoading);
@@ -60,3 +60,5 @@ export const AllPosts: React.FC = () => {
 
   return <RenderPagination incomingData={allUsersPosts} renderData={renderAllUsersPosts} />;
 };
+
+export default AllPosts;

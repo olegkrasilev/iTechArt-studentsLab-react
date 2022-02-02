@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect, lazy } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { AllPosts } from 'src/pages/allPosts/allPosts';
+import { selectIsUserAuthorized } from 'src/redux/selector';
 import { Login } from 'src/components/login/index';
-import { AllUsers } from 'src/pages/allUsers/allUsers';
 import { NotFound } from 'src/pages/notFound';
 import { Layout } from 'src/pages/layout';
 import { UserPage } from 'src/pages/user';
-import { selectIsUserAuthorized } from 'src/redux/selector';
+
+const AllUsers = lazy(() => import('src/pages/allUsers/allUsers'));
+const AllPosts = lazy(() => import('src/pages/allPosts/allPosts'));
 
 export const Navigation = () => {
   const isAuthorized = useSelector(selectIsUserAuthorized);
@@ -31,18 +32,19 @@ export const Navigation = () => {
   }, [isAuthorized, isAuthorizedLocation, navigate]);
 
   return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      {isAuthorized && (
-        <Route path="/authorized" element={<Layout />}>
-          <Route path="allUsers" element={<AllUsers />} />
-          <Route path="allPosts" element={<AllPosts />} />
-          <Route path="user" element={<UserPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      )}
-
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <Suspense fallback={<p> Loading...</p>}>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        {isAuthorized && (
+          <Route path="/authorized" element={<Layout />}>
+            <Route path="allUsers" element={<AllUsers />} />
+            <Route path="allPosts" element={<AllPosts />} />
+            <Route path="user" element={<UserPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        )}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Suspense>
   );
 };

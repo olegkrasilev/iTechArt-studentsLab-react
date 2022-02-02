@@ -105,7 +105,8 @@
     ],
     "no-plusplus": "off",
     "default-param-last": "off",
-    "@typescript-eslint/default-param-last": ["off"]
+    "@typescript-eslint/default-param-last": ["off"],
+    "import/no-default-export": "off"
   },
   "settings": {
     "import/resolver": {
