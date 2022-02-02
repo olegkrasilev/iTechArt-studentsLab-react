@@ -1,3 +1,4 @@
+import { User } from 'src/types/users';
 import { Post } from 'src/types/posts';
 
 export type Posts = {
@@ -8,6 +9,7 @@ export type Posts = {
   id: number;
 };
 
+// TODO remove this later
 export type Users = {
   email: string;
   firstName: string;
@@ -42,8 +44,13 @@ export type Store = {
     };
   };
   posts: {
-    error: null;
+    error: null | string;
     loading: boolean;
     posts: Post[];
+  };
+  users: {
+    error: null | string;
+    loading: boolean;
+    users: User[];
   };
 };

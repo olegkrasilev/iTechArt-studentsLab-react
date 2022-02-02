@@ -7,3 +7,5 @@ export const selectUserError = (store: Store) => store.app.user.error;
 export const selectAllUsersPosts = (store: Store) => store.posts.posts;
 
 export const selectIsUsersPostsLoading = (store: Store) => store.posts.loading;
+
+export const selectALlUsers = (store: Store) => store.users.users;

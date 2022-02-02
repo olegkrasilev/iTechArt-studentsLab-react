@@ -3,23 +3,21 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, Grid } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { loadUsersAction } from 'src/redux/action/users';
 import { Users } from 'src/types';
 import { RenderPagination } from 'src/components/pagination';
+import { selectALlUsers } from 'src/redux/selector';
 
-type Properties = {
-  currentData: Users[];
-};
-
-export const AllUsers: React.FC<Properties> = ({ currentData }) => {
+export const AllUsers: React.FC = () => {
   const dispatch = useDispatch();
+  const allUsers = useSelector(selectALlUsers);
 
   useEffect(() => {
     dispatch(loadUsersAction());
-  }, []);
-  const renderPosts = currentData.map(item => {
+  }, [dispatch]);
+  const renderUsers = allUsers.map(item => {
     const { email, firstName, lastName, id } = item;
 
     return (
@@ -40,5 +38,5 @@ export const AllUsers: React.FC<Properties> = ({ currentData }) => {
     );
   });
 
-  return <RenderPagination incomingData={currentData} renderData={renderPosts} />;
+  return <RenderPagination incomingData={allUsers} renderData={renderUsers} />;
 };

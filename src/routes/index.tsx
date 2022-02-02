@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 
 import { AllPosts } from 'src/pages/allPosts/allPosts';
 import { Login } from 'src/components/login/index';
-import { mockData as UserData } from 'src/data/users';
 import { AllUsers } from 'src/pages/allUsers/allUsers';
 import { NotFound } from 'src/pages/notFound';
 import { Layout } from 'src/pages/layout';
@@ -36,7 +35,7 @@ export const Navigation = () => {
       <Route path="/" element={<Login />} />
       {isAuthorized && (
         <Route path="/authorized" element={<Layout />}>
-          <Route path="allUsers" element={<AllUsers currentData={UserData} />} />
+          <Route path="allUsers" element={<AllUsers />} />
           <Route path="allPosts" element={<AllPosts />} />
           <Route path="user" element={<UserPage />} />
           <Route path="*" element={<NotFound />} />
