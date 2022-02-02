@@ -6,11 +6,10 @@ import { CardActionArea, Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { loadUsersAction } from 'src/redux/action/users';
-import { Users } from 'src/types';
 import { RenderPagination } from 'src/components/pagination';
 import { selectALlUsers } from 'src/redux/selector';
 
-export const AllUsers: React.FC = () => {
+const AllUsers: React.FC = () => {
   const dispatch = useDispatch();
   const allUsers = useSelector(selectALlUsers);
 
@@ -40,3 +39,5 @@ export const AllUsers: React.FC = () => {
 
   return <RenderPagination incomingData={allUsers} renderData={renderUsers} />;
 };
+
+export default AllUsers;
