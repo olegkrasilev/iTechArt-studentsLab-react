@@ -32,16 +32,14 @@ export type LoginResponse = {
 export type SignupResponse = LoginResponse;
 
 export type Store = {
-  app: {
-    user: {
-      id: null | number;
-      email: null | string;
-      firstName: null | string;
-      lastName: null | string;
-      error: null;
-      loading: boolean;
-      isAuthorized: boolean;
-    };
+  user: {
+    id: null | number;
+    email: null | string;
+    firstName: null | string;
+    lastName: null | string;
+    error: null;
+    loading: boolean;
+    isAuthorized: boolean;
   };
   posts: {
     error: null | string;

@@ -5,7 +5,7 @@ import { usersReducer } from 'src/redux/reducers/usersReducer';
 import { userReducer } from 'src/redux/reducers/userReducer';
 
 export const rootReducer = combineReducers({
-  app: userReducer,
+  user: userReducer,
   posts: postsReducer,
   users: usersReducer,
 });
