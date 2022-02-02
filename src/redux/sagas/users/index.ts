@@ -1,16 +1,8 @@
 import { call, put, takeEvery, all } from 'redux-saga/effects';
 import axios from 'axios';
 
-import { allUsersEndpoint } from '../../../constants/endpoints';
-
-import {
-  LoadUsersAction,
-  LoadUsersActions,
-  LoadUsersErrorAction,
-  LoadUsersSuccessAction,
-  User,
-  UsersActions,
-} from '../../../types/users';
+import { allUsersEndpoint } from 'src/constants/endpoints';
+import { User, UsersActions } from 'src/types/users';
 
 /*
 Workers
