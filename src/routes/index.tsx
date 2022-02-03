@@ -7,8 +7,8 @@ import { Login } from 'src/components/login/index';
 import { NotFound } from 'src/pages/notFound';
 import { Layout } from 'src/pages/layout';
 
-const AllUsers = lazy(() => import('src/pages/allUsers/allUsers'));
-const AllPosts = lazy(() => import('src/pages/allPosts/allPosts'));
+const AllUsers = lazy(() => import('src/pages/allUsers'));
+const AllPosts = lazy(() => import('src/pages/allPosts'));
 const MyPosts = lazy(() => import('src/pages/myPosts'));
 
 export const Navigation = () => {
