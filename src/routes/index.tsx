@@ -1,6 +1,7 @@
 import React, { Suspense, useEffect, lazy } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { Backdrop, CircularProgress } from '@mui/material';
 
 import { selectIsUserAuthorized } from 'src/redux/selector';
 import { Login } from 'src/components/login/index';
@@ -32,7 +33,13 @@ export const Navigation = () => {
   }, [isAuthorized, isAuthorizedLocation, navigate]);
 
   return (
-    <Suspense fallback={<p> Loading...</p>}>
+    <Suspense
+      fallback={
+        <Backdrop open>
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      }
+    >
       <Routes>
         <Route path="/" element={<Login />} />
         {isAuthorized && (
