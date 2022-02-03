@@ -18,11 +18,6 @@ export const Header: React.FC = () => {
         <nav className="menu">
           <ul className="menu__list reset-list">
             <li className="menu__list-item">
-              <Link className="menu__list-link" to="/authorized/myPosts">
-                My posts
-              </Link>
-            </li>
-            <li className="menu__list-item">
               <Link className="menu__list-link" to="/authorized/allUsers">
                 Users
               </Link>
@@ -33,9 +28,9 @@ export const Header: React.FC = () => {
               </Link>
             </li>
             <li className="menu__list-item">
-              <a className="menu__list-link" href="/">
+              <Link className="menu__list-link" to="/authorized/account">
                 Account
-              </a>
+              </Link>
             </li>
             <li className="menu__list-item">
               <button onClick={handleLogout} className="menu__list-link reset-btn" type="button">

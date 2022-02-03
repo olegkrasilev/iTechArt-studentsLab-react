@@ -10,7 +10,7 @@ import { Layout } from 'src/pages/layout';
 
 const AllUsers = lazy(() => import('src/pages/allUsers'));
 const AllPosts = lazy(() => import('src/pages/allPosts'));
-const MyPosts = lazy(() => import('src/pages/myPosts'));
+const Account = lazy(() => import('src/pages/account'));
 
 export const Navigation = () => {
   const isAuthorized = useSelector(selectIsUserAuthorized);
@@ -46,7 +46,7 @@ export const Navigation = () => {
           <Route path="/authorized" element={<Layout />}>
             <Route path="allUsers" element={<AllUsers />} />
             <Route path="allPosts" element={<AllPosts />} />
-            <Route path="myPosts" element={<MyPosts />} />
+            <Route path="account" element={<Account />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         )}

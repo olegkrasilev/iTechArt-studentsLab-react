@@ -2,15 +2,27 @@ import { Backdrop, Card, CardActionArea, CardContent, CircularProgress, Grid, Ty
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import UserPage from '../user';
+
 import { RenderPagination } from 'src/components/pagination';
 import { loadUserPostsAction } from 'src/redux/action/loadUserPosts';
-import { selectCurrentUserPosts, selectIsUserLoading, selectUserId } from 'src/redux/selector';
+import {
+  selectCurrentUserPosts,
+  selectIsUserLoading,
+  selectUserId,
+  selectUserFirstName,
+  selectUserEmail,
+  selectUserLastName,
+} from 'src/redux/selector';
 
-const MyPosts = () => {
+const Account = () => {
   const dispatch = useDispatch();
   const userId = useSelector(selectUserId);
   const currentUserAllPosts = useSelector(selectCurrentUserPosts);
   const isCurrentUserAllPostsLoading = useSelector(selectIsUserLoading);
+  const userEmail = useSelector(selectUserEmail);
+  const userFirstName = useSelector(selectUserFirstName);
+  const userLastName = useSelector(selectUserLastName);
 
   useEffect(() => {
     dispatch(loadUserPostsAction(userId));
@@ -18,7 +30,7 @@ const MyPosts = () => {
 
   const renderCurrentUserAllPosts = currentUserAllPosts.map(item => {
     const { post, postCreationTime, title, id } = item;
-    const formatedPostCreationTime = new Date(postCreationTime).toDateString();
+    const formattedPostCreationTime = new Date(postCreationTime).toDateString();
 
     return (
       <Grid item key={id} xs={12}>
@@ -27,7 +39,7 @@ const MyPosts = () => {
             <CardActionArea>
               <CardContent>
                 <Typography gutterBottom variant="h6" component="div">
-                  {title}: created At {formatedPostCreationTime}
+                  {title}: created At {formattedPostCreationTime}
                 </Typography>
                 <Typography gutterBottom variant="body1" component="div">
                   {post}
@@ -48,7 +60,12 @@ const MyPosts = () => {
     );
   }
 
-  return <RenderPagination incomingData={currentUserAllPosts} renderData={renderCurrentUserAllPosts} />;
+  return (
+    <>
+      <UserPage email={userEmail} firstName={userFirstName} lastName={userLastName} />
+      <RenderPagination incomingData={currentUserAllPosts} renderData={renderCurrentUserAllPosts} />;
+    </>
+  );
 };
 
-export default MyPosts;
+export default Account;
