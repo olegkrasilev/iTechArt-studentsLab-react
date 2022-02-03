@@ -8,18 +8,9 @@ export const StyledCard = styled.div`
   border-radius: 50px;
   padding: 3rem;
 
-  .title {
-    font-size: 3.5rem;
-    line-height: 4.2rem;
+  input {
     text-align: center;
-    color: #ffffff;
-    margin-bottom: 2rem;
-  }
-
-  .email {
-    font-size: 2.3rem;
-    line-height: 2.8rem;
-    text-align: center;
-    color: #a79ae0;
+    margin: 1rem 0;
+    font-size: 3rem;
   }
 `;

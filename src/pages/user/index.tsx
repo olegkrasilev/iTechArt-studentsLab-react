@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { StyledCard } from './style';
 
@@ -10,14 +10,33 @@ type Properties = {
   email: string | null | undefined;
 };
 
-const UserPage: React.FC<Properties> = ({ firstName, email, lastName }) => (
-  <StyledCard>
-    <img src={profile} alt="" className="avatar" />
-    <h3 className="title">
-      {firstName} {lastName}
-    </h3>
-    <h3 className="email">{email}</h3>
-  </StyledCard>
-);
+const UserPage: React.FC<Properties> = ({ firstName, email, lastName }) => {
+  const [userFirstName, setUserFirstName] = useState(firstName);
+  const [userLastName, setUserLastName] = useState(lastName);
+  const [userEmail, setUserEmail] = useState(email);
+
+  // userID, email, lastName, firstName <<<< to server
+
+  return (
+    <StyledCard>
+      <img src={profile} alt="" className="avatar" />
+      <input
+        value={userFirstName || ''}
+        onChange={event => setUserFirstName(event.target.value)}
+        onBlur={() => console.log('dispatch', userFirstName)}
+      />
+      <input
+        value={userLastName || ''}
+        onChange={event => setUserLastName(event.target.value)}
+        onBlur={() => console.log('dispatch', userLastName)}
+      />
+      <input
+        value={userEmail || ''}
+        onChange={event => setUserEmail(event.target.value)}
+        onBlur={() => console.log('dispatch', userEmail)}
+      />
+    </StyledCard>
+  );
+};
 
 export default UserPage;
