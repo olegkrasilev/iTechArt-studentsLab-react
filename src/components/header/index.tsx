@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from '@mui/material/Container';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import { StyledHeader } from 'src/components/header/style';
 import { logoutAction } from 'src/redux/action/user';
@@ -23,9 +23,13 @@ export const Header: React.FC = () => {
               </Link>
             </li>
             <li className="menu__list-item">
-              <Link className="menu__list-link" to="/authorized/allPosts">
+              <NavLink
+                className={({ isActive }) => `menu__list-link${isActive ? '--active' : ''}`}
+                // className="menu__list-link"
+                to="/authorized/allPosts"
+              >
                 Posts
-              </Link>
+              </NavLink>
             </li>
             <li className="menu__list-item">
               <Link className="menu__list-link" to="/authorized/account">

@@ -19,7 +19,8 @@ export const StyledHeader = styled.header`
     margin-right: 20px;
   }
 
-  .menu__list-link {
+  .menu__list-link,
+  .menu__list-link--active {
     display: inline-block;
     font-size: 2rem;
     color: darkblue;
@@ -36,5 +37,11 @@ export const StyledHeader = styled.header`
       --p: 50%;
       transition: 0.3s, background-position 0.3s 0.2s;
     }
+  }
+
+  .menu__list-link--active {
+    --d: 0%;
+    --p: 50%;
+    transition: 0.3s, background-position 0.3s 0.2s;
   }
 `;
