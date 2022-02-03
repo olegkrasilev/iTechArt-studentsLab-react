@@ -1,8 +1,19 @@
-import { Backdrop, Card, CardActionArea, CardContent, CircularProgress, Grid, Typography } from '@mui/material';
+import {
+  Backdrop,
+  Card,
+  CardActionArea,
+  CardContent,
+  CircularProgress,
+  Container,
+  Grid,
+  Typography,
+} from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import UserPage from '../user';
+
+import { StyledDiv } from './style';
 
 import { RenderPagination } from 'src/components/pagination';
 import { loadUserPostsAction } from 'src/redux/action/loadUserPosts';
@@ -61,10 +72,12 @@ const Account = () => {
   }
 
   return (
-    <>
-      <UserPage email={userEmail} firstName={userFirstName} lastName={userLastName} />
-      <RenderPagination incomingData={currentUserAllPosts} renderData={renderCurrentUserAllPosts} />;
-    </>
+    <Container>
+      <StyledDiv>
+        <UserPage email={userEmail} firstName={userFirstName} lastName={userLastName} />
+        <RenderPagination incomingData={currentUserAllPosts} renderData={renderCurrentUserAllPosts} />
+      </StyledDiv>
+    </Container>
   );
 };
 
