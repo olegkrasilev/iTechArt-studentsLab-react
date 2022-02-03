@@ -6,10 +6,10 @@ import { selectIsUserAuthorized } from 'src/redux/selector';
 import { Login } from 'src/components/login/index';
 import { NotFound } from 'src/pages/notFound';
 import { Layout } from 'src/pages/layout';
-import MyPosts from 'src/pages/myPosts';
 
 const AllUsers = lazy(() => import('src/pages/allUsers/allUsers'));
 const AllPosts = lazy(() => import('src/pages/allPosts/allPosts'));
+const MyPosts = lazy(() => import('src/pages/myPosts'));
 
 export const Navigation = () => {
   const isAuthorized = useSelector(selectIsUserAuthorized);

@@ -20,32 +20,33 @@ const AllPosts: React.FC = () => {
 
   const renderAllUsersPosts = allUsersPosts.map(item => {
     const { firstName, lastName, post, postCreationTime, title, postID } = item;
-
     const formatedPostCreationTime = new Date(postCreationTime as Date).toDateString();
 
     return (
       <Grid item key={postID} xs={12}>
-        <Card>
-          <CardActionArea>
-            <CardContent>
-              <Typography gutterBottom variant="h6" component="div">
-                {title} by {firstName}
-                {lastName}
-              </Typography>
-              <Typography gutterBottom variant="body1" component="div">
-                Created at <time>{formatedPostCreationTime}</time>
-              </Typography>
-              <Typography variant="subtitle1" color="text.secondary">
-                {post}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-            <Button size="small" color="primary">
-              Comment
-            </Button>
-          </CardActions>
-        </Card>
+        <article>
+          <Card>
+            <CardActionArea>
+              <CardContent>
+                <Typography gutterBottom variant="h6" component="div">
+                  {title} by {firstName}
+                  {lastName}
+                </Typography>
+                <Typography gutterBottom variant="body1" component="div">
+                  Created at <time>{formatedPostCreationTime}</time>
+                </Typography>
+                <Typography variant="subtitle1" color="text.secondary">
+                  {post}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            <CardActions>
+              <Button size="small" color="primary">
+                Comment
+              </Button>
+            </CardActions>
+          </Card>
+        </article>
       </Grid>
     );
   });
