@@ -2,16 +2,17 @@ import React, { useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { CardActionArea, Grid } from '@mui/material';
+import { Backdrop, CardActionArea, CircularProgress, Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { loadUsersAction } from 'src/redux/action/users';
 import { RenderPagination } from 'src/components/pagination';
-import { selectALlUsers } from 'src/redux/selector';
+import { selectALlUsers, selectIsAllUsersLoading } from 'src/redux/selector';
 
 const AllUsers: React.FC = () => {
   const dispatch = useDispatch();
   const allUsers = useSelector(selectALlUsers);
+  const isAllUsersLoading = useSelector(selectIsAllUsersLoading);
 
   useEffect(() => {
     dispatch(loadUsersAction());
@@ -36,6 +37,14 @@ const AllUsers: React.FC = () => {
       </Grid>
     );
   });
+
+  if (isAllUsersLoading) {
+    return (
+      <Backdrop open>
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    );
+  }
 
   return <RenderPagination incomingData={allUsers} renderData={renderUsers} />;
 };

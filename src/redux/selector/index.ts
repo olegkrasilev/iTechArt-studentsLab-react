@@ -12,4 +12,8 @@ export const selectCurrentUserPosts = (store: Store) => store.user.posts;
 
 export const selectIsUsersPostsLoading = (store: Store) => store.posts.loading;
 
+export const selectIsUserLoading = (store: Store) => store.user.loading;
+
+export const selectIsAllUsersLoading = (store: Store) => store.users.loading;
+
 export const selectALlUsers = (store: Store) => store.users.users;

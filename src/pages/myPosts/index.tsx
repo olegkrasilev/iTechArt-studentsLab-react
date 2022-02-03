@@ -1,15 +1,16 @@
-import { Card, CardActionArea, CardContent, Grid, Typography } from '@mui/material';
+import { Backdrop, Card, CardActionArea, CardContent, CircularProgress, Grid, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RenderPagination } from 'src/components/pagination';
 import { loadUserPostsAction } from 'src/redux/action/loadUserPosts';
-import { selectCurrentUserPosts, selectUserId } from 'src/redux/selector';
+import { selectCurrentUserPosts, selectIsUserLoading, selectUserId } from 'src/redux/selector';
 
 const MyPosts = () => {
   const dispatch = useDispatch();
   const userId = useSelector(selectUserId);
   const currentUserAllPosts = useSelector(selectCurrentUserPosts);
+  const isCurrentUserAllPostsLoading = useSelector(selectIsUserLoading);
 
   useEffect(() => {
     dispatch(loadUserPostsAction(userId));
@@ -38,6 +39,14 @@ const MyPosts = () => {
       </Grid>
     );
   });
+
+  if (isCurrentUserAllPostsLoading) {
+    return (
+      <Backdrop open>
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    );
+  }
 
   return <RenderPagination incomingData={currentUserAllPosts} renderData={renderCurrentUserAllPosts} />;
 };
