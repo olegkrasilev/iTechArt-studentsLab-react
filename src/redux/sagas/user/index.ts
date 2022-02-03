@@ -1,9 +1,12 @@
 import { call, put, takeEvery, all } from 'redux-saga/effects';
 import axios from 'axios';
 
+import { TakeableChannel } from 'redux-saga';
+
+import { LogoutActions, LoginActions, SignupActions, LoadUserPostsAction } from 'src/types/user';
+
 import { SignupResponse, LoginResponse } from 'src/types/index';
-import { LogoutActions, LoginActions, SignupActions } from 'src/types/user';
-import { loginEndpoint, signUpEndpoint, logoutEndpoint } from 'src/constants/endpoints';
+import { loginEndpoint, signUpEndpoint, logoutEndpoint, allUserPostsEndpoint } from 'src/constants/endpoints';
 import { setAccessJwtToken, setRefreshToken } from 'src/utils/jwt';
 
 /*
@@ -91,6 +94,32 @@ export function* logoutUser() {
   }
 }
 
+export function* loadUserPosts(data: { payload: number }) {
+  const userID = data.payload;
+  try {
+    const response: {
+      data: {
+        posts: { title: string; post: string; postCreationTime: Date; id: number }[];
+      };
+    } = yield call(axios.get, `${allUserPostsEndpoint}/${userID}`, {
+      params: {
+        userID,
+      },
+      withCredentials: true,
+    });
+
+    const dataToStore = response.data.posts;
+
+    yield put({ type: LoadUserPostsAction.loadUserPostSuccess, payload: dataToStore });
+  } catch (error) {
+    if (error instanceof Error) {
+      const errorMessage = error.message;
+
+      yield put({ type: LoadUserPostsAction.loadUserPostError, payload: errorMessage });
+    }
+  }
+}
+
 /*
 Watchers
 */
@@ -107,9 +136,14 @@ export function* watchLogoutUser() {
   yield takeEvery(LogoutActions.logoutUser, logoutUser);
 }
 
+export function* watchLoadUserPosts() {
+  // yield takeEvery(LoadUserPostsAction.loadUserPost, loadUserPosts);
+  yield takeEvery(LoadUserPostsAction.loadUserPost as unknown as TakeableChannel<unknown>, loadUserPosts);
+}
+
 export function* userSaga() {
   try {
-    yield all([watchLoginUser(), watchSignupUser(), watchLogoutUser()]);
+    yield all([watchLoginUser(), watchSignupUser(), watchLogoutUser(), watchLoadUserPosts()]);
   } catch (error) {
     // TODO create store app error field
     console.error(error);

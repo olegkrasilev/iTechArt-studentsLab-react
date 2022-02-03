@@ -24,6 +24,7 @@ export type Store = {
     error: null;
     loading: boolean;
     isAuthorized: boolean;
+    posts: { title: string; post: string; postCreationTime: Date; id: number }[];
   };
   posts: {
     error: null | string;

@@ -11,3 +11,5 @@ export const logoutEndpoint = `${userEndpoint}/logout`;
 export const allUsersEndpoint = `${userEndpoint}/getAllUsers`;
 
 export const allPostsEndpoint = `${postsEndpoint}/getAllPosts`;
+
+export const allUserPostsEndpoint = `http://localhost:3000/api/v1/posts/getUserPosts`;
