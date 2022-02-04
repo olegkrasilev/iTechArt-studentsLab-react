@@ -83,8 +83,8 @@ export const userReducer = (
 
     case ChangeUserInfoActionType.fulfilled: {
       return {
-        ...action.payload,
         ...state,
+        ...action.payload,
         loading: false,
       };
     }

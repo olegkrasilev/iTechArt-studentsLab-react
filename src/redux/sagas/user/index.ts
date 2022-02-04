@@ -137,20 +137,21 @@ export function* changeUserInfo(payload: {
 }) {
   const { email, firstName, lastName, userID } = payload.payload;
   try {
-    const response: { data: { firstName: string; lastName: string; email: string } } = yield call(
+    const response: { data: { firstName: string; lastName: string; newEmail: string } } = yield call(
       axios.patch,
       updateUserEndpoint,
       { email, firstName, lastName, userID },
       { withCredentials: true },
     );
 
-    const newEmail = response.data.email;
+    const newEmail = response.data.newEmail;
     const newFirstName = response.data.firstName;
     const newLastName = response.data.lastName;
 
     yield put({
       type: ChangeUserInfoActionType.fulfilled,
-      payload: { email: newEmail, firstName: newFirstName, lastName: newLastName },
+      // payload: { brandnew: newEmail, firstName: newFirstName, lastName: newLastName },
+      payload: { firstName: newFirstName, lastName: newLastName, email: newEmail },
     });
   } catch (error) {
     if (error instanceof Error) {
