@@ -114,3 +114,32 @@ export interface LoadUserPostsError {
 }
 
 export type LoadUserPostsActions = LoadUserPosts | LoadUserPostSuccess | LoadUserPostsError;
+
+/*
+Account edit info
+*/
+
+export enum ChangeUserInfoActionType {
+  pending = '@@CHANGE_USER_INFO_PENDING',
+  fulfilled = '@@CHANGE_USER_INFO_PENDING_FULFILLED',
+  rejected = '@@CHANGE_USER_INFO_REJECTED',
+}
+
+export interface ChangeUserInfoActionPending {
+  type: ChangeUserInfoActionType.pending;
+}
+
+export interface ChangeUserInfoActionFulfilled {
+  type: ChangeUserInfoActionType.fulfilled;
+  payload: { email: string; firstName: string; lastName: string };
+}
+
+export interface ChangeUserInfoActionRejected {
+  type: ChangeUserInfoActionType.rejected;
+  payload: string;
+}
+
+export type ChangeUserInfoActions =
+  | ChangeUserInfoActionPending
+  | ChangeUserInfoActionFulfilled
+  | ChangeUserInfoActionRejected;

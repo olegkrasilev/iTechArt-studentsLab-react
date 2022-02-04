@@ -2,10 +2,13 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Button, TextField } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { StyledCard } from './style';
 
+import { loadUserPostsAction } from 'src/redux/action/changeUserInfo';
 import profile from 'src/components/userCard/assets/profilePicture.png';
+import { selectUserId } from 'src/redux/selector';
 
 type Properties = {
   firstName: string | null | undefined;
@@ -14,6 +17,8 @@ type Properties = {
 };
 
 const UserPage: React.FC<Properties> = ({ firstName, email, lastName }) => {
+  const dispatch = useDispatch();
+  const userID = useSelector(selectUserId);
   // userID, email, lastName, firstName <<<< to server
 
   const editAccountSchemaValidation = yup.object({
@@ -27,17 +32,17 @@ const UserPage: React.FC<Properties> = ({ firstName, email, lastName }) => {
       email: `${email}`,
       firstName: `${firstName}`,
       lastName: `${lastName}`,
+      userID,
     },
     validationSchema: editAccountSchemaValidation,
     onSubmit: data => {
-      // do nothing
-      console.log(data);
+      dispatch(loadUserPostsAction(data));
     },
   });
 
   return (
     <StyledCard>
-      <img src={profile} alt="" className="avatar" />
+      <img src={profile} alt="avatar" className="avatar" />
       <form onSubmit={editAccountFormik.handleSubmit} className="form__right" noValidate autoComplete="off">
         <TextField
           className="input"
