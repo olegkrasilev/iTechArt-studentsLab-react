@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { StyledDiv } from './style';
 
-import UserPage from 'src/components/user';
+import UserPage from 'src/components/userCard';
 
 import { RenderPagination } from 'src/components/pagination';
 import { loadUserPostsAction } from 'src/redux/action/loadUserPosts';
