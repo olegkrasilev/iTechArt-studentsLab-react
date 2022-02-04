@@ -25,10 +25,10 @@ const AllUsers: React.FC = () => {
         <Card>
           <CardActionArea>
             <CardContent>
-              <Typography gutterBottom variant="h6" component="div">
+              <Typography gutterBottom variant="h6" component="p">
                 {firstName} {lastName}
               </Typography>
-              <Typography gutterBottom variant="body1" component="div">
+              <Typography gutterBottom variant="body1" component="address">
                 email: {email}
               </Typography>
             </CardContent>

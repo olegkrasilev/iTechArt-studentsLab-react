@@ -28,11 +28,11 @@ const AllPosts: React.FC = () => {
           <Card>
             <CardActionArea>
               <CardContent>
-                <Typography gutterBottom variant="h6" component="div">
+                <Typography gutterBottom variant="h6" component="p">
                   {title} by {firstName}
                   {lastName}
                 </Typography>
-                <Typography gutterBottom variant="body1" component="div">
+                <Typography gutterBottom variant="body1" component="p">
                   Created at <time>{formatedPostCreationTime}</time>
                 </Typography>
                 <Typography variant="subtitle1" color="text.secondary">

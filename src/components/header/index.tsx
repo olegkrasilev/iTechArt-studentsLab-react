@@ -18,23 +18,28 @@ export const Header: React.FC = () => {
         <nav className="menu">
           <ul className="menu__list reset-list">
             <li className="menu__list-item">
-              <Link className="menu__list-link" to="/authorized/allUsers">
+              <NavLink
+                className={({ isActive }) => `menu__list-link${isActive ? '--active' : ''}`}
+                to="/authorized/allUsers"
+              >
                 Users
-              </Link>
+              </NavLink>
             </li>
             <li className="menu__list-item">
               <NavLink
                 className={({ isActive }) => `menu__list-link${isActive ? '--active' : ''}`}
-                // className="menu__list-link"
                 to="/authorized/allPosts"
               >
                 Posts
               </NavLink>
             </li>
             <li className="menu__list-item">
-              <Link className="menu__list-link" to="/authorized/account">
+              <NavLink
+                className={({ isActive }) => `menu__list-link${isActive ? '--active' : ''}`}
+                to="/authorized/account"
+              >
                 Account
-              </Link>
+              </NavLink>
             </li>
             <li className="menu__list-item">
               <button onClick={handleLogout} className="menu__list-link reset-btn" type="button">

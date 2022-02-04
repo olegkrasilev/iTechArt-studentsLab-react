@@ -49,10 +49,10 @@ const Account = () => {
           <Card>
             <CardActionArea>
               <CardContent>
-                <Typography gutterBottom variant="h6" component="div">
+                <Typography gutterBottom variant="h6">
                   {title}: created At {formattedPostCreationTime}
                 </Typography>
-                <Typography gutterBottom variant="body1" component="div">
+                <Typography gutterBottom variant="body1" component="p">
                   {post}
                 </Typography>
               </CardContent>
