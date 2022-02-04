@@ -1,5 +1,6 @@
 import {
   Backdrop,
+  Button,
   Card,
   CardActionArea,
   CardContent,
@@ -11,10 +12,12 @@ import {
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { makeStyles } from '@mui/styles';
+
 import { StyledDiv } from './style';
 
+import { deleteUserPostAction } from 'src/redux/action/deleteUserPost';
 import UserPage from 'src/components/userCard';
-
 import { RenderPagination } from 'src/components/pagination';
 import { loadUserPostsAction } from 'src/redux/action/loadUserPosts';
 import {
@@ -39,6 +42,21 @@ const Account = () => {
     dispatch(loadUserPostsAction(userId));
   }, [dispatch, userId]);
 
+  const useStyles = makeStyles({
+    button: {
+      margin: 10,
+    },
+  });
+
+  const classes = useStyles();
+
+  // eslint-disable-next-line unicorn/consistent-function-scoping
+  const deletePostHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const postID = (event.target as HTMLButtonElement).id;
+
+    dispatch(deleteUserPostAction(postID));
+  };
+
   const renderCurrentUserAllPosts = currentUserAllPosts.map(item => {
     const { post, postCreationTime, title, id } = item;
     const formattedPostCreationTime = new Date(postCreationTime).toDateString();
@@ -57,6 +75,9 @@ const Account = () => {
                 </Typography>
               </CardContent>
             </CardActionArea>
+            <Button onClick={deletePostHandler} className={classes.button} id={`${id}`} variant="contained">
+              Delete
+            </Button>
           </Card>
         </article>
       </Grid>

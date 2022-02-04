@@ -143,3 +143,25 @@ export type ChangeUserInfoActions =
   | ChangeUserInfoActionPending
   | ChangeUserInfoActionFulfilled
   | ChangeUserInfoActionRejected;
+
+/*
+  Delete user post
+*/
+
+export enum DeleteUserPostActionType {
+  pending = '@@DELETE_USER_POST_PENDING',
+  fulfilled = '@@DELETE_USER_POST_FULFILLED',
+  rejected = '@@DELETE_USER_POST_REJECTED',
+}
+
+export interface DeleteUserPostActionPending {
+  type: DeleteUserPostActionType.pending;
+}
+
+export interface DeleteUserPostActionFulfilled {
+  type: DeleteUserPostActionType.fulfilled;
+}
+
+export interface DeleteUserPostActionRejected {
+  type: DeleteUserPostActionType.rejected;
+}
