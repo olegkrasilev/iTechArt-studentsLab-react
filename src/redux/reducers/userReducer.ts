@@ -1,4 +1,6 @@
 import {
+  ChangeUserInfoActionType,
+  ChangeUserInfoActions,
   LoginUserActions,
   LoginActions,
   SignupActions,
@@ -7,7 +9,7 @@ import {
   LogoutActions,
   LoadUserPostsAction,
   LoadUserPostsActions,
-} from 'src/types/user';
+} from '../../types/user';
 
 const initialState = {
   id: null,
@@ -22,13 +24,14 @@ const initialState = {
 
 export const userReducer = (
   state = initialState,
-  action: LoginUserActions | SignupUserActions | LogoutUserActions | LoadUserPostsActions,
+  action: LoginUserActions | SignupUserActions | LogoutUserActions | LoadUserPostsActions | ChangeUserInfoActions,
 ) => {
   switch (action.type) {
     case LoginActions.loginUser:
     case SignupActions.signupUser:
     case LogoutActions.logoutUser:
     case LoadUserPostsAction.loadUserPost:
+    case ChangeUserInfoActionType.pending:
       return {
         ...state,
         loading: true,
@@ -61,7 +64,8 @@ export const userReducer = (
         isAuthorized: false,
       };
     case LogoutActions.logoutUserError:
-    case LoadUserPostsAction.loadUserPostError: {
+    case LoadUserPostsAction.loadUserPostError:
+    case ChangeUserInfoActionType.rejected: {
       return {
         ...state,
         loading: false,
@@ -74,6 +78,14 @@ export const userReducer = (
         ...state,
         loading: false,
         posts: action.payload,
+      };
+    }
+
+    case ChangeUserInfoActionType.fulfilled: {
+      return {
+        ...action.payload,
+        ...state,
+        loading: false,
       };
     }
 

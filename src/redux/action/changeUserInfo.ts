@@ -1,6 +1,6 @@
 import { ChangeUserInfoActionType } from '../../types/user';
 
-export const loadUserPostsAction = (userInfo: {
+export const changeUserInfoAction = (userInfo: {
   email: string;
   firstName: string;
   lastName: string;

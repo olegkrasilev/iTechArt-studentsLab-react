@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { StyledCard } from './style';
 
-import { loadUserPostsAction } from 'src/redux/action/changeUserInfo';
+import { changeUserInfoAction } from 'src/redux/action/changeUserInfo';
 import profile from 'src/components/userCard/assets/profilePicture.png';
 import { selectUserId } from 'src/redux/selector';
 
@@ -19,8 +19,6 @@ type Properties = {
 const UserPage: React.FC<Properties> = ({ firstName, email, lastName }) => {
   const dispatch = useDispatch();
   const userID = useSelector(selectUserId);
-  // userID, email, lastName, firstName <<<< to server
-
   const editAccountSchemaValidation = yup.object({
     email: yup.string().email('Enter a valid email').required('Email is required'),
     firstName: yup.string().required('First name is required'),
@@ -36,7 +34,7 @@ const UserPage: React.FC<Properties> = ({ firstName, email, lastName }) => {
     },
     validationSchema: editAccountSchemaValidation,
     onSubmit: data => {
-      dispatch(loadUserPostsAction(data));
+      dispatch(changeUserInfoAction(data));
     },
   });
 
@@ -70,7 +68,6 @@ const UserPage: React.FC<Properties> = ({ firstName, email, lastName }) => {
           variant="outlined"
           required
         />
-
         <TextField
           className="input"
           id="lastName"

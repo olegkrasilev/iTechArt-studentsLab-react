@@ -121,7 +121,7 @@ Account edit info
 
 export enum ChangeUserInfoActionType {
   pending = '@@CHANGE_USER_INFO_PENDING',
-  fulfilled = '@@CHANGE_USER_INFO_PENDING_FULFILLED',
+  fulfilled = '@@CHANGE_USER_INFO_FULFILLED',
   rejected = '@@CHANGE_USER_INFO_REJECTED',
 }
 

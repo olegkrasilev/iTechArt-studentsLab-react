@@ -3,10 +3,22 @@ import axios from 'axios';
 
 import { TakeableChannel } from 'redux-saga';
 
-import { LogoutActions, LoginActions, SignupActions, LoadUserPostsAction } from 'src/types/user';
+import {
+  ChangeUserInfoActionType,
+  LogoutActions,
+  LoginActions,
+  SignupActions,
+  LoadUserPostsAction,
+} from '../../../types/user';
 
 import { SignupResponse, LoginResponse } from 'src/types/index';
-import { loginEndpoint, signUpEndpoint, logoutEndpoint, allUserPostsEndpoint } from 'src/constants/endpoints';
+import {
+  loginEndpoint,
+  signUpEndpoint,
+  logoutEndpoint,
+  allUserPostsEndpoint,
+  updateUserEndpoint,
+} from 'src/constants/endpoints';
 import { setAccessJwtToken, setRefreshToken } from 'src/utils/jwt';
 
 /*
@@ -120,6 +132,35 @@ export function* loadUserPosts(data: { payload: number }) {
   }
 }
 
+export function* changeUserInfo(payload: {
+  payload: { userID: number; firstName: string; lastName: string; email: string };
+}) {
+  const { email, firstName, lastName, userID } = payload.payload;
+  try {
+    const response: { data: { firstName: string; lastName: string; email: string } } = yield call(
+      axios.patch,
+      updateUserEndpoint,
+      { email, firstName, lastName, userID },
+      { withCredentials: true },
+    );
+
+    const newEmail = response.data.email;
+    const newFirstName = response.data.firstName;
+    const newLastName = response.data.lastName;
+
+    yield put({
+      type: ChangeUserInfoActionType.fulfilled,
+      payload: { email: newEmail, firstName: newFirstName, lastName: newLastName },
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      const errorMessage = error.message;
+
+      yield put({ type: ChangeUserInfoActionType.rejected, payload: errorMessage });
+    }
+  }
+}
+
 /*
 Watchers
 */
@@ -141,9 +182,14 @@ export function* watchLoadUserPosts() {
   yield takeEvery(LoadUserPostsAction.loadUserPost as unknown as TakeableChannel<unknown>, loadUserPosts);
 }
 
+export function* watchChangeUserInfo() {
+  // yield takeEvery(ChangeUserInfoActionType.pending, changeUserInfo);
+  yield takeEvery(ChangeUserInfoActionType.pending as unknown as TakeableChannel<unknown>, changeUserInfo);
+}
+
 export function* userSaga() {
   try {
-    yield all([watchLoginUser(), watchSignupUser(), watchLogoutUser(), watchLoadUserPosts()]);
+    yield all([watchLoginUser(), watchSignupUser(), watchLogoutUser(), watchLoadUserPosts(), watchChangeUserInfo()]);
   } catch (error) {
     // TODO create store app error field
     console.error(error);
