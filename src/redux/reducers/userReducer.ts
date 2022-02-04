@@ -9,6 +9,8 @@ import {
   LogoutActions,
   LoadUserPostsAction,
   LoadUserPostsActions,
+  DeleteUserPostActionType,
+  DeleteUserPostActions,
 } from '../../types/user';
 
 const initialState = {
@@ -22,16 +24,22 @@ const initialState = {
   posts: [],
 };
 
-export const userReducer = (
-  state = initialState,
-  action: LoginUserActions | SignupUserActions | LogoutUserActions | LoadUserPostsActions | ChangeUserInfoActions,
-) => {
+type Action =
+  | LoginUserActions
+  | SignupUserActions
+  | LogoutUserActions
+  | LoadUserPostsActions
+  | ChangeUserInfoActions
+  | DeleteUserPostActions;
+
+export const userReducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case LoginActions.loginUser:
     case SignupActions.signupUser:
     case LogoutActions.logoutUser:
     case LoadUserPostsAction.loadUserPost:
     case ChangeUserInfoActionType.pending:
+    case DeleteUserPostActionType.pending:
       return {
         ...state,
         loading: true,
@@ -65,7 +73,8 @@ export const userReducer = (
       };
     case LogoutActions.logoutUserError:
     case LoadUserPostsAction.loadUserPostError:
-    case ChangeUserInfoActionType.rejected: {
+    case ChangeUserInfoActionType.rejected:
+    case DeleteUserPostActionType.rejected: {
       return {
         ...state,
         loading: false,
@@ -85,6 +94,13 @@ export const userReducer = (
       return {
         ...state,
         ...action.payload,
+        loading: false,
+      };
+    }
+
+    case DeleteUserPostActionType.fulfilled: {
+      return {
+        ...state,
         loading: false,
       };
     }

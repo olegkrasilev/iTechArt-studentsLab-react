@@ -164,4 +164,10 @@ export interface DeleteUserPostActionFulfilled {
 
 export interface DeleteUserPostActionRejected {
   type: DeleteUserPostActionType.rejected;
+  payload: string;
 }
+
+export type DeleteUserPostActions =
+  | DeleteUserPostActionPending
+  | DeleteUserPostActionFulfilled
+  | DeleteUserPostActionRejected;
