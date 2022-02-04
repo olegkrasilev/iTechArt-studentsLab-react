@@ -15,3 +15,5 @@ export const allUsersEndpoint = `${userEndpoint}/getAllUsers`;
 export const allPostsEndpoint = `${postsEndpoint}/getAllPosts`;
 
 export const allUserPostsEndpoint = `${postsEndpoint}/getUserPosts`;
+
+export const deleteUserPostEndpoint = `${postsEndpoint}/deletePost`;

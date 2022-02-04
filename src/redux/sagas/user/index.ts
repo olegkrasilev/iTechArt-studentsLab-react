@@ -9,6 +9,7 @@ import {
   LoginActions,
   SignupActions,
   LoadUserPostsAction,
+  DeleteUserPostActionType,
 } from '../../../types/user';
 
 import { SignupResponse, LoginResponse } from 'src/types/index';
@@ -18,6 +19,7 @@ import {
   logoutEndpoint,
   allUserPostsEndpoint,
   updateUserEndpoint,
+  deleteUserPostEndpoint,
 } from 'src/constants/endpoints';
 import { setAccessJwtToken, setRefreshToken } from 'src/utils/jwt';
 
@@ -150,7 +152,6 @@ export function* changeUserInfo(payload: {
 
     yield put({
       type: ChangeUserInfoActionType.fulfilled,
-      // payload: { brandnew: newEmail, firstName: newFirstName, lastName: newLastName },
       payload: { firstName: newFirstName, lastName: newLastName, email: newEmail },
     });
   } catch (error) {
@@ -158,6 +159,24 @@ export function* changeUserInfo(payload: {
       const errorMessage = error.message;
 
       yield put({ type: ChangeUserInfoActionType.rejected, payload: errorMessage });
+    }
+  }
+}
+
+export function* deleteUserPost(payload: { type: string; postID: string }) {
+  const { postID } = payload;
+  try {
+    yield axios.delete(deleteUserPostEndpoint, {
+      data: { postID },
+      withCredentials: true,
+    });
+
+    yield put({ type: DeleteUserPostActionType.fulfilled });
+  } catch (error) {
+    if (error instanceof Error) {
+      const errorMessage = error.message;
+
+      yield put({ type: DeleteUserPostActionType.rejected, payload: errorMessage });
     }
   }
 }
@@ -188,9 +207,21 @@ export function* watchChangeUserInfo() {
   yield takeEvery(ChangeUserInfoActionType.pending as unknown as TakeableChannel<unknown>, changeUserInfo);
 }
 
+export function* watchDeleteUserPost() {
+  // yield takeEvery(DeleteUserPostActionType.pending, deleteUserPost);
+  yield takeEvery(DeleteUserPostActionType.pending as unknown as TakeableChannel<unknown>, deleteUserPost);
+}
+
 export function* userSaga() {
   try {
-    yield all([watchLoginUser(), watchSignupUser(), watchLogoutUser(), watchLoadUserPosts(), watchChangeUserInfo()]);
+    yield all([
+      watchLoginUser(),
+      watchSignupUser(),
+      watchLogoutUser(),
+      watchLoadUserPosts(),
+      watchChangeUserInfo(),
+      watchDeleteUserPost(),
+    ]);
   } catch (error) {
     // TODO create store app error field
     console.error(error);
