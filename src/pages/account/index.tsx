@@ -11,9 +11,9 @@ import {
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import UserPage from '../user';
-
 import { StyledDiv } from './style';
+
+import UserPage from 'src/components/user';
 
 import { RenderPagination } from 'src/components/pagination';
 import { loadUserPostsAction } from 'src/redux/action/loadUserPosts';
@@ -75,7 +75,7 @@ const Account = () => {
     <Container>
       <StyledDiv>
         <UserPage email={userEmail} firstName={userFirstName} lastName={userLastName} />
-        <RenderPagination incomingData={currentUserAllPosts} renderData={renderCurrentUserAllPosts} />
+        <RenderPagination incomingData={currentUserAllPosts} renderData={renderCurrentUserAllPosts} />;
       </StyledDiv>
     </Container>
   );

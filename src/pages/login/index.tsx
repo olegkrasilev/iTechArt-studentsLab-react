@@ -5,8 +5,8 @@ import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 
-import { ForgotPasswordModal } from 'src/components/login/forgoPasswordModal';
-import { Wrapper } from 'src/components/login/style';
+import { ForgotPasswordModal } from 'src/pages/login/forgoPasswordModal';
+import { Wrapper } from 'src/pages/login/style';
 import { loginAction, signupAction } from 'src/redux/action/user';
 import { selectUserError } from 'src/redux/selector';
 

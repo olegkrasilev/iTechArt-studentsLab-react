@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { StyledCard } from './style';
 
-import profile from 'src/pages/user/assets/profilePicture.png';
+import profile from 'src/components/user/assets/profilePicture.png';
 
 type Properties = {
   firstName: string | null | undefined;

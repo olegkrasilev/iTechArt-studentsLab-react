@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import loginAvif from 'src/components/login/assets/login-avif.avif';
-import loginJpg from 'src/components/login/assets/login-jpg.jpg';
-import loginWebp from 'src/components/login/assets/login-webp.webp';
+import loginAvif from 'src/pages/login/assets/login-avif.avif';
+import loginJpg from 'src/pages/login/assets/login-jpg.jpg';
+import loginWebp from 'src/pages/login/assets/login-webp.webp';
 
 export const Wrapper = styled.section`
   display: flex;
