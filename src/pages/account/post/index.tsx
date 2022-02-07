@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/consistent-function-scoping */
 import React, { useRef, useState } from 'react';
 import { Button, Card, CardActionArea, CardContent, Grid, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
@@ -12,8 +11,10 @@ type Properties = {
 };
 
 const Post: React.FC<Properties> = ({ id, title, formattedPostCreationTime, post, deletePostHandler }) => {
+  const [initialPost, setInitialPost] = useState<string | null>(post);
   const [isEditable, setIsEditable] = useState<boolean | undefined>();
   const postReference = useRef<HTMLSpanElement | null>(null);
+
   const useStyles = makeStyles({
     button: {
       margin: 10,
@@ -21,18 +22,33 @@ const Post: React.FC<Properties> = ({ id, title, formattedPostCreationTime, post
   });
 
   const classes = useStyles();
+
   const editPostHandler = () => {
     setIsEditable(true);
 
-    if (postReference.current) {
-      postReference.current.focus();
-      /*
+    postReference?.current?.focus();
+    /*
       By default its select parent element,so focus need to be invoked twice.
       */
-      setTimeout(() => {
-        postReference?.current?.focus();
-      }, 0);
-    }
+    setTimeout(() => {
+      postReference?.current?.focus();
+    }, 0);
+  };
+
+  const inputPostHandler = (event: React.FormEvent<HTMLSpanElement>) => {
+    setInitialPost(event.currentTarget.textContent);
+  };
+
+  const savePostHandler = () => {
+    setIsEditable(false);
+    const sendData = {
+      postID: id,
+      initialPost,
+      title,
+    };
+
+    // Dispatch here
+    console.log(sendData);
   };
 
   return (
@@ -53,8 +69,9 @@ const Post: React.FC<Properties> = ({ id, title, formattedPostCreationTime, post
                 variant="body1"
                 contentEditable={isEditable}
                 suppressContentEditableWarning
+                onInput={inputPostHandler}
               >
-                {post}
+                {initialPost}
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -64,7 +81,7 @@ const Post: React.FC<Properties> = ({ id, title, formattedPostCreationTime, post
           <Button onClick={editPostHandler} className={classes.button} variant="contained">
             Edit
           </Button>
-          <Button className={classes.button} variant="contained">
+          <Button onClick={savePostHandler} className={classes.button} variant="contained">
             Save
           </Button>
         </Card>
