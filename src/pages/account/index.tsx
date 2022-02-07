@@ -1,18 +1,6 @@
-import {
-  Backdrop,
-  Button,
-  Card,
-  CardActionArea,
-  CardContent,
-  CircularProgress,
-  Container,
-  Grid,
-  Typography,
-} from '@mui/material';
+import { Backdrop, CircularProgress, Container } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { makeStyles } from '@mui/styles';
 
 import { StyledDiv } from './style';
 
@@ -28,6 +16,7 @@ import {
   selectUserEmail,
   selectUserLastName,
 } from 'src/redux/selector';
+import Post from 'src/pages/account/post';
 
 const Account = () => {
   const dispatch = useDispatch();
@@ -42,15 +31,6 @@ const Account = () => {
     dispatch(loadUserPostsAction(userId));
   }, [dispatch, userId]);
 
-  const useStyles = makeStyles({
-    button: {
-      margin: 10,
-    },
-  });
-
-  const classes = useStyles();
-
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   const deletePostHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     const postID = (event.target as HTMLButtonElement).id;
 
@@ -62,25 +42,14 @@ const Account = () => {
     const formattedPostCreationTime = new Date(postCreationTime).toDateString();
 
     return (
-      <Grid item key={id} xs={12}>
-        <article>
-          <Card>
-            <CardActionArea>
-              <CardContent>
-                <Typography gutterBottom variant="h6">
-                  {title}: created At {formattedPostCreationTime}
-                </Typography>
-                <Typography gutterBottom variant="body1" component="p">
-                  {post}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-            <Button onClick={deletePostHandler} className={classes.button} id={`${id}`} variant="contained">
-              Delete
-            </Button>
-          </Card>
-        </article>
-      </Grid>
+      <Post
+        key={id}
+        id={id}
+        formattedPostCreationTime={formattedPostCreationTime}
+        title={title}
+        post={post}
+        deletePostHandler={deletePostHandler}
+      />
     );
   });
 

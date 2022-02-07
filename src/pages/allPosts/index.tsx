@@ -20,7 +20,7 @@ const AllPosts: React.FC = () => {
 
   const renderAllUsersPosts = allUsersPosts.map(item => {
     const { firstName, lastName, post, postCreationTime, title, postID } = item;
-    const formatedPostCreationTime = new Date(postCreationTime as Date).toDateString();
+    const formattedPostCreationTime = new Date(postCreationTime as Date).toDateString();
 
     return (
       <Grid item key={postID} xs={12}>
@@ -33,7 +33,7 @@ const AllPosts: React.FC = () => {
                   {lastName}
                 </Typography>
                 <Typography gutterBottom variant="body1" component="p">
-                  Created at <time>{formatedPostCreationTime}</time>
+                  Created at <time>{formattedPostCreationTime}</time>
                 </Typography>
                 <Typography variant="subtitle1" color="text.secondary">
                   {post}
