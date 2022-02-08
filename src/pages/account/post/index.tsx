@@ -1,6 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { Button, Card, CardActionArea, CardContent, Grid, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { useDispatch } from 'react-redux';
+
+import { editPostsAction } from 'src/redux/action/editPost';
 
 type Properties = {
   id: number;
@@ -14,6 +17,7 @@ const Post: React.FC<Properties> = ({ id, title, formattedPostCreationTime, post
   const [initialPost, setInitialPost] = useState<string | null>(post);
   const [isEditable, setIsEditable] = useState<boolean | undefined>();
   const postReference = useRef<HTMLSpanElement | null>(null);
+  const dispatch = useDispatch();
 
   const useStyles = makeStyles({
     button: {
@@ -43,12 +47,11 @@ const Post: React.FC<Properties> = ({ id, title, formattedPostCreationTime, post
     setIsEditable(false);
     const sendData = {
       postID: id,
-      initialPost,
+      post: initialPost,
       title,
     };
 
-    // Dispatch here
-    console.log(sendData);
+    dispatch(editPostsAction(sendData));
   };
 
   return (

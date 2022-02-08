@@ -1,9 +1,11 @@
 import { call, put, takeEvery, all } from 'redux-saga/effects';
 import axios from 'axios';
 
-import { allPostsEndpoint } from 'src/constants/endpoints';
+import { TakeableChannel } from 'redux-saga';
 
-import { Post, PostsActions } from 'src/types/posts';
+import { allPostsEndpoint, editPostEndpoint } from 'src/constants/endpoints';
+
+import { Post, PostsActions, EditPostActionType } from 'src/types/posts';
 
 /*
 Workers
@@ -29,6 +31,19 @@ export function* loadAllPosts() {
   }
 }
 
+export function* editPost(payload: { payload: { postID: number; post: string | null; title: string } }) {
+  const { post, postID, title } = payload.payload;
+  try {
+    yield call(axios.patch, editPostEndpoint, { postID, post, title }, { withCredentials: true });
+    yield put({ type: EditPostActionType.fulfilled });
+  } catch (error) {
+    if (error instanceof Error) {
+      const errorMessage = error.message;
+
+      yield put({ type: EditPostActionType.rejected, payload: errorMessage });
+    }
+  }
+}
 /*
 Watchers
 */
@@ -37,9 +52,13 @@ export function* watchLoadPosts() {
   yield takeEvery(PostsActions.loadPosts, loadAllPosts);
 }
 
+export function* watchEditPost() {
+  yield takeEvery(EditPostActionType.pending as unknown as TakeableChannel<unknown>, editPost);
+}
+
 export function* postsSaga() {
   try {
-    yield all([watchLoadPosts()]);
+    yield all([watchLoadPosts(), watchEditPost()]);
   } catch (error) {
     // TODO create store app error field
     console.error(error);

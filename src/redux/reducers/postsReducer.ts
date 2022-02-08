@@ -1,4 +1,4 @@
-import { PostsActions, LoadPostsActions, Post } from 'src/types/posts';
+import { PostsActions, LoadPostsActions, Post, EditPostActions, EditPostActionType } from 'src/types/posts';
 
 interface PostsInitialState {
   loading: boolean;
@@ -8,9 +8,10 @@ interface PostsInitialState {
 
 const initialState: PostsInitialState = { loading: false, error: null, posts: [] };
 
-export const postsReducer = (state = initialState, action: LoadPostsActions) => {
+export const postsReducer = (state = initialState, action: LoadPostsActions | EditPostActions) => {
   switch (action.type) {
     case PostsActions.loadPosts:
+    case EditPostActionType.pending:
       return {
         error: false,
         loading: true,
@@ -23,11 +24,19 @@ export const postsReducer = (state = initialState, action: LoadPostsActions) => 
         posts: action.payload,
       };
     case PostsActions.loadPostsError:
+    case EditPostActionType.rejected:
       return {
         error: action.payload,
         loading: false,
         posts: state.posts,
       };
+    case EditPostActionType.fulfilled:
+      return {
+        error: false,
+        loading: false,
+        posts: state.posts,
+      };
+
     default:
       return state;
   }
