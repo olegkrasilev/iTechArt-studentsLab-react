@@ -1,3 +1,5 @@
+import { RequestedPost } from 'src/redux/reducers/postsReducer';
+
 export interface Post {
   title: null | string;
   post: null | string;
@@ -74,14 +76,7 @@ export interface RequestPostActionPending {
 
 export interface RequestPostActionFulfilled {
   type: RequestPostActionType.fulfilled;
-  payload: {
-    post: string;
-    title: string;
-    postCreationTime: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-  };
+  payload: RequestedPost;
 }
 
 export interface RequestPostActionRejected {
