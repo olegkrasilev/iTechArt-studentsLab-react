@@ -5,6 +5,8 @@ import Typography from '@mui/material/Typography';
 import { Backdrop, Button, CardActionArea, CardActions, CircularProgress, Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Link } from 'react-router-dom';
+
 import { loadPostsAction } from 'src/redux/action/posts';
 import { RenderPagination } from 'src/components/pagination';
 import { selectAllUsersPosts, selectIsUsersPostsLoading } from 'src/redux/selector';
@@ -44,6 +46,7 @@ const AllPosts: React.FC = () => {
               <Button size="small" color="primary">
                 Comment
               </Button>
+              <Link to={`post/${postID}`}>More</Link>
             </CardActions>
           </Card>
         </article>

@@ -47,6 +47,7 @@ export const Navigation = () => {
             <Route path="allUsers" element={<AllUsers />} />
             <Route path="allPosts" element={<AllPosts />} />
             <Route path="account" element={<Account />} />
+            <Route path="allPosts/post/:id" element={<h1>Post </h1>} />
             <Route path="*" element={<NotFound />} />
           </Route>
         )}
