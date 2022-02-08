@@ -1,11 +1,4 @@
-import {
-  LoadUsersAction,
-  LoadUsersActions,
-  LoadUsersErrorAction,
-  LoadUsersSuccessAction,
-  User,
-  UsersActions,
-} from '../../types/users';
+import { LoadUsersActions, User, UsersActions } from 'src/types/users';
 
 interface UsersInitialState {
   loading: boolean;

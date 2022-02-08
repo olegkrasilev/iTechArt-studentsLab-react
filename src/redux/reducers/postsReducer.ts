@@ -1,12 +1,34 @@
 import { PostsActions, LoadPostsActions, Post, EditPostActions, EditPostActionType } from 'src/types/posts';
 
+export interface RequestedPost {
+  post: string | undefined;
+  title: string | undefined;
+  postCreationTime: Date | undefined;
+  firstName: string | undefined;
+  lastName: string | undefined;
+  email: string | undefined;
+}
+
 interface PostsInitialState {
   loading: boolean;
   error: null | string;
   posts: Post[];
+  requestedPost: RequestedPost;
 }
 
-const initialState: PostsInitialState = { loading: false, error: null, posts: [] };
+const initialState: PostsInitialState = {
+  loading: false,
+  error: null,
+  posts: [],
+  requestedPost: {
+    post: undefined,
+    title: undefined,
+    postCreationTime: undefined,
+    firstName: undefined,
+    lastName: undefined,
+    email: undefined,
+  },
+};
 
 export const postsReducer = (state = initialState, action: LoadPostsActions | EditPostActions) => {
   switch (action.type) {

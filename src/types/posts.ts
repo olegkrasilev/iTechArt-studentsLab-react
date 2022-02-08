@@ -57,3 +57,36 @@ export interface EditPostActionRejected {
 }
 
 export type EditPostActions = EditPostActionPending | EditPostActionFulfilled | EditPostActionRejected;
+
+/*
+Load requested post
+*/
+
+export enum RequestPostActionType {
+  pending = '@@REQUEST_POST_PENDING',
+  fulfilled = '@@REQUEST_POST_FULFILLED',
+  rejected = '@@REQUEST_POST_REJECTED',
+}
+
+export interface RequestPostActionPending {
+  type: RequestPostActionType.pending;
+}
+
+export interface RequestPostActionFulfilled {
+  type: RequestPostActionType.fulfilled;
+  payload: {
+    post: string;
+    title: string;
+    postCreationTime: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+  };
+}
+
+export interface RequestPostActionRejected {
+  type: RequestPostActionType.rejected;
+  payload: string;
+}
+
+export type RequestPostActions = RequestPostActionPending | RequestPostActionFulfilled | RequestPostActionRejected;
