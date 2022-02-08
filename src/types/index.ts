@@ -1,3 +1,4 @@
+import { RequestedPost } from 'src/redux/reducers/postsReducer';
 import { User } from 'src/types/users';
 import { Post } from 'src/types/posts';
 
@@ -30,6 +31,7 @@ export type Store = {
     error: null | string;
     loading: boolean;
     posts: Post[];
+    requestedPost: RequestedPost;
   };
   users: {
     error: null | string;

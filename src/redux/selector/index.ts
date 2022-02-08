@@ -23,3 +23,7 @@ export const selectUserEmail = (store: Store) => store.user.email;
 export const selectUserFirstName = (store: Store) => store.user.firstName;
 
 export const selectUserLastName = (store: Store) => store.user.lastName;
+
+export const selectRequestedPost = (store: Store) => store.posts.requestedPost;
+
+export const selectRequestedPostLoading = (store: Store) => store.posts.loading;
