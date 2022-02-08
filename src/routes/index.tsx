@@ -3,7 +3,6 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Backdrop, CircularProgress } from '@mui/material';
 
-import Post from 'src/pages/post';
 import { selectIsUserAuthorized } from 'src/redux/selector';
 import { Login } from 'src/pages/login/index';
 import { NotFound } from 'src/pages/notFound';
@@ -12,6 +11,7 @@ import { Layout } from 'src/pages/layout';
 const AllUsers = lazy(() => import('src/pages/allUsers'));
 const AllPosts = lazy(() => import('src/pages/allPosts'));
 const Account = lazy(() => import('src/pages/account'));
+const Post = lazy(() => import('src/pages/post'));
 
 export const Navigation = () => {
   const isAuthorized = useSelector(selectIsUserAuthorized);

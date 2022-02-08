@@ -1,4 +1,4 @@
-import { DeleteUserPostActionType } from '../../types/user';
+import { DeleteUserPostActionType } from 'src/types/user';
 
 export const deleteUserPostAction = (postID: string) => ({
   type: DeleteUserPostActionType.pending,
