@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Backdrop, CircularProgress } from '@mui/material';
 
+import Post from 'src/pages/post';
 import { selectIsUserAuthorized } from 'src/redux/selector';
 import { Login } from 'src/pages/login/index';
 import { NotFound } from 'src/pages/notFound';
@@ -47,7 +48,7 @@ export const Navigation = () => {
             <Route path="allUsers" element={<AllUsers />} />
             <Route path="allPosts" element={<AllPosts />} />
             <Route path="account" element={<Account />} />
-            <Route path="allPosts/post/:id" element={<h1>Post </h1>} />
+            <Route path="allPosts/post/:postID" element={<Post />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         )}
