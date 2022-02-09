@@ -11,9 +11,9 @@ import profile from 'src/components/userCard/assets/profilePicture.png';
 import { selectUserId } from 'src/redux/selector';
 
 type Properties = {
-  firstName: string | null | undefined;
-  lastName: string | null | undefined;
-  email: string | null | undefined;
+  firstName?: string | null;
+  lastName?: string | null;
+  email?: string | null;
 };
 
 const UserPage: React.FC<Properties> = ({ firstName, email, lastName }) => {
