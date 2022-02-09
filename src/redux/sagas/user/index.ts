@@ -1,8 +1,6 @@
 import { call, put, takeEvery, all } from 'redux-saga/effects';
 import axios from 'axios';
 
-import { TakeableChannel } from 'redux-saga';
-
 import {
   ChangeUserInfoActionType,
   LogoutActions,
@@ -10,7 +8,7 @@ import {
   SignupActions,
   LoadUserPostsAction,
   DeleteUserPostActionType,
-} from '../../../types/user';
+} from 'src/types/user';
 
 import { SignupResponse, LoginResponse } from 'src/types/index';
 import {
@@ -42,11 +40,10 @@ export function* loginUser(payload: { payload: { email: string; password: string
     );
 
     const { id, firstName, lastName, accessToken, refreshToken } = response.data;
-    const dataToStore = { id, email, firstName, lastName };
 
     setAccessJwtToken(accessToken);
     setRefreshToken(refreshToken);
-    yield put({ type: LoginActions.loginUserSuccess, payload: dataToStore });
+    yield put({ type: LoginActions.loginUserSuccess, payload: { id, email, firstName, lastName } });
   } catch (error) {
     if (error instanceof Error) {
       const errorMessage = error.message;
@@ -74,7 +71,6 @@ export function* signupUser(payload: {
     );
 
     const { accessToken, refreshToken, id } = response.data;
-    const dataToStore = { id, email, firstName, lastName };
 
     if (!(accessToken && refreshToken)) {
       throw new Error('Please try again');
@@ -82,7 +78,7 @@ export function* signupUser(payload: {
 
     setAccessJwtToken(accessToken);
     setRefreshToken(refreshToken);
-    yield put({ type: SignupActions.signupUserSuccess, payload: dataToStore });
+    yield put({ type: SignupActions.signupUserSuccess, payload: { id, email, firstName, lastName } });
   } catch (error) {
     if (error instanceof Error) {
       const errorMessage = error.message;
@@ -108,7 +104,7 @@ export function* logoutUser() {
   }
 }
 
-export function* loadUserPosts(data: { payload: number }) {
+export function* loadUserPosts(data: { payload: number; type: string }) {
   const userID = data.payload;
   try {
     const response: {
@@ -122,9 +118,7 @@ export function* loadUserPosts(data: { payload: number }) {
       withCredentials: true,
     });
 
-    const dataToStore = response.data.posts;
-
-    yield put({ type: LoadUserPostsAction.loadUserPostSuccess, payload: dataToStore });
+    yield put({ type: LoadUserPostsAction.loadUserPostSuccess, payload: response.data.posts });
   } catch (error) {
     if (error instanceof Error) {
       const errorMessage = error.message;
@@ -136,6 +130,7 @@ export function* loadUserPosts(data: { payload: number }) {
 
 export function* changeUserInfo(payload: {
   payload: { userID: number; firstName: string; lastName: string; email: string };
+  type: string;
 }) {
   const { email, firstName, lastName, userID } = payload.payload;
   try {
@@ -146,13 +141,9 @@ export function* changeUserInfo(payload: {
       { withCredentials: true },
     );
 
-    const newEmail = response.data.newEmail;
-    const newFirstName = response.data.firstName;
-    const newLastName = response.data.lastName;
-
     yield put({
       type: ChangeUserInfoActionType.fulfilled,
-      payload: { firstName: newFirstName, lastName: newLastName, email: newEmail },
+      payload: { firstName: response.data.firstName, lastName: response.data.lastName, email: response.data.newEmail },
     });
   } catch (error) {
     if (error instanceof Error) {
@@ -198,18 +189,15 @@ export function* watchLogoutUser() {
 }
 
 export function* watchLoadUserPosts() {
-  // yield takeEvery(LoadUserPostsAction.loadUserPost, loadUserPosts);
-  yield takeEvery(LoadUserPostsAction.loadUserPost as unknown as TakeableChannel<unknown>, loadUserPosts);
+  yield takeEvery(LoadUserPostsAction.loadUserPost, loadUserPosts);
 }
 
 export function* watchChangeUserInfo() {
-  // yield takeEvery(ChangeUserInfoActionType.pending, changeUserInfo);
-  yield takeEvery(ChangeUserInfoActionType.pending as unknown as TakeableChannel<unknown>, changeUserInfo);
+  yield takeEvery(ChangeUserInfoActionType.pending, changeUserInfo);
 }
 
 export function* watchDeleteUserPost() {
-  // yield takeEvery(DeleteUserPostActionType.pending, deleteUserPost);
-  yield takeEvery(DeleteUserPostActionType.pending as unknown as TakeableChannel<unknown>, deleteUserPost);
+  yield takeEvery(DeleteUserPostActionType.pending, deleteUserPost);
 }
 
 export function* userSaga() {
