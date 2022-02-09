@@ -1,5 +1,5 @@
 import { Backdrop, CircularProgress, Container } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { StyledDiv } from './style';
@@ -31,11 +31,14 @@ const Account = () => {
     dispatch(loadUserPostsAction(userId));
   }, [dispatch, userId]);
 
-  const deletePostHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const postID = (event.target as HTMLButtonElement).id;
+  const deletePostHandler = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      const postID = (event.target as HTMLButtonElement).id;
 
-    dispatch(deleteUserPostAction(postID));
-  };
+      dispatch(deleteUserPostAction(postID));
+    },
+    [dispatch],
+  );
 
   const renderCurrentUserAllPosts = currentUserAllPosts.map(item => {
     const { post, postCreationTime, title, id } = item;
