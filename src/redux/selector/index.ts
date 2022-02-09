@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 
 import { Store } from 'src/types/index';
 
+// user
 const userState = (store: Store) => store.user;
 
 export const selectIsUserAuthorized = createSelector(userState, state => state.isAuthorized);
@@ -20,7 +21,7 @@ export const selectUserFirstName = createSelector(userState, state => state.firs
 
 export const selectUserLastName = createSelector(userState, state => state.lastName);
 
-// store.posts
+// posts
 
 const postsState = (store: Store) => store.posts;
 
@@ -31,6 +32,7 @@ export const selectIsPostsLoading = createSelector(postsState, posts => posts.lo
 export const selectRequestedPost = createSelector(postsState, posts => posts.requestedPost);
 
 // Users
+
 const usersState = (store: Store) => store.users;
 
 export const selectIsAllUsersLoading = createSelector(usersState, users => users.loading);

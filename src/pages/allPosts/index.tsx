@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import { Backdrop, Button, CardActionArea, CardActions, CircularProgress, Grid } from '@mui/material';
+import { Backdrop, CircularProgress } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+
+import Post from './post';
 
 import { loadPostsAction } from 'src/redux/action/posts';
 import { RenderPagination } from 'src/components/pagination';
@@ -24,32 +22,15 @@ const AllPosts: React.FC = () => {
     const formattedPostCreationTime = new Date(postCreationTime as Date).toDateString();
 
     return (
-      <Grid item key={postID} xs={12}>
-        <article>
-          <Card>
-            <CardActionArea>
-              <CardContent>
-                <Typography gutterBottom variant="h6" component="p">
-                  {title} by {firstName}
-                  {lastName}
-                </Typography>
-                <Typography gutterBottom variant="body1" component="p">
-                  Created at <time>{formattedPostCreationTime}</time>
-                </Typography>
-                <Typography variant="subtitle1" color="text.secondary">
-                  {post}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-            <CardActions>
-              <Button size="small" color="primary">
-                Comment
-              </Button>
-              <Link to={`post/${postID}`}>More</Link>
-            </CardActions>
-          </Card>
-        </article>
-      </Grid>
+      <Post
+        key={postID}
+        firstName={firstName}
+        lastName={lastName}
+        formattedPostCreationTime={formattedPostCreationTime}
+        post={post}
+        title={title}
+        postID={postID}
+      />
     );
   });
 
