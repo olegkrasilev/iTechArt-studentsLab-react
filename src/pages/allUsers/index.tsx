@@ -17,6 +17,7 @@ const AllUsers: React.FC = () => {
   useEffect(() => {
     dispatch(loadUsersAction());
   }, [dispatch]);
+
   const renderUsers = allUsers.map(item => {
     const { email, firstName, lastName, id } = item;
 

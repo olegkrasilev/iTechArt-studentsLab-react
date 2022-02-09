@@ -1,29 +1,38 @@
+import { createSelector } from 'reselect';
+
 import { Store } from 'src/types/index';
 
-export const selectIsUserAuthorized = (store: Store) => store.user.isAuthorized;
+const userState = (store: Store) => store.user;
 
-export const selectUserError = (store: Store) => store.user.error;
+export const selectIsUserAuthorized = createSelector(userState, state => state.isAuthorized);
 
-export const selectAllUsersPosts = (store: Store) => store.posts.posts;
+export const selectUserError = createSelector(userState, state => state.error);
 
-export const selectUserId = (store: Store) => store.user.id;
+export const selectUserId = createSelector(userState, state => state.id);
 
-export const selectCurrentUserPosts = (store: Store) => store.user.posts;
+export const selectCurrentUserPosts = createSelector(userState, state => state.posts);
 
-export const selectIsUsersPostsLoading = (store: Store) => store.posts.loading;
+export const selectIsUserLoading = createSelector(userState, state => state.loading);
 
-export const selectIsUserLoading = (store: Store) => store.user.loading;
+export const selectUserEmail = createSelector(userState, state => state.email);
 
-export const selectIsAllUsersLoading = (store: Store) => store.users.loading;
+export const selectUserFirstName = createSelector(userState, state => state.firstName);
 
-export const selectALlUsers = (store: Store) => store.users.users;
+export const selectUserLastName = createSelector(userState, state => state.lastName);
 
-export const selectUserEmail = (store: Store) => store.user.email;
+// store.posts
 
-export const selectUserFirstName = (store: Store) => store.user.firstName;
+const postsState = (store: Store) => store.posts;
 
-export const selectUserLastName = (store: Store) => store.user.lastName;
+export const selectAllUsersPosts = createSelector(postsState, posts => posts.posts);
 
-export const selectRequestedPost = (store: Store) => store.posts.requestedPost;
+export const selectIsPostsLoading = createSelector(postsState, posts => posts.loading);
 
-export const selectRequestedPostLoading = (store: Store) => store.posts.loading;
+export const selectRequestedPost = createSelector(postsState, posts => posts.requestedPost);
+
+// Users
+const usersState = (store: Store) => store.users;
+
+export const selectIsAllUsersLoading = createSelector(usersState, users => users.loading);
+
+export const selectALlUsers = createSelector(usersState, users => users.users);

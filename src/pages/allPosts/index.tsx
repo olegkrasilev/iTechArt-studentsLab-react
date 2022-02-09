@@ -4,17 +4,16 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Backdrop, Button, CardActionArea, CardActions, CircularProgress, Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { Link } from 'react-router-dom';
 
 import { loadPostsAction } from 'src/redux/action/posts';
 import { RenderPagination } from 'src/components/pagination';
-import { selectAllUsersPosts, selectIsUsersPostsLoading } from 'src/redux/selector';
+import { selectAllUsersPosts, selectIsPostsLoading } from 'src/redux/selector';
 
 const AllPosts: React.FC = () => {
   const dispatch = useDispatch();
   const allUsersPosts = useSelector(selectAllUsersPosts);
-  const isPostsLoading = useSelector(selectIsUsersPostsLoading);
+  const isPostsLoading = useSelector(selectIsPostsLoading);
 
   useEffect(() => {
     dispatch(loadPostsAction());

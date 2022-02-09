@@ -4,14 +4,14 @@ import { useParams } from 'react-router-dom';
 
 import { Backdrop, Card, CardActionArea, CardContent, CircularProgress, Typography } from '@mui/material';
 
-import { selectRequestedPost, selectRequestedPostLoading } from 'src/redux/selector';
+import { selectRequestedPost, selectIsPostsLoading } from 'src/redux/selector';
 import { requestUserPost } from 'src/redux/action/requestPost';
 
 const Post = () => {
   const { postID } = useParams();
   const dispatch = useDispatch();
   const requestedPost = useSelector(selectRequestedPost);
-  const isRequestedPostLoading = useSelector(selectRequestedPostLoading);
+  const isRequestedPostLoading = useSelector(selectIsPostsLoading);
   const { email, firstName, lastName, post, postCreationTime, title } = requestedPost;
 
   useEffect(() => {

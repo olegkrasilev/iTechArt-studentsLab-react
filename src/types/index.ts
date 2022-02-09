@@ -22,7 +22,7 @@ export type Store = {
     email: null | string;
     firstName: null | string;
     lastName: null | string;
-    error: null;
+    error: null | boolean;
     loading: boolean;
     isAuthorized: boolean;
     posts: { title: string; post: string; postCreationTime: Date; id: number }[];
