@@ -15,13 +15,17 @@ type Properties = {
 
 const Post: React.FC<Properties> = ({ id, title, formattedPostCreationTime, post, deletePostHandler }) => {
   const [initialPost, setInitialPost] = useState<string | null>(post);
-  const [isEditable, setIsEditable] = useState<boolean | undefined>();
-  const postReference = useRef<HTMLSpanElement | null>(null);
+  const [isEditable, setIsEditable] = useState(false);
   const dispatch = useDispatch();
 
   const useStyles = makeStyles({
     button: {
       margin: 10,
+    },
+    isActive: {
+      border: 1,
+      borderColor: '#000',
+      borderStyle: 'dashed',
     },
   });
 
@@ -29,14 +33,6 @@ const Post: React.FC<Properties> = ({ id, title, formattedPostCreationTime, post
 
   const editPostHandler = () => {
     setIsEditable(true);
-
-    postReference?.current?.focus();
-    /*
-      By default its select parent element,so focus need to be invoked twice.
-      */
-    setTimeout(() => {
-      postReference?.current?.focus();
-    }, 0);
   };
 
   const inputPostHandler = (event: React.FormEvent<HTMLSpanElement>) => {
@@ -67,12 +63,12 @@ const Post: React.FC<Properties> = ({ id, title, formattedPostCreationTime, post
                 created At {formattedPostCreationTime}
               </Typography>
               <Typography
-                ref={postReference}
                 gutterBottom
                 variant="body1"
                 contentEditable={isEditable}
                 suppressContentEditableWarning
                 onInput={inputPostHandler}
+                className={isEditable ? classes.isActive : ''}
               >
                 {initialPost}
               </Typography>
