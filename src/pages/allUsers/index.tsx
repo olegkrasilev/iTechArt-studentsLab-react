@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import { Backdrop, CardActionArea, CircularProgress, Grid } from '@mui/material';
+import { Backdrop, CircularProgress } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
+
+import User from './user';
 
 import { loadUsersAction } from 'src/redux/action/users';
 import { RenderPagination } from 'src/components/pagination';
@@ -21,22 +20,7 @@ const AllUsers: React.FC = () => {
   const renderUsers = allUsers.map(item => {
     const { email, firstName, lastName, id } = item;
 
-    return (
-      <Grid item key={id} xs={12}>
-        <Card>
-          <CardActionArea>
-            <CardContent>
-              <Typography gutterBottom variant="h6" component="p">
-                {firstName} {lastName}
-              </Typography>
-              <Typography gutterBottom variant="body1" component="address">
-                email: {email}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-      </Grid>
-    );
+    return <User key={id} email={email} firstName={firstName} lastName={lastName} />;
   });
 
   if (isAllUsersLoading) {
