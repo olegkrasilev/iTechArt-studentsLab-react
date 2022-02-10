@@ -21,6 +21,7 @@ interface PostsInitialState {
   loading: boolean;
   error: null | string;
   posts: Post[];
+  totalPostInDB: null | number;
   requestedPost: RequestedPost;
 }
 
@@ -28,6 +29,7 @@ const initialState: PostsInitialState = {
   loading: false,
   error: null,
   posts: [],
+  totalPostInDB: null,
   requestedPost: {
     post: undefined,
     title: undefined,
@@ -54,7 +56,8 @@ export const postsReducer = (state = initialState, action: LoadPostsActions | Ed
         ...state,
         error: false,
         loading: false,
-        posts: action.payload,
+        posts: action.payload.posts,
+        totalPostInDB: action.payload.totalPostInDB,
       };
     case PostsActions.loadPostsError:
     case EditPostActionType.rejected:

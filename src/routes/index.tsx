@@ -29,7 +29,7 @@ export const Navigation = () => {
     }
 
     if (isAuthorized) {
-      navigate('/authorized/allPosts');
+      navigate('/authorized/allPosts/1');
     }
   }, [isAuthorized, isAuthorizedLocation, navigate]);
 
@@ -46,7 +46,7 @@ export const Navigation = () => {
         {isAuthorized && (
           <Route path="/authorized" element={<Layout />}>
             <Route path="allUsers" element={<AllUsers />} />
-            <Route path="allPosts" element={<AllPosts />} />
+            <Route path="allPosts/:page" element={<AllPosts />} />
             <Route path="account" element={<Account />} />
             <Route path="allPosts/post/:postID" element={<Post />} />
             <Route path="*" element={<NotFound />} />

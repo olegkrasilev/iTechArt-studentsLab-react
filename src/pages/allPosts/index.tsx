@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { Backdrop, CircularProgress } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useParams } from 'react-router-dom';
+
 import Post from './post';
 
 import { loadPostsAction } from 'src/redux/action/posts';
@@ -10,12 +12,15 @@ import { selectAllUsersPosts, selectIsPostsLoading } from 'src/redux/selector';
 
 const AllPosts: React.FC = () => {
   const dispatch = useDispatch();
+  const { page } = useParams();
   const allUsersPosts = useSelector(selectAllUsersPosts);
   const isPostsLoading = useSelector(selectIsPostsLoading);
 
   useEffect(() => {
-    dispatch(loadPostsAction());
-  }, [dispatch]);
+    if (page) {
+      dispatch(loadPostsAction(page));
+    }
+  }, [dispatch, page]);
 
   const renderAllUsersPosts = allUsersPosts.map(item => {
     const { firstName, lastName, post, postCreationTime, title, postID } = item;

@@ -9,17 +9,19 @@ import { RequestedPost } from 'src/redux/reducers/postsReducer';
 Workers
 */
 
-export function* loadAllPosts() {
+export function* loadAllPosts(payload: { payload: { page: string }; type: string }) {
+  const { page } = payload.payload;
   try {
     const response: {
       data: {
+        total: number;
         posts: Post[];
       };
-    } = yield call(axios.get, allPostsEndpoint, { withCredentials: true });
+    } = yield call(axios.get, `${allPostsEndpoint}/${page}`, { withCredentials: true });
 
-    const posts = response.data.posts;
+    const { posts, total } = response.data;
 
-    yield put({ type: PostsActions.loadPostsSuccess, payload: posts });
+    yield put({ type: PostsActions.loadPostsSuccess, payload: { posts, totalPostInDB: total } });
   } catch (error) {
     if (error instanceof Error) {
       const errorMessage = error.message;

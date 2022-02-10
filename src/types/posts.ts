@@ -25,7 +25,10 @@ export interface LoadPostsAction {
 
 export interface LoadPostsSuccessAction {
   type: PostsActions.loadPostsSuccess;
-  payload: Post[];
+  payload: {
+    posts: Post[];
+    totalPostInDB: number;
+  };
 }
 
 export interface LoadPostsErrorAction {
