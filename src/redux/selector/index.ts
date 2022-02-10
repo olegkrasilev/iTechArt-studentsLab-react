@@ -31,6 +31,8 @@ export const selectIsPostsLoading = createSelector(postsState, posts => posts.lo
 
 export const selectRequestedPost = createSelector(postsState, posts => posts.requestedPost);
 
+export const selectTotalPostInDB = createSelector(postsState, posts => posts.totalPostInDB);
+
 // Users
 
 const usersState = (store: Store) => store.users;

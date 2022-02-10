@@ -11,13 +11,19 @@ Workers
 
 export function* loadAllPosts(payload: { payload: { page: string }; type: string }) {
   const { page } = payload.payload;
+
   try {
     const response: {
       data: {
         total: number;
         posts: Post[];
       };
-    } = yield call(axios.get, `${allPostsEndpoint}/${page}`, { withCredentials: true });
+    } = yield call(axios.get, `${allPostsEndpoint}/${page}`, {
+      params: {
+        page,
+      },
+      withCredentials: true,
+    });
 
     const { posts, total } = response.data;
 

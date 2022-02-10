@@ -31,6 +31,7 @@ export type Store = {
     error: null | string;
     loading: boolean;
     posts: Post[];
+    totalPostInDB: null | number;
     requestedPost: RequestedPost;
   };
   users: {
