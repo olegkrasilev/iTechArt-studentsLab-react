@@ -8,17 +8,23 @@ import { User, UsersActions } from 'src/types/users';
 Workers
 */
 
-export function* loadUsers() {
+export function* loadUsers(payload: { payload: { page: string }; type: string }) {
+  const page = payload.payload;
+
   try {
     const response: {
       data: {
         users: User[];
+        total: number;
       };
-    } = yield call(axios.get, allUsersEndpoint, { withCredentials: true });
+    } = yield call(axios.get, `${allUsersEndpoint}/${page}`, {
+      params: { page },
+      withCredentials: true,
+    });
 
-    const users = response.data.users;
+    const { total, users } = response.data;
 
-    yield put({ type: UsersActions.loadUserSuccess, payload: users });
+    yield put({ type: UsersActions.loadUserSuccess, payload: { users, totalUsersInDB: total } });
   } catch (error) {
     if (error instanceof Error) {
       const errorMessage = error.message;

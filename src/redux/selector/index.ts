@@ -42,3 +42,5 @@ const usersState = (store: Store) => store.users;
 export const selectIsAllUsersLoading = createSelector(usersState, users => users.loading);
 
 export const selectALlUsers = createSelector(usersState, users => users.users);
+
+export const selectTotalUsersInDB = createSelector(usersState, users => users.totalUsersInDB);

@@ -39,5 +39,6 @@ export type Store = {
     error: null | string;
     loading: boolean;
     users: User[];
+    totalUsersInDB: null | number;
   };
 };

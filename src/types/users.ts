@@ -17,7 +17,7 @@ export interface LoadUsersAction {
 
 export interface LoadUsersSuccessAction {
   type: UsersActions.loadUserSuccess;
-  payload: User[];
+  payload: { users: User[]; totalUsersInDB: number };
 }
 
 export interface LoadUsersErrorAction {

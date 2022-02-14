@@ -20,7 +20,7 @@ export const Header: React.FC = () => {
             <li className="menu__list-item">
               <NavLink
                 className={({ isActive }) => `menu__list-link${isActive ? '--active' : ''}`}
-                to="/authorized/allUsers"
+                to="/authorized/allUsers/1"
               >
                 Users
               </NavLink>

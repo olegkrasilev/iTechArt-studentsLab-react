@@ -113,8 +113,6 @@ export function* loadUserPosts(data: {
   };
   type: string;
 }) {
-  // work here
-
   const userID = data.payload.userId;
   const { page } = data.payload.page;
   try {
