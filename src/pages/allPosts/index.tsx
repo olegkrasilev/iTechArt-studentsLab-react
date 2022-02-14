@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Backdrop, CircularProgress, Container, Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Params, useNavigate, useParams } from 'react-router-dom';
 import Pagination from '@mui/material/Pagination';
 import { makeStyles } from '@mui/styles';
 
@@ -14,6 +14,9 @@ const AllPosts: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const page = useParams();
+  const [defaultPage, setDefaultPage] = useState(1);
+
+  console.log(defaultPage);
   const allUsersPosts = useSelector(selectAllUsersPosts);
   const isPostsLoading = useSelector(selectIsPostsLoading);
   const totalPostInDB = useSelector(selectTotalPostInDB);
@@ -46,6 +49,7 @@ const AllPosts: React.FC = () => {
 
     if (paginationButtonNumber) {
       navigate(`../allPosts/${paginationButtonNumber}`, { replace: true });
+      setDefaultPage(+paginationButtonNumber);
     }
   };
 
@@ -84,6 +88,7 @@ const AllPosts: React.FC = () => {
             {renderAllUsersPosts}
           </Grid>
           <Pagination
+            page={defaultPage}
             hidePrevButton
             hideNextButton
             className={classes.centerPagination}
