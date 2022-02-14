@@ -1,3 +1,5 @@
+import { number } from 'yup/lib/locale';
+
 import { Post } from 'src/types/posts';
 
 /*
@@ -105,7 +107,7 @@ export interface LoadUserPosts {
 
 export interface LoadUserPostSuccess {
   type: LoadUserPostsAction.loadUserPostSuccess;
-  payload: Post[];
+  payload: { posts: Post[]; totalPostsInDB: number };
 }
 
 export interface LoadUserPostsError {

@@ -15,8 +15,6 @@ const AllPosts: React.FC = () => {
   const dispatch = useDispatch();
   const page = useParams();
   const [defaultPage, setDefaultPage] = useState(1);
-
-  console.log(defaultPage);
   const allUsersPosts = useSelector(selectAllUsersPosts);
   const isPostsLoading = useSelector(selectIsPostsLoading);
   const totalPostInDB = useSelector(selectTotalPostInDB);

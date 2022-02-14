@@ -21,6 +21,8 @@ export const selectUserFirstName = createSelector(userState, state => state.firs
 
 export const selectUserLastName = createSelector(userState, state => state.lastName);
 
+export const selectUsersTotalPostInDB = createSelector(userState, state => state.totalPostInDB);
+
 // posts
 
 const postsState = (store: Store) => store.posts;

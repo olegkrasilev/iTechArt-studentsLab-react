@@ -104,21 +104,38 @@ export function* logoutUser() {
   }
 }
 
-export function* loadUserPosts(data: { payload: number; type: string }) {
-  const userID = data.payload;
+export function* loadUserPosts(data: {
+  payload: {
+    userId: number;
+    page: {
+      page: string;
+    };
+  };
+  type: string;
+}) {
+  // work here
+
+  const userID = data.payload.userId;
+  const { page } = data.payload.page;
   try {
     const response: {
       data: {
         posts: { title: string; post: string; postCreationTime: Date; id: number }[];
+        total: number;
       };
-    } = yield call(axios.get, `${allUserPostsEndpoint}/${userID}`, {
+    } = yield call(axios.get, `${allUserPostsEndpoint}/${userID}/${page}`, {
       params: {
         userID,
       },
       withCredentials: true,
     });
 
-    yield put({ type: LoadUserPostsAction.loadUserPostSuccess, payload: response.data.posts });
+    const { posts, total } = response.data;
+
+    yield put({
+      type: LoadUserPostsAction.loadUserPostSuccess,
+      payload: { posts, totalPostInDB: total },
+    });
   } catch (error) {
     if (error instanceof Error) {
       const errorMessage = error.message;

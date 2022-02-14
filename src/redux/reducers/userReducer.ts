@@ -22,6 +22,7 @@ const initialState = {
   loading: false,
   isAuthorized: false,
   posts: [],
+  totalPostInDB: null,
 };
 
 type Action =
@@ -86,7 +87,7 @@ export const userReducer = (state = initialState, action: Action) => {
       return {
         ...state,
         loading: false,
-        posts: action.payload,
+        ...action.payload,
       };
     }
 

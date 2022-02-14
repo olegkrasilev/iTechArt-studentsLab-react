@@ -26,6 +26,7 @@ export type Store = {
     loading: boolean;
     isAuthorized: boolean;
     posts: { title: string; post: string; postCreationTime: Date; id: number }[];
+    totalPostInDB: null | number;
   };
   posts: {
     error: null | string;

@@ -28,7 +28,7 @@ export const Header: React.FC = () => {
             <li className="menu__list-item">
               <NavLink
                 className={({ isActive }) => `menu__list-link${isActive ? '--active' : ''}`}
-                to="/authorized/allPosts"
+                to="/authorized/allPosts/1"
               >
                 Posts
               </NavLink>
@@ -36,7 +36,7 @@ export const Header: React.FC = () => {
             <li className="menu__list-item">
               <NavLink
                 className={({ isActive }) => `menu__list-link${isActive ? '--active' : ''}`}
-                to="/authorized/account"
+                to="/authorized/account/1"
               >
                 Account
               </NavLink>
