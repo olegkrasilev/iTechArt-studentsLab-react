@@ -1,16 +1,13 @@
 import { Backdrop, CircularProgress, Container, Grid, Pagination } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { useNavigate, useParams } from 'react-router-dom';
-
 import { makeStyles } from '@mui/styles';
 
 import { StyledDiv } from './style';
 
 import { deleteUserPostAction } from 'src/redux/action/deleteUserPost';
 import UserPage from 'src/components/userCard';
-import { RenderPagination } from 'src/components/pagination';
 import { loadUserPostsAction } from 'src/redux/action/loadUserPosts';
 import {
   selectCurrentUserPosts,
