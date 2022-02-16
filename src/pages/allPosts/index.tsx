@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Backdrop, CircularProgress, Container, Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { Params, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Pagination from '@mui/material/Pagination';
-import { makeStyles } from '@mui/styles';
 
+import { useStyles } from './styles';
 import Post from './post';
 
 import { loadPostsAction } from 'src/redux/action/posts';
@@ -27,46 +27,12 @@ const AllPosts: React.FC = () => {
     }
   }, [dispatch, page]);
 
-  const useStyles = makeStyles({
-    centerPagination: {
-      display: 'flex',
-      justifyContent: 'center',
-      marginTop: 20,
-      marginBottom: 20,
-    },
-    title: {
-      textAlign: 'center',
-      fontSize: 40,
-    },
-  });
-
   const classes = useStyles();
 
-  const handlePaginationClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const paginationButtonNumber = (event.target as HTMLButtonElement).textContent;
-
-    if (paginationButtonNumber) {
-      navigate(`../allPosts/${paginationButtonNumber}`, { replace: true });
-      setDefaultPage(+paginationButtonNumber);
-    }
+  const handlePaginationClick = (event: React.ChangeEvent<unknown>, paginationPage: number) => {
+    navigate(`../allPosts/${paginationPage}`, { replace: true });
+    setDefaultPage(paginationPage);
   };
-
-  const renderAllUsersPosts = allUsersPosts.map(item => {
-    const { firstName, lastName, post, postCreationTime, title, postID } = item;
-    const formattedPostCreationTime = new Date(postCreationTime as Date).toDateString();
-
-    return (
-      <Post
-        key={postID}
-        firstName={firstName}
-        lastName={lastName}
-        formattedPostCreationTime={formattedPostCreationTime}
-        post={post}
-        title={title}
-        postID={postID}
-      />
-    );
-  });
 
   if (isPostsLoading) {
     return (
@@ -78,12 +44,25 @@ const AllPosts: React.FC = () => {
 
   return (
     <Container>
-      {allUsersPosts.length === 0 ? (
-        <h1 className={classes.title}>No Posts were found</h1>
-      ) : (
+      {allUsersPosts.length > 0 ? (
         <ul>
           <Grid container spacing={2}>
-            {renderAllUsersPosts}
+            {allUsersPosts.map(item => {
+              const { firstName, lastName, post, postCreationTime, title, postID } = item;
+              const formattedPostCreationTime = new Date(postCreationTime as Date).toDateString();
+
+              return (
+                <Post
+                  key={postID}
+                  firstName={firstName}
+                  lastName={lastName}
+                  formattedPostCreationTime={formattedPostCreationTime}
+                  post={post}
+                  title={title}
+                  postID={postID}
+                />
+              );
+            })}
           </Grid>
           <Pagination
             page={defaultPage}
@@ -91,9 +70,11 @@ const AllPosts: React.FC = () => {
             hideNextButton
             className={classes.centerPagination}
             count={paginationButtonsCount}
-            onClick={handlePaginationClick}
+            onChange={handlePaginationClick}
           />
         </ul>
+      ) : (
+        <h1 className={classes.title}>No Posts were found</h1>
       )}
     </Container>
   );
