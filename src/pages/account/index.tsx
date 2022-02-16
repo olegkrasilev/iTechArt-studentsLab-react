@@ -2,9 +2,8 @@ import { Backdrop, CircularProgress, Container, Grid, Pagination } from '@mui/ma
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { makeStyles } from '@mui/styles';
 
-import { StyledDiv } from './style';
+import { StyledDiv, useStyles } from './style';
 
 import { deleteUserPostAction } from 'src/redux/action/deleteUserPost';
 import UserPage from 'src/components/userCard';
@@ -41,6 +40,7 @@ const Account = () => {
 
   const deletePostHandler = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
+      // TODO FIX type
       const postID = (event.target as HTMLButtonElement).id;
 
       dispatch(deleteUserPostAction(postID));
@@ -48,45 +48,12 @@ const Account = () => {
     [dispatch],
   );
 
-  const handlePaginationClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const paginationButtonNumber = (event.target as HTMLButtonElement).textContent;
-
-    if (paginationButtonNumber) {
-      navigate(`../account/${paginationButtonNumber}`, { replace: true });
-      setDefaultPage(+paginationButtonNumber);
-    }
+  const handlePaginationClick = (event: React.ChangeEvent<unknown>, paginationPage: number) => {
+    navigate(`../account/${paginationPage}`, { replace: true });
+    setDefaultPage(paginationPage);
   };
 
-  const useStyles = makeStyles({
-    centerPagination: {
-      display: 'flex',
-      justifyContent: 'center',
-      marginTop: 20,
-      marginBottom: 20,
-    },
-    title: {
-      textAlign: 'center',
-      fontSize: 40,
-    },
-  });
-
   const classes = useStyles();
-
-  const renderCurrentUserAllPosts = currentUserAllPosts.map(item => {
-    const { post, postCreationTime, title, id } = item;
-    const formattedPostCreationTime = new Date(postCreationTime).toDateString();
-
-    return (
-      <Post
-        key={id}
-        id={id}
-        formattedPostCreationTime={formattedPostCreationTime}
-        title={title}
-        post={post}
-        deletePostHandler={deletePostHandler}
-      />
-    );
-  });
 
   if (isCurrentUserAllPostsLoading) {
     return (
@@ -105,7 +72,21 @@ const Account = () => {
         ) : (
           <ul>
             <Grid container spacing={2}>
-              {renderCurrentUserAllPosts}
+              {currentUserAllPosts.map(item => {
+                const { post, postCreationTime, title, id } = item;
+                const formattedPostCreationTime = new Date(postCreationTime).toDateString();
+
+                return (
+                  <Post
+                    key={id}
+                    id={id}
+                    formattedPostCreationTime={formattedPostCreationTime}
+                    title={title}
+                    post={post}
+                    deletePostHandler={deletePostHandler}
+                  />
+                );
+              })}
             </Grid>
             <Pagination
               hidePrevButton
@@ -113,7 +94,7 @@ const Account = () => {
               page={defaultPage}
               className={classes.centerPagination}
               count={paginationButtonsCount}
-              onClick={handlePaginationClick}
+              onChange={handlePaginationClick}
             />
           </ul>
         )}
