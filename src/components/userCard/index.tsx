@@ -11,9 +11,9 @@ import profile from 'src/components/userCard/assets/profilePicture.png';
 import { selectUserId } from 'src/redux/selector';
 
 type Properties = {
-  firstName?: string | null;
-  lastName?: string | null;
-  email?: string | null;
+  firstName: string;
+  lastName: string;
+  email: string;
 };
 
 const UserPage: React.FC<Properties> = ({ firstName, email, lastName }) => {
@@ -27,9 +27,9 @@ const UserPage: React.FC<Properties> = ({ firstName, email, lastName }) => {
 
   const editAccountFormik = useFormik({
     initialValues: {
-      email: `${email}`,
-      firstName: `${firstName}`,
-      lastName: `${lastName}`,
+      email,
+      firstName,
+      lastName,
       userID,
     },
     validationSchema: editAccountSchemaValidation,

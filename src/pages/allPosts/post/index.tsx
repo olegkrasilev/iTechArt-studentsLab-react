@@ -26,8 +26,7 @@ const Post: React.FC<Properties> = ({ firstName, lastName, post, formattedPostCr
           <CardActionArea>
             <CardContent>
               <Typography gutterBottom variant="h6" component="p">
-                {title} by {firstName}
-                {lastName}
+                {title} by {`${firstName} ${lastName}`}
               </Typography>
               <Typography gutterBottom variant="body1" component="p">
                 Created at <time>{formattedPostCreationTime}</time>
