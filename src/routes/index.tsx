@@ -8,7 +8,7 @@ import { Login } from 'src/pages/login/index';
 import { NotFound } from 'src/pages/notFound';
 import { Layout } from 'src/pages/layout';
 
-const AllUsers = lazy(() => import('src/pages/allUsers'));
+const AllUsers = lazy(() => import('src/pages/allUsers/container'));
 const AllPosts = lazy(() => import('src/pages/allPosts/container'));
 const Account = lazy(() => import('src/pages/account/container'));
 const Post = lazy(() => import('src/pages/post'));
