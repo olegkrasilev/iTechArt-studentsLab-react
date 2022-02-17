@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Backdrop, CircularProgress } from '@mui/material';
 
 import { selectIsUserAuthorized } from 'src/redux/selector';
-import { Login } from 'src/pages/login/index';
+import Login from 'src/pages/login/container';
 import { NotFound } from 'src/pages/notFound';
 import { Layout } from 'src/pages/layout';
 
