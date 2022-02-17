@@ -6,12 +6,12 @@ import { Button, CardActionArea, CardActions, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 type Properties = {
-  firstName: string | null;
-  lastName: string | null;
-  post: string | null;
-  formattedPostCreationTime: string | null;
-  title: string | null;
-  postID: number | null;
+  firstName: string;
+  lastName: string;
+  post: string;
+  formattedPostCreationTime: string;
+  title: string;
+  postID: number;
 };
 const Post: React.FC<Properties> = ({ firstName, lastName, post, formattedPostCreationTime, postID, title }) => {
   const navigate = useNavigate();

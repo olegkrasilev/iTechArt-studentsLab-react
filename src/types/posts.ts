@@ -1,12 +1,12 @@
 import { RequestedPost } from 'src/redux/reducers/postsReducer';
 
 export interface Post {
-  title: null | string;
-  post: null | string;
-  postCreationTime: null | Date;
-  firstName: null | string;
-  lastName: null | string;
-  postID: null | number;
+  title: string;
+  post: string;
+  postCreationTime: Date;
+  firstName: string;
+  lastName: string;
+  postID: number;
 }
 
 /*
