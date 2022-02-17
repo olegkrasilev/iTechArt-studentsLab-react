@@ -10,7 +10,7 @@ import { Layout } from 'src/pages/layout';
 
 const AllUsers = lazy(() => import('src/pages/allUsers'));
 const AllPosts = lazy(() => import('src/pages/allPosts'));
-const Account = lazy(() => import('src/pages/account'));
+const Account = lazy(() => import('src/pages/account/container'));
 const Post = lazy(() => import('src/pages/post'));
 
 export const Navigation = () => {
