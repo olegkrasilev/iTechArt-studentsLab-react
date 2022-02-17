@@ -3,8 +3,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { StyledDiv, useStyles } from './style';
+import { StyledDiv } from './style';
 
+import { useStyles } from 'src/styles/pagination';
 import { deleteUserPostAction } from 'src/redux/action/deleteUserPost';
 import UserPage from 'src/components/userCard';
 import { loadUserPostsAction } from 'src/redux/action/loadUserPosts';

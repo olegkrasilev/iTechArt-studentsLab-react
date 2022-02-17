@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Pagination from '@mui/material/Pagination';
 
-import { useStyles } from './styles';
 import Post from './post';
 
+import { useStyles } from 'src/styles/pagination';
 import { loadPostsAction } from 'src/redux/action/posts';
 import { selectAllUsersPosts, selectIsPostsLoading, selectTotalPostInDB } from 'src/redux/selector';
 

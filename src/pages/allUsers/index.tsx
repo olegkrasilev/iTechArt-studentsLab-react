@@ -3,9 +3,9 @@ import { Backdrop, CircularProgress, Container, Grid, Pagination } from '@mui/ma
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useStyles } from './style';
 import User from './user';
 
+import { useStyles } from 'src/styles/pagination';
 import { loadUsersAction } from 'src/redux/action/users';
 import { selectALlUsers, selectIsAllUsersLoading, selectTotalUsersInDB } from 'src/redux/selector';
 
