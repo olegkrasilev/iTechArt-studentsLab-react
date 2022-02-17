@@ -88,3 +88,28 @@ export interface RequestPostActionRejected {
 }
 
 export type RequestPostActions = RequestPostActionPending | RequestPostActionFulfilled | RequestPostActionRejected;
+
+/*
+Create post
+*/
+
+export enum CreatePostActionType {
+  pending = '@@CREATE_POST_PENDING',
+  fulfilled = '@@CREATE_POST_FULFILLED',
+  rejected = '@@CREATE_POST_REJECTED',
+}
+
+export interface CreatePostActionPending {
+  type: CreatePostActionType.pending;
+}
+
+export interface CreatePostActionFulfilled {
+  type: CreatePostActionType.fulfilled;
+}
+
+export interface CreatePostActionRejected {
+  type: CreatePostActionType.rejected;
+  payload: string;
+}
+
+export type CreatePostActions = CreatePostActionPending | CreatePostActionFulfilled | CreatePostActionRejected;

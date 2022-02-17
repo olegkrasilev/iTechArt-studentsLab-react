@@ -21,3 +21,5 @@ export const deleteUserPostEndpoint = `${postsEndpoint}/deletePost`;
 export const editPostEndpoint = `${postsEndpoint}/updatePost`;
 
 export const requestPostEndpoint = `${postsEndpoint}/getUserPost`;
+
+export const createPostEndpoint = `${postsEndpoint}/createPost`;

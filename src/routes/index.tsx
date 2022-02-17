@@ -12,6 +12,7 @@ const AllUsers = lazy(() => import('src/pages/allUsers/container'));
 const AllPosts = lazy(() => import('src/pages/allPosts/container'));
 const Account = lazy(() => import('src/pages/account/container'));
 const Post = lazy(() => import('src/pages/post'));
+const CreatePost = lazy(() => import('src/pages/createPost'));
 
 export const Navigation = () => {
   const isAuthorized = useSelector(selectIsUserAuthorized);
@@ -49,6 +50,7 @@ export const Navigation = () => {
             <Route path="allPosts/:page" element={<AllPosts />} />
             <Route path="account/:page" element={<Account />} />
             <Route path="allPosts/post/:postID" element={<Post />} />
+            <Route path="createPost" element={<CreatePost />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         )}

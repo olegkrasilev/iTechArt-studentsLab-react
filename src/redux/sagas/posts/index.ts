@@ -1,8 +1,8 @@
 import { call, put, takeEvery, all } from 'redux-saga/effects';
 import axios from 'axios';
 
-import { allPostsEndpoint, editPostEndpoint, requestPostEndpoint } from 'src/constants/endpoints';
-import { Post, PostsActions, EditPostActionType, RequestPostActionType } from 'src/types/posts';
+import { allPostsEndpoint, editPostEndpoint, requestPostEndpoint, createPostEndpoint } from 'src/constants/endpoints';
+import { Post, PostsActions, EditPostActionType, RequestPostActionType, CreatePostActionType } from 'src/types/posts';
 import { RequestedPost } from 'src/redux/reducers/postsReducer';
 
 /*
@@ -72,6 +72,32 @@ export function* requestPost(payload: { postID: string; type: string }) {
     }
   }
 }
+
+export function* createPost(payload: { payload: { post: string; title: string; userID: number }; type: string }) {
+  const { userID, post, title } = payload.payload;
+  try {
+    yield call(
+      axios.post,
+      createPostEndpoint,
+      { userID, post, title },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      },
+    );
+
+    yield put({ type: CreatePostActionType.fulfilled });
+  } catch (error) {
+    if (error instanceof Error) {
+      const errorMessage = error.message;
+
+      yield put({ type: CreatePostActionType.rejected, payload: errorMessage });
+    }
+  }
+}
+
 /*
 Watchers
 */
@@ -88,9 +114,13 @@ export function* watchRequestPost() {
   yield takeEvery(RequestPostActionType.pending, requestPost);
 }
 
+export function* watchCreatePost() {
+  yield takeEvery(CreatePostActionType.pending, createPost);
+}
+
 export function* postsSaga() {
   try {
-    yield all([watchLoadPosts(), watchEditPost(), watchRequestPost()]);
+    yield all([watchLoadPosts(), watchEditPost(), watchRequestPost(), watchCreatePost()]);
   } catch (error) {
     // TODO create store app error field
     console.error(error);
