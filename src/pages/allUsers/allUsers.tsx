@@ -23,7 +23,7 @@ const AllUsers: React.FC<Properties> = ({ allUsers, defaultPage, paginationButto
           {allUsers.map(item => {
             const { email, firstName, lastName, id } = item;
 
-            return <User key={id} email={email} firstName={firstName} lastName={lastName} />;
+            return <User id={id} key={id} email={email} firstName={firstName} lastName={lastName} />;
           })}
         </Grid>
         <Pagination

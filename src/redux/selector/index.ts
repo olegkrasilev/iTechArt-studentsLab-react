@@ -44,3 +44,5 @@ export const selectIsAllUsersLoading = createSelector(usersState, users => users
 export const selectALlUsers = createSelector(usersState, users => users.users);
 
 export const selectTotalUsersInDB = createSelector(usersState, users => users.totalUsersInDB);
+
+export const selectRequestedUserInfo = createSelector(usersState, users => users.requestedUserID);

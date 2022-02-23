@@ -2,7 +2,7 @@ import { call, put, takeEvery, all } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { allUsersEndpoint } from 'src/constants/endpoints';
-import { User, UsersActions } from 'src/types/users';
+import { User, UsersActions, GetRequestedUserInfoType } from 'src/types/users';
 
 /*
 Workers
@@ -34,6 +34,24 @@ export function* loadUsers(payload: { payload: { page: string }; type: string })
   }
 }
 
+export function* getRequestedUserInfo(payload: {
+  payload: {
+    userID: number;
+  };
+  type: string;
+}) {
+  const { userID } = payload.payload;
+  try {
+    yield put({ type: GetRequestedUserInfoType.fulfilled, payload: userID });
+  } catch (error) {
+    if (error instanceof Error) {
+      const errorMessage = error.message;
+
+      yield put({ type: GetRequestedUserInfoType.rejected, payload: errorMessage });
+    }
+  }
+}
+
 /*
 Watchers
 */
@@ -42,9 +60,13 @@ export function* watchLoadUsers() {
   yield takeEvery(UsersActions.loadUsers, loadUsers);
 }
 
+export function* watchGetRequestedUserInfo() {
+  yield takeEvery(GetRequestedUserInfoType.pending, getRequestedUserInfo);
+}
+
 export function* usersSaga() {
   try {
-    yield all([watchLoadUsers()]);
+    yield all([watchLoadUsers(), watchGetRequestedUserInfo()]);
   } catch (error) {
     // TODO create store app error field
     console.error(error);

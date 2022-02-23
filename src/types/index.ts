@@ -40,5 +40,6 @@ export type Store = {
     loading: boolean;
     users: User[];
     totalUsersInDB: null | number;
+    requestedUserID: null | number;
   };
 };

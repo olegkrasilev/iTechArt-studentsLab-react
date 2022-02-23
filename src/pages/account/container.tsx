@@ -17,9 +17,12 @@ import {
   selectUsersTotalPostInDB,
 } from 'src/redux/selector';
 
-const AccountContainer = () => {
+type Properties = {
+  userId: number | null;
+};
+
+const AccountContainer: React.FC<Properties> = ({ userId }) => {
   const dispatch = useDispatch();
-  const userId = useSelector(selectUserId);
   const page = useParams();
   const navigate = useNavigate();
   const [defaultPage, setDefaultPage] = useState(1);

@@ -3,7 +3,7 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Backdrop, CircularProgress } from '@mui/material';
 
-import { selectIsUserAuthorized } from 'src/redux/selector';
+import { selectIsUserAuthorized, selectUserId, selectRequestedUserInfo } from 'src/redux/selector';
 import Login from 'src/pages/login/container';
 import { NotFound } from 'src/pages/notFound';
 import { Layout } from 'src/pages/layout';
@@ -16,6 +16,8 @@ const CreatePost = lazy(() => import('src/pages/createPost'));
 
 export const Navigation = () => {
   const isAuthorized = useSelector(selectIsUserAuthorized);
+  const userId = useSelector(selectUserId);
+  const requestedUserId = useSelector(selectRequestedUserInfo);
   const navigate = useNavigate();
   const location = useLocation();
   const isAuthorizedLocation = location.pathname.startsWith('/authorized');
@@ -48,7 +50,8 @@ export const Navigation = () => {
           <Route path="/authorized" element={<Layout />}>
             <Route path="allUsers/:page" element={<AllUsers />} />
             <Route path="allPosts/:page" element={<AllPosts />} />
-            <Route path="account/:page" element={<Account />} />
+            <Route path="account/:page" element={<Account userId={userId} />} />
+            <Route path="requestedUser/:page" element={<Account userId={requestedUserId} />} />
             <Route path="allPosts/post/:postID" element={<Post />} />
             <Route path="createPost" element={<CreatePost />} />
             <Route path="*" element={<NotFound />} />
