@@ -1,4 +1,4 @@
-import { ChangeUserInfoActionType } from '../../types/user';
+import { ChangeUserInfoActionType } from 'src/types/user';
 
 export const changeUserInfoAction = (userInfo: {
   email: string;

@@ -3,10 +3,10 @@ import { Backdrop, CircularProgress } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { loadUsersAction } from '../../redux/action/users';
-import { selectALlUsers, selectIsAllUsersLoading, selectTotalUsersInDB } from '../../redux/selector';
-
 import AllUsers from './allUsers';
+
+import { loadUsersAction } from 'src/redux/action/users';
+import { selectALlUsers, selectIsAllUsersLoading, selectTotalUsersInDB } from 'src/redux/selector';
 
 const AllUsersContainer: React.FC = () => {
   const dispatch = useDispatch();

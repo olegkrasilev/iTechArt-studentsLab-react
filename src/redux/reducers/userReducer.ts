@@ -11,7 +11,7 @@ import {
   LoadUserPostsActions,
   DeleteUserPostActionType,
   DeleteUserPostActions,
-} from '../../types/user';
+} from 'src/types/user';
 
 const initialState = {
   id: null,

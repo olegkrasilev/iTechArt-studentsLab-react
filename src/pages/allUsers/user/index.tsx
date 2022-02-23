@@ -6,7 +6,7 @@ import { CardActionArea, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { getRequestedUserInfo } from '../../../redux/action/getRequestedUserInfo';
+import { getRequestedUserInfo } from 'src/redux/action/getRequestedUserInfo';
 
 type Properties = {
   email: string;
