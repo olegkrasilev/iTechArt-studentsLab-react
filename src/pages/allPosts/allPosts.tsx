@@ -49,6 +49,7 @@ const AllPosts: React.FC<Properties> = ({
           className={classes.centerPagination}
           count={paginationButtonsCount}
           onChange={handlePaginationClick}
+          size="large"
         />
       </ul>
     </Container>
