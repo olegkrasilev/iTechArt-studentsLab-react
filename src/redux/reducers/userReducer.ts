@@ -93,8 +93,8 @@ export const userReducer = (state = initialState, action: Action) => {
 
     case ChangeUserInfoActionType.fulfilled: {
       return {
-        ...state,
         ...action.payload,
+        ...state,
         loading: false,
       };
     }
