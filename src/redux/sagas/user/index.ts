@@ -90,7 +90,6 @@ export function* signupUser(payload: {
 
 export function* logoutUser() {
   const accessToken = getAccessJwtToken();
-
   try {
     yield call(
       axios.post,
@@ -152,13 +151,14 @@ export function* changeUserInfo(payload: {
   payload: { userID: number; firstName: string; lastName: string; email: string };
   type: string;
 }) {
+  const accessToken = getAccessJwtToken();
   const { email, firstName, lastName, userID } = payload.payload;
   try {
     const response: { data: { firstName: string; lastName: string; newEmail: string } } = yield call(
       axios.patch,
       updateUserEndpoint,
       { email, firstName, lastName, userID },
-      { withCredentials: true },
+      { withCredentials: true, headers: { Authorization: `Bearer ${accessToken}` } },
     );
 
     yield put({
