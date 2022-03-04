@@ -65,6 +65,7 @@ const Account: React.FC<Properties> = ({
             className={classes.centerPagination}
             count={paginationButtonsCount}
             onChange={handlePaginationClick}
+            size="large"
           />
         </ul>
       </StyledDiv>

@@ -56,15 +56,15 @@ const Post: React.FC<Properties> = ({ id, title, formattedPostCreationTime, post
         <Card>
           <CardActionArea>
             <CardContent>
-              <Typography id="title" gutterBottom component="h6" variant="h6">
+              <Typography id="title" gutterBottom variant="h3" component="h6">
                 {title}:
               </Typography>
-              <Typography gutterBottom variant="body2" component="time">
+              <Typography gutterBottom variant="h5" component="time">
                 created At {formattedPostCreationTime}
               </Typography>
               <Typography
                 gutterBottom
-                variant="body1"
+                variant="h5"
                 contentEditable={isEditable}
                 suppressContentEditableWarning
                 onInput={inputPostHandler}
@@ -74,13 +74,13 @@ const Post: React.FC<Properties> = ({ id, title, formattedPostCreationTime, post
               </Typography>
             </CardContent>
           </CardActionArea>
-          <Button onClick={deletePostHandler} className={classes.button} id={`${id}`} variant="contained">
+          <Button onClick={deletePostHandler} className={classes.button} id={`${id}`} variant="contained" size="large">
             Delete
           </Button>
-          <Button onClick={editPostHandler} className={classes.button} variant="contained">
+          <Button onClick={editPostHandler} className={classes.button} variant="contained" size="large">
             Edit
           </Button>
-          <Button onClick={savePostHandler} className={classes.button} variant="contained">
+          <Button onClick={savePostHandler} className={classes.button} variant="contained" size="large">
             Save
           </Button>
         </Card>
