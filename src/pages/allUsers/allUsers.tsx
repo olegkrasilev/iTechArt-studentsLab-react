@@ -33,6 +33,7 @@ const AllUsers: React.FC<Properties> = ({ allUsers, defaultPage, paginationButto
           page={defaultPage}
           onChange={handlePaginationClick}
           count={paginationButtonsCount}
+          size="large"
         />
       </ul>
     </Container>

@@ -27,10 +27,10 @@ const User: React.FC<Properties> = ({ email, firstName, lastName, id }) => {
       <Card onClick={handleClick}>
         <CardActionArea>
           <CardContent>
-            <Typography gutterBottom variant="h6" component="p">
+            <Typography gutterBottom variant="h3" component="p">
               {firstName} {lastName}
             </Typography>
-            <Typography gutterBottom variant="body1" component="address">
+            <Typography gutterBottom variant="h5" component="address">
               email: {email}
             </Typography>
           </CardContent>
