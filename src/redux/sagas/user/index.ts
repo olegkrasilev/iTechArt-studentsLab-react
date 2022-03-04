@@ -19,7 +19,7 @@ import {
   updateUserEndpoint,
   deleteUserPostEndpoint,
 } from 'src/constants/endpoints';
-import { setAccessJwtToken, setRefreshToken } from 'src/utils/jwt';
+import { getAccessJwtToken, setAccessJwtToken, setRefreshToken } from 'src/utils/jwt';
 
 /*
 Workers
@@ -89,12 +89,17 @@ export function* signupUser(payload: {
 }
 
 export function* logoutUser() {
-  try {
-    const response: { status: number } = yield call(axios.post, logoutEndpoint, {}, { withCredentials: true });
+  const accessToken = getAccessJwtToken();
 
-    if (response.status === 204) {
-      yield put({ type: LogoutActions.logoutUserSuccess });
-    }
+  try {
+    yield call(
+      axios.post,
+      logoutEndpoint,
+      {},
+      { withCredentials: true, headers: { Authorization: `Bearer ${accessToken}` } },
+    );
+
+    yield put({ type: LogoutActions.logoutUserSuccess });
   } catch (error) {
     if (error instanceof Error) {
       const errorMessage = error.message;
