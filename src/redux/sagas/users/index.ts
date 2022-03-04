@@ -1,6 +1,8 @@
 import { call, put, takeEvery, all } from 'redux-saga/effects';
 import axios from 'axios';
 
+import { getAccessJwtToken } from 'src/utils/jwt';
+
 import { allUsersEndpoint } from 'src/constants/endpoints';
 import { User, UsersActions, GetRequestedUserInfoType } from 'src/types/users';
 
@@ -10,6 +12,7 @@ Workers
 
 export function* loadUsers(payload: { payload: { page: string }; type: string }) {
   const page = payload.payload;
+  const accessToken = getAccessJwtToken();
 
   try {
     const response: {
@@ -20,6 +23,7 @@ export function* loadUsers(payload: { payload: { page: string }; type: string })
     } = yield call(axios.get, `${allUsersEndpoint}/${page}`, {
       params: { page },
       withCredentials: true,
+      headers: { Authorization: `Bearer ${accessToken}` },
     });
 
     const { total, users } = response.data;
