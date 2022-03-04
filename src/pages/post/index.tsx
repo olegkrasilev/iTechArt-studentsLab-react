@@ -34,19 +34,19 @@ const Post = () => {
     <Card>
       <CardActionArea>
         <CardContent>
-          <Typography gutterBottom variant="h6" component="p">
-            {`Title: ${title}`}
+          <Typography gutterBottom variant="h2" component="p">
+            {`${title} by`}
           </Typography>
-          <Typography gutterBottom variant="h6" component="p">
-            {`Author: ${firstName} ${lastName}`}
+          <Typography gutterBottom variant="h3" component="p">
+            {`${firstName} ${lastName}`}
           </Typography>
-          <Typography gutterBottom variant="h6" component="p">
+          <Typography gutterBottom variant="h4" component="p">
             {`Email: ${email}`}
           </Typography>
-          <Typography gutterBottom variant="body1" component="p">
+          <Typography gutterBottom variant="h4" component="p">
             Created at <time>{formattedPostCreationTime}</time>
           </Typography>
-          <Typography variant="subtitle1" color="text.secondary">
+          <Typography variant="h3" color="text.secondary">
             {post}
           </Typography>
         </CardContent>
