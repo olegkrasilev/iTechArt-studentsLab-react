@@ -22,7 +22,7 @@ export const StyledHeader = styled.header`
   .menu__list-link,
   .menu__list-link--active {
     display: inline-block;
-    font-size: 2rem;
+    font-size: 3rem;
     color: darkblue;
     margin: 2.5rem;
     padding-bottom: 5px;
