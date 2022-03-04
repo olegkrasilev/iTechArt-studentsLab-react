@@ -44,8 +44,9 @@ const AccountContainer: React.FC<Properties> = ({ userId }) => {
       const postID = (event.target as HTMLButtonElement).id;
 
       dispatch(deleteUserPostAction(postID));
+      navigate(`../account/${1}`, { replace: true });
     },
-    [dispatch],
+    [dispatch, navigate],
   );
 
   const handlePaginationClick = useCallback(
