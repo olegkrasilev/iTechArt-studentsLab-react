@@ -45,6 +45,7 @@ const AccountContainer: React.FC<Properties> = ({ userId }) => {
 
       dispatch(deleteUserPostAction(postID));
       navigate(`../account/${1}`, { replace: true });
+      setDefaultPage(1);
     },
     [dispatch, navigate],
   );
