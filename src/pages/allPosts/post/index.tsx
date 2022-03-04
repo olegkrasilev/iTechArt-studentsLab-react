@@ -25,22 +25,22 @@ const Post: React.FC<Properties> = ({ firstName, lastName, post, formattedPostCr
         <Card>
           <CardActionArea>
             <CardContent>
-              <Typography gutterBottom variant="h6" component="p">
+              <Typography gutterBottom variant="h4" component="p">
                 {title} by {`${firstName} ${lastName}`}
               </Typography>
-              <Typography gutterBottom variant="body1" component="p">
+              <Typography gutterBottom variant="h6" component="p">
                 Created at <time>{formattedPostCreationTime}</time>
               </Typography>
-              <Typography variant="subtitle1" color="text.secondary">
-                {post}
+              <Typography variant="h5" color="text.secondary">
+                {`${post}`}
               </Typography>
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button size="small" color="primary">
+            <Button size="large" color="primary">
               Comment
             </Button>
-            <Button onClick={handleNavigate} size="small" color="primary" variant="contained">
+            <Button onClick={handleNavigate} size="large" color="primary" variant="contained">
               More
             </Button>
           </CardActions>
