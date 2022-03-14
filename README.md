@@ -7,9 +7,9 @@ Trainee-project with client architecture.
 Client-side of application is created with:
 
 - React: 17.0.2
-- Redux-saga": 1.1.3
+- Redux-saga: 1.1.3
 - Styled-components: 5.3.3
-- Mui/material": 5.3.0
+- Mui/material: 5.3.0
 - Formik: 2.2.9
     
 # Getting Started with Create React App
