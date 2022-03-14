@@ -4,7 +4,7 @@ Trainee-project with client architecture.
 
 ## Technologies
 
-Client-side of application is presented created with:
+Client-side of application is created with:
 
 - React: 17.0.2
 - Redux-saga": 1.1.3
