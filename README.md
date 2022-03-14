@@ -1,3 +1,17 @@
+## General info
+
+Trainee-project with client architecture.
+
+## Technologies
+
+Client-side of application is presented created with:
+
+- React: 17.0.2
+- Redux-saga": 1.1.3
+- Styled-components: 5.3.3
+- Mui/material": 5.3.0
+- Formik: 2.2.9
+    
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
