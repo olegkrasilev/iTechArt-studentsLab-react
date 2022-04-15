@@ -29,7 +29,8 @@
     "prettier",
     "react-redux",
     "redux-saga",
-    "import"
+    "import",
+    "no-floating-promise"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -107,7 +108,11 @@
     "default-param-last": "off",
     "@typescript-eslint/default-param-last": ["off"],
     "import/no-default-export": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "no-floating-promise/no-floating-promise": 2,
+    "@typescript-eslint/no-floating-promises": ["error"],
+    "@typescript-eslint/require-await": "error",
+    "@typescript-eslint/await-thenable": "error"
   },
   "settings": {
     "import/resolver": {
