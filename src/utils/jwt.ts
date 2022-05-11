@@ -3,7 +3,7 @@ import { addMinutes, addDays } from 'date-fns';
 
 export const getAccessJwtToken = () => Cookies.get('jwtAccessToken');
 
-export const setAccessJwtToken = async (jwtAccessToken: string) => {
+export const setAccessJwtToken = (jwtAccessToken: string) => {
   // TODO add env file
   Cookies.set('jwtAccessToken', jwtAccessToken, {
     expires: addMinutes(new Date(), 10),

@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 
 import { Navigation } from 'src/routes';
 
-export const App: React.FC = () => (
+const App: React.FC = () => (
   <>
     <Helmet>
       <title>iTechArt Students Lab </title>
@@ -12,3 +12,5 @@ export const App: React.FC = () => (
     <Navigation />
   </>
 );
+
+export default App;

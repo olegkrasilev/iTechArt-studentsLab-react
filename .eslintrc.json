@@ -17,7 +17,9 @@
     "plugin:promise/recommended",
     "plugin:prettier/recommended",
     "plugin:react-redux/recommended",
-    "plugin:redux-saga/recommended"
+    "plugin:redux-saga/recommended",
+    "plugin:jest-dom/recommended",
+    "plugin:testing-library/react"
   ],
   "plugins": [
     "@typescript-eslint",
@@ -30,7 +32,9 @@
     "react-redux",
     "redux-saga",
     "import",
-    "no-floating-promise"
+    "no-floating-promise",
+    "testing-library",
+    "jest-dom"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -44,7 +48,6 @@
   "rules": {
     "prettier/prettier": "error",
     "import/prefer-default-export": "off",
-    "import/no-default-export": "error",
     "no-use-before-define": [
       "error",
       {
@@ -83,9 +86,10 @@
           "order": "asc"
         },
         "groups": ["builtin", "external", "index", "sibling", "parent", "internal"]
-      }
+      },
+      "error",
+      { "newlines-between": "always-and-inside-groups" }
     ],
-    "import/order": ["error", { "newlines-between": "always-and-inside-groups" }],
     "import/no-cycle": "off",
     "unicorn/no-null": "off",
     "react/function-component-definition": [
@@ -112,7 +116,9 @@
     "no-floating-promise/no-floating-promise": 2,
     "@typescript-eslint/no-floating-promises": ["error"],
     "@typescript-eslint/require-await": "error",
-    "@typescript-eslint/await-thenable": "error"
+    "@typescript-eslint/await-thenable": "error",
+    "no-unused-expressions": "off",
+    "@typescript-eslint/no-unused-expressions": ["off"]
   },
   "settings": {
     "import/resolver": {
